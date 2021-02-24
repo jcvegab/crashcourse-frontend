@@ -1,10 +1,5 @@
-import StyledButton from '../UI/Button';
+import CallToAction from '../layouts/CallToAction';
 
 export default function Main() {
-  return (
-    <main>
-      <StyledButton ghost>Comprar ahora</StyledButton>
-      <StyledButton>Comprar ahora</StyledButton>
-    </main>
-  );
+  return <CallToAction></CallToAction>;
 }
