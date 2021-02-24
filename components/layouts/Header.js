@@ -11,7 +11,7 @@ const HeaderTemplate = styled.header`
 export default function Header() {
   return (
     <HeaderTemplate>
-      <Logo></Logo>
+      <Logo />
       <StyledButton ghost>Regístrate gratis</StyledButton>
     </HeaderTemplate>
   );

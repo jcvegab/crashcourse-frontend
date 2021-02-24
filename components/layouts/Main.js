@@ -5,9 +5,9 @@ import CoursesList from '../layouts/CoursesList';
 export default function Main() {
   return (
     <>
-      <CallToAction></CallToAction>
-      <Categories></Categories>
-      <CoursesList></CoursesList>
+      <CallToAction />
+      <Categories />
+      <CoursesList />
     </>
   );
 }
