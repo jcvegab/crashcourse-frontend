@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
+    transparent: 'transparent',
     white: '#ffffff',
     grayLighter: '#f6f7f9',
     grayLight: '#e8eaf0',

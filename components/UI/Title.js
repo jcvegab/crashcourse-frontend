@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const TitlesTemplate = css`
+  margin-bottom: ${(props) => props.margin};
   color: ${({ theme }) => theme.colors.black};
   font-weight: 900;
 `;

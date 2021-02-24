@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { StyledH2 } from '../UI/Title';
-import StyledButton from '../UI/Button';
+import Button from '../UI/Button';
 
 const SectionTemplate = styled.section`
   margin-bottom: 56px;
@@ -14,11 +14,9 @@ const SectionTemplate = styled.section`
 export default function CallToAction() {
   return (
     <SectionTemplate>
-      <StyledH2>{`Title H2 - 
+      <StyledH2 margin="24px">{`Title H2 - 
       banner cursos nuevos`}</StyledH2>
-      <StyledButton margin="24px 0 0" width="218px">
-        Comprar ahora
-      </StyledButton>
+      <Button width="218px">Comprar ahora</Button>
     </SectionTemplate>
   );
 }
