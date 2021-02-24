@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter';
   }
 `;
 
@@ -17,9 +18,6 @@ const theme = {
     grayDark: '#8d8d9d',
     baseMain: '#181b32',
     black: '#000000',
-  },
-  fonts: {
-    inter: 'Inter',
   },
 };
 
