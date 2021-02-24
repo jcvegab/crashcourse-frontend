@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from './Button';
 import Tag from './Tag';
+import CourseStats from './CourseStats';
 
 const CourseCardContainer = styled.div`
   width: 270px;
@@ -19,18 +20,41 @@ const CourseCardInfo = styled.div`
   border-radius: 0 0 10px 10px;
   background-color: ${({ theme }) => theme.colors.grayLighter};
 `;
+const CourseName = styled.h5`
+  color: ${({ theme }) => theme.colors.baseMain};
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+`;
 
-export default function CourseCard() {
+const CourseProfesor = styled.p`
+  font-size: 14px;
+  line-height: 20px;
+`;
+
+const CourseCost = styled.p``;
+
+export default function CourseCard({
+  course_name,
+  username,
+  real_price,
+  price,
+  level,
+  users,
+  course_score,
+}) {
   return (
     <CourseCardContainer>
       <CourseCardImage>
         <Tag>Tag venta</Tag>
       </CourseCardImage>
       <CourseCardInfo>
-        <p>Nombre del curso</p>
-        <p>Profesor del curso</p>
-        <p>Nivel 1</p>
-        <p>co$349,929</p>
+        <CourseName>{course_name}</CourseName>
+        <CourseProfesor>{username}</CourseProfesor>
+        <CourseStats level={level} users={users} course_score={course_score} />
+        <CourseCost>
+          ${price} ${real_price}
+        </CourseCost>
         <Button>Comprar ahora</Button>
       </CourseCardInfo>
     </CourseCardContainer>
