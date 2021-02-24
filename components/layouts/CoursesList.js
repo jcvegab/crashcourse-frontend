@@ -16,7 +16,7 @@ export default function CoursesList() {
       <StyledH4 margin="40px">Title H4 - Listado de cursos</StyledH4>
       <CoursesListTemplate>
         {courses.map((course) => (
-          <CourseCard key={course.id} />
+          <CourseCard key={course.id} props={course} />
         ))}
       </CoursesListTemplate>
     </section>

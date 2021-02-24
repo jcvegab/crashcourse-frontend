@@ -34,26 +34,22 @@ const CourseProfesor = styled.p`
 
 const CourseCost = styled.p``;
 
-export default function CourseCard({
-  course_name,
-  username,
-  real_price,
-  price,
-  level,
-  users,
-  course_score,
-}) {
+export default function CourseCard({ props }) {
   return (
     <CourseCardContainer>
       <CourseCardImage>
         <Tag>Tag venta</Tag>
       </CourseCardImage>
       <CourseCardInfo>
-        <CourseName>{course_name}</CourseName>
-        <CourseProfesor>{username}</CourseProfesor>
-        <CourseStats level={level} users={users} course_score={course_score} />
+        <CourseName>{props.course_name}</CourseName>
+        <CourseProfesor>{props.username}</CourseProfesor>
+        <CourseStats
+          level="1"
+          users={props.users}
+          course_score={props.course_score}
+        />
         <CourseCost>
-          ${price} ${real_price}
+          ${props.price} ${props.real_price}
         </CourseCost>
         <Button>Comprar ahora</Button>
       </CourseCardInfo>
