@@ -5,7 +5,7 @@ import Logo from '../UI/Logo';
 const HeaderTemplate = styled.header`
   display: flex;
   justify-content: space-between;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 `;
 
 export default function Header() {
