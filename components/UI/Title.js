@@ -5,6 +5,17 @@ const TitlesTemplate = css`
   font-weight: 900;
 `;
 
+const StyledH1 = styled.h1`
+  ${TitlesTemplate}
+  font-size: 20px;
+  line-height: 18px;
+  ${(props) =>
+    props.movile &&
+    css`
+      font-size: 18px;
+    `};
+`;
+
 const StyledH2 = styled.h2`
   ${TitlesTemplate}
   font-size: 40px;
@@ -38,4 +49,4 @@ const StyledH4 = styled.h4`
     `};
 `;
 
-export { StyledH2, StyledH3, StyledH4 };
+export { StyledH1, StyledH2, StyledH3, StyledH4 };
