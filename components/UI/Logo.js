@@ -11,7 +11,7 @@ const StyledLogo = styled.a`
 
 export default function Logo() {
   return (
-    <Link prefetch href="/" passHref>
+    <Link href="/" passHref>
       <StyledLogo>
         <img src="/logo.svg" alt="Crashcourse"></img>
         <StyledH1>Crashcourse</StyledH1>

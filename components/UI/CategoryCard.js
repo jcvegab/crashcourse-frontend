@@ -4,6 +4,7 @@ import Image from 'next/image';
 const CategoryCardContainer = styled.div`
   width: 120px;
   height: 112px;
+  padding: 10px;
   color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.grayLighter};
   border-radius: 10px;

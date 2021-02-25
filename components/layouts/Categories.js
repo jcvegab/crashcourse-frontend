@@ -19,13 +19,15 @@ export default function Categories() {
       unique.includes(category) ? unique : [...unique, category],
     []
   );
-  console.log(filtered_categories);
   return (
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
       <CategoriesList>
         {filtered_categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
+          <CategoryCard
+            key={filtered_categories.indexOf(category)}
+            category={category}
+          />
         ))}
       </CategoriesList>
     </CategoriesTemplate>

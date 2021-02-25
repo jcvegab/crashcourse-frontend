@@ -1,5 +1,5 @@
 import '../styles/_app.css';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -21,12 +21,20 @@ const theme = {
   },
 };
 
+const AppView = styled.div`
+  margin: 0 auto;
+  max-width: 1152px;
+  overflow: hidden;
+`;
+
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <AppView>
+          <Component {...pageProps} />
+        </AppView>
       </ThemeProvider>
     </>
   );

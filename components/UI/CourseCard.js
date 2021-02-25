@@ -5,21 +5,31 @@ import CourseStats from './CourseStats';
 
 const CourseCardContainer = styled.div`
   width: 270px;
-  height: 368px;
 `;
 
-const CourseCardImage = styled.div`
+const CourseCardTop = styled.div`
   height: 160px;
   padding: 8px;
   border-radius: 10px 10px 0 0;
   background-color: ${({ theme }) => theme.colors.grayLight};
 `;
 
-const CourseCardInfo = styled.div`
+const CourseCardBottom = styled.div`
+  height: 208px;
   padding: 16px 15.5px;
   border-radius: 0 0 10px 10px;
   background-color: ${({ theme }) => theme.colors.grayLighter};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
+
+const CourseInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const CourseName = styled.h5`
   color: ${({ theme }) => theme.colors.baseMain};
   font-weight: bold;
@@ -37,22 +47,26 @@ const CourseCost = styled.p``;
 export default function CourseCard({ props }) {
   return (
     <CourseCardContainer>
-      <CourseCardImage>
+      <CourseCardTop>
         <Tag>Tag venta</Tag>
-      </CourseCardImage>
-      <CourseCardInfo>
-        <CourseName>{props.course_name}</CourseName>
-        <CourseProfesor>{props.username}</CourseProfesor>
-        <CourseStats
-          level="1"
-          users={props.users}
-          course_score={props.course_score}
-        />
+      </CourseCardTop>
+      <CourseCardBottom>
+        <CourseInfo>
+          <CourseName>{props.course_name}</CourseName>
+          <CourseProfesor>{props.username}</CourseProfesor>
+          <CourseStats
+            level="1"
+            users={props.users}
+            course_score={props.course_score}
+          />
+        </CourseInfo>
         <CourseCost>
-          ${props.price} ${props.real_price}
+          co${props.price} <span>CO${props.real_price}</span>
         </CourseCost>
-        <Button>Comprar ahora</Button>
-      </CourseCardInfo>
+        <Button url={`cursos/${props.id}`} path={`cursos/[name]`}>
+          Comprar ahora
+        </Button>
+      </CourseCardBottom>
     </CourseCardContainer>
   );
 }

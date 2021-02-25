@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
+import Link from 'next/link';
 
-const StyledButton = styled.button`
+const StyledButton = styled.a`
   height: ${(props) => props.height || '48px'};
   width: ${(props) => props.width || '100%'};
   padding: 0;
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.baseMain};
-  border: 0;
   border-radius: 10px;
   display: inline-flex;
   align-items: center;
@@ -15,6 +15,7 @@ const StyledButton = styled.button`
   font-size: ${(props) => props.fontSize || '18px'};
   line-height: ${(props) => props.lineHeight || '20px'};
   cursor: pointer;
+  text-decoration: none;
   ${(props) =>
     props.ghost &&
     css`
@@ -24,17 +25,28 @@ const StyledButton = styled.button`
     `};
 `;
 
-const Button = ({ height, width, fontSize, lineHeight, ghost, children }) => {
+const Button = ({
+  height,
+  width,
+  fontSize,
+  lineHeight,
+  ghost,
+  url,
+  path,
+  children,
+}) => {
   return (
-    <StyledButton
-      height={height}
-      width={width}
-      fontSize={fontSize}
-      lineHeight={lineHeight}
-      ghost={ghost}
-    >
-      {children}
-    </StyledButton>
+    <Link as={url ? `/${url}` : '/'} href={path ? `/${path}` : '/'} passHref>
+      <StyledButton
+        height={height}
+        width={width}
+        fontSize={fontSize}
+        lineHeight={lineHeight}
+        ghost={ghost}
+      >
+        {children}
+      </StyledButton>
+    </Link>
   );
 };
 export default Button;
