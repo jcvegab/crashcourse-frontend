@@ -16,6 +16,7 @@ const StyledButton = styled.a`
   line-height: ${(props) => props.lineHeight || '20px'};
   cursor: pointer;
   text-decoration: none;
+  user-select: none;
   ${(props) =>
     props.ghost &&
     css`

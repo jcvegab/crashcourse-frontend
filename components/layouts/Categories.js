@@ -23,11 +23,8 @@ export default function Categories() {
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
       <CategoriesList>
-        {filtered_categories.map((category) => (
-          <CategoryCard
-            key={filtered_categories.indexOf(category)}
-            category={category}
-          />
+        {filtered_categories.map((category, index) => (
+          <CategoryCard key={index} category={category} />
         ))}
       </CategoriesList>
     </CategoriesTemplate>
