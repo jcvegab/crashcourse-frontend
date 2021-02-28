@@ -1,3 +1,5 @@
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from './api/apolloClient';
 import '../styles/_app.css';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
@@ -28,15 +30,16 @@ const AppView = styled.div`
 `;
 
 function MyApp({ Component, pageProps }) {
+  const client = useApollo();
   return (
-    <>
+    <ApolloProvider client={client}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <AppView>
           <Component {...pageProps} />
         </AppView>
       </ThemeProvider>
-    </>
+    </ApolloProvider>
   );
 }
 
