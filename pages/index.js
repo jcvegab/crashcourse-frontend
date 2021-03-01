@@ -43,7 +43,6 @@ export default function Home() {
       </Head>
       <Header></Header>
       <Main></Main>
-      <pre>{JSON.stringify(data)}</pre>
     </>
   );
 }

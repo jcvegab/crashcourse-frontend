@@ -5,7 +5,7 @@ import Data from '../data.json';
 
 const CoursesListTemplate = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 40px 24px;
 `;
 

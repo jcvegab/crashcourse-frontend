@@ -1,18 +1,11 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  NormalizedCacheObject,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 let apolloClient;
 
 function createApolloCLient() {
   return new ApolloClient({
-    link: new HttpLink({
-      uri: 'http://localhost:8000/graphql',
-    }),
     cache: new InMemoryCache(),
+    uri: 'https://crashcourse-backend.herokuapp.com/graphql',
   });
 }
 

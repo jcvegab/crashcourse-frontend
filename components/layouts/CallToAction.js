@@ -4,7 +4,11 @@ import Button from '../UI/Button';
 
 const SectionTemplate = styled.section`
   margin-bottom: 56px;
-  padding: 72px 196px;
+  padding: 72px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background-color: ${({ theme }) => theme.colors.grayLighter};
   border-radius: 10px;
