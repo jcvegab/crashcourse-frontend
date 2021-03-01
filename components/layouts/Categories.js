@@ -8,8 +8,9 @@ const CategoriesTemplate = styled.section`
 `;
 
 const CategoriesList = styled.div`
-  display: inline-flex;
+  display: flexbox;
   gap: 24px;
+  overflow-x: scroll;
 `;
 
 export default function Categories() {
