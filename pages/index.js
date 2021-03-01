@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useQuery, gql } from '@apollo/client';
 import Header from '../components/layouts/Header';
 import Main from '../components/layouts/Main';
+import Loading from '../components/layouts/LoadingPage';
 
 const ResumeQuery = gql`
   query ResumeQuery {
@@ -22,19 +23,8 @@ const ResumeQuery = gql`
 
 export default function Home() {
   const { data, error, loading } = useQuery(ResumeQuery);
-
-  if (error) {
-    return <span>Error in backend...</span>;
-  }
-
-  if (loading) {
-    return (
-      <header>
-        <h1>Crashcourse</h1>
-        <h2>Loading...</h2>
-      </header>
-    );
-  }
+  if (error) return <span>Error in backend...</span>;
+  if (loading) return <Loading />;
   return (
     <>
       <Head>
