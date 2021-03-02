@@ -60,7 +60,7 @@ export default function CourseCard({ props }) {
           />
         </CourseInfo>
         <CourseCost price={props.price} realPrice={props.realPrice} />
-        <Button url={`cursos/${props.id}`} path={`cursos/[name]`}>
+        <Button url={`cursos/${props.id}`} path={`cursos/[id]`}>
           Comprar ahora
         </Button>
       </CourseCardBottom>

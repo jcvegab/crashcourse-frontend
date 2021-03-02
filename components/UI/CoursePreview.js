@@ -28,14 +28,14 @@ const ButtonsContainer = styled.div`
   gap: 10px;
 `;
 
-export default function CoursePreview() {
+export default function CoursePreview({ props }) {
   return (
     <PreviewCardContainer>
       <TrailerContainer>
         <span>Ver trailer del curso</span>
       </TrailerContainer>
       <BuyCourseContainer>
-        <CourseCost />
+        <CourseCost price={props.price} realPrice={props.realPrice} />
         <ButtonsContainer>
           <Button url={`checkout`} path={`checkout`}>
             Comprar ahora

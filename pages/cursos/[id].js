@@ -1,14 +1,15 @@
 import Head from 'next/head';
 import { useQuery, gql } from '@apollo/client';
+import { useRouter } from 'next/router';
 import Header from '../../components/layouts/Header';
 import { StyledH2 } from '../../components/UI/Title';
 import CourseStats from '../../components/UI/CourseStats';
 import Loading from '../../components/layouts/LoadingPage';
 import CoursePreview from '../../components/UI/CoursePreview';
 
-const CourseQuery = gql`
+const CourseQuery = (id) => gql`
   query ResumeQuery {
-    courses {
+    course(id: ${id}) {
       name
       tutorUsername
       level
@@ -21,20 +22,22 @@ const CourseQuery = gql`
 `;
 
 export default function Curso() {
-  const { data, error, loading } = useQuery(CourseQuery);
+  const router = useRouter();
+  const { id } = router.query;
 
+  const { data, error, loading } = useQuery(CourseQuery(id));
   if (error) return <span>Error in backend...</span>;
-
   if (loading) return <Loading />;
+
   return (
     <>
       <Head>
-        <title>Curso | Crashcourse</title>
+        <title>Curso {id} | Crashcourse</title>
       </Head>
       <Header />
       <main>
         <div>
-          <StyledH2>Title H2 - Nombre del curso</StyledH2>
+          <StyledH2>{data.course.name}</StyledH2>
           <p>
             Body 3- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id
             mi, mauris aliquam phasellus quis semper diam fringilla. Nunc nullam
@@ -58,7 +61,7 @@ export default function Curso() {
           <div>
             <span>Acción 1</span>
           </div>
-          <CoursePreview />
+          <CoursePreview props={data.course} />
         </div>
       </main>
     </>
