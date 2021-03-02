@@ -3,9 +3,8 @@ import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/layouts/Header';
 import { StyledH2 } from '../../components/UI/Title';
 import CourseStats from '../../components/UI/CourseStats';
-import Button from '../../components/UI/Button';
 import Loading from '../../components/layouts/LoadingPage';
-import CourseCost from '../../components/UI/CourseCost';
+import CoursePreview from '../../components/UI/CoursePreview';
 
 const CourseQuery = gql`
   query ResumeQuery {
@@ -59,18 +58,7 @@ export default function Curso() {
           <div>
             <span>Acción 1</span>
           </div>
-        </div>
-        <div>
-          <div>
-            <span>Ver trailer del curso</span>
-          </div>
-          <div>
-            <CourseCost />
-            <Button url={`checkout`} path={`checkout`}>
-              Comprar ahora
-            </Button>
-            <Button ghost>Agregar al carrito</Button>
-          </div>
+          <CoursePreview />
         </div>
       </main>
     </>
