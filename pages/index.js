@@ -18,6 +18,9 @@ const ResumeQuery = gql`
       score
       price
       realPrice
+      category {
+        name
+      }
     }
   }
 `;

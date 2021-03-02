@@ -19,9 +19,9 @@ const CategoryCardContainer = styled.div`
   cursor: pointer;
 `;
 
-export default function CategoryCard({ category }) {
+export default function CategoryCard({ category, onSelect }) {
   return (
-    <CategoryCardContainer>
+    <CategoryCardContainer onClick={() => onSelect(category)}>
       <Image height={40} width={40} src="/icons/category-icon.svg" />
       <p>{category}</p>
     </CategoryCardContainer>

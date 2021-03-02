@@ -12,13 +12,19 @@ const CategoriesList = styled.div`
   overflow-x: scroll;
 `;
 
-export default function Categories({ props }) {
+export default function Categories({ props, onSelect }) {
   return (
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
       <CategoriesList>
         {props.map((category, index) => (
-          <CategoryCard key={index} category={category.name} />
+          <CategoryCard
+            key={index}
+            category={category.name}
+            onSelect={(category) => {
+              onSelect(category);
+            }}
+          />
         ))}
       </CategoriesList>
     </CategoriesTemplate>

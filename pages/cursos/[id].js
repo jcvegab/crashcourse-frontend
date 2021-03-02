@@ -44,7 +44,11 @@ export default function Curso() {
             est in non. Enim sapien amet ut pharetra. Purus sagittis est felis
             sapien in. Auctor tellus, in mauris mi, facilisi arcu sedut.
           </p>
-          <CourseStats />
+          <CourseStats
+            level={data.course.level}
+            users={data.course.users}
+            course_score={data.course.score}
+          />
         </div>
         <div>
           <div>Img</div>
