@@ -4,8 +4,25 @@ import styled from 'styled-components';
 
 const CoursesListTemplate = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 40px 24px;
+
+  @media only screen and (min-width: 320px) {
+    margin: 0 auto;
+    max-width: max-content;
+    grid-template-columns: repeat(1, 270px);
+  }
+  @media only screen and (min-width: 480px) {
+    grid-template-columns: repeat(2, 270px);
+  }
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 270px);
+  }
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(3, 270px);
+  }
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 270px);
+  }
 `;
 
 export default function CoursesList({ props }) {

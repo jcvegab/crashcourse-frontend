@@ -13,6 +13,10 @@ const SectionTemplate = styled.section`
   background-color: ${({ theme }) => theme.colors.grayLighter};
   border-radius: 10px;
   white-space: pre-line;
+
+  @media only screen and (max-width: 1024px) {
+    border-radius: 0;
+  }
 `;
 
 export default function CallToAction() {
