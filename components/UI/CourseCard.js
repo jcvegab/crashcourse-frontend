@@ -52,16 +52,16 @@ export default function CourseCard({ props }) {
       </CourseCardTop>
       <CourseCardBottom>
         <CourseInfo>
-          <CourseName>{props.course_name}</CourseName>
-          <CourseProfesor>{props.username}</CourseProfesor>
+          <CourseName>{props.name}</CourseName>
+          <CourseProfesor>{props.tutorUsername}</CourseProfesor>
           <CourseStats
-            level="1"
+            level={props.level}
             users={props.users}
-            course_score={props.course_score}
+            course_score={props.score}
           />
         </CourseInfo>
         <CourseCost>
-          co${props.price} <span>CO${props.real_price}</span>
+          co${props.price} <span>CO${props.realPrice}</span>
         </CourseCost>
         <Button url={`cursos/${props.id}`} path={`cursos/[name]`}>
           Comprar ahora

@@ -1,7 +1,6 @@
 import { StyledH4 } from '../UI/Title';
 import CourseCard from '../UI/CourseCard';
 import styled from 'styled-components';
-import Data from '../data.json';
 
 const CoursesListTemplate = styled.div`
   display: grid;
@@ -9,13 +8,12 @@ const CoursesListTemplate = styled.div`
   gap: 40px 24px;
 `;
 
-export default function CoursesList() {
-  const courses = Data.STORE;
+export default function CoursesList({ props }) {
   return (
     <section>
       <StyledH4 margin="40px">Title H4 - Listado de cursos</StyledH4>
       <CoursesListTemplate>
-        {courses.map((course) => (
+        {props.map((course) => (
           <CourseCard key={course.id} props={course} />
         ))}
       </CoursesListTemplate>

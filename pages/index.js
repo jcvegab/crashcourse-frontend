@@ -10,6 +10,7 @@ const ResumeQuery = gql`
       name
     }
     courses {
+      id
       name
       tutorUsername
       level
@@ -23,8 +24,11 @@ const ResumeQuery = gql`
 
 export default function Home() {
   const { data, error, loading } = useQuery(ResumeQuery);
+
   if (error) return <span>Error in backend...</span>;
+
   if (loading) return <Loading />;
+
   return (
     <>
       <Head>
@@ -32,7 +36,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header></Header>
-      <Main></Main>
+      <Main props={data}></Main>
     </>
   );
 }
