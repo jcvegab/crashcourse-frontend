@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import Tag from './Tag';
 import CourseStats from './CourseStats';
+import CourseCost from './CourseCost';
 
 const CourseCardContainer = styled.div`
   width: 270px;
@@ -42,8 +43,6 @@ const CourseProfesor = styled.p`
   line-height: 20px;
 `;
 
-const CourseCost = styled.p``;
-
 export default function CourseCard({ props }) {
   return (
     <CourseCardContainer>
@@ -60,9 +59,7 @@ export default function CourseCard({ props }) {
             course_score={props.score}
           />
         </CourseInfo>
-        <CourseCost>
-          co${props.price} <span>CO${props.realPrice}</span>
-        </CourseCost>
+        <CourseCost price={props.price} realPrice={props.realPrice} />
         <Button url={`cursos/${props.id}`} path={`cursos/[name]`}>
           Comprar ahora
         </Button>

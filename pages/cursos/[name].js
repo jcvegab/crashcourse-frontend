@@ -1,10 +1,32 @@
 import Head from 'next/head';
+import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/layouts/Header';
 import { StyledH2 } from '../../components/UI/Title';
 import CourseStats from '../../components/UI/CourseStats';
 import Button from '../../components/UI/Button';
+import Loading from '../../components/layouts/LoadingPage';
+import CourseCost from '../../components/UI/CourseCost';
+
+const CourseQuery = gql`
+  query ResumeQuery {
+    courses {
+      name
+      tutorUsername
+      level
+      users
+      score
+      price
+      realPrice
+    }
+  }
+`;
 
 export default function Curso() {
+  const { data, error, loading } = useQuery(CourseQuery);
+
+  if (error) return <span>Error in backend...</span>;
+
+  if (loading) return <Loading />;
   return (
     <>
       <Head>
@@ -43,7 +65,7 @@ export default function Curso() {
             <span>Ver trailer del curso</span>
           </div>
           <div>
-            <p>co $349,929 CO$164,434</p>
+            <CourseCost />
             <Button url={`checkout`} path={`checkout`}>
               Comprar ahora
             </Button>
