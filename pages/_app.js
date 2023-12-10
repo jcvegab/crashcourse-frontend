@@ -1,7 +1,7 @@
-import { ApolloProvider } from '@apollo/client';
-import { useApollo } from './api/apolloClient';
-import '../styles/_app.css';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./api/apolloClient";
+import "../styles/_app.css";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -13,13 +13,13 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    transparent: 'transparent',
-    white: '#ffffff',
-    grayLighter: '#f6f7f9',
-    grayLight: '#e8eaf0',
-    grayDark: '#8d8d9d',
-    baseMain: '#181b32',
-    black: '#000000',
+    transparent: "transparent",
+    white: "#ffffff",
+    grayLighter: "#f6f7f9",
+    grayLight: "#e8eaf0",
+    grayDark: "#8d8d9d",
+    baseMain: "#181b32",
+    black: "#000000",
   },
 };
 
@@ -30,7 +30,6 @@ const AppView = styled.div`
 `;
 
 function MyApp({ Component, pageProps }) {
-  const client = useApollo();
   return (
     <ApolloProvider client={client}>
       <GlobalStyle />
