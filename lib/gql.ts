@@ -27,6 +27,7 @@ export async function gql<TData, TVariables = Record<string, unknown>>(
     headers: {
       ...options?.headers,
       'Content-Type': 'application/json',
+      'X-Internal-Token': process.env.INTERNAL_TOKEN!,
       ...(token && { Authorization: `Bearer ${token}` }),
     },
     body: JSON.stringify({ query, variables }),
