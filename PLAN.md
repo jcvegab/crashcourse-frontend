@@ -569,7 +569,7 @@ git revert <commit_sha>
 
 ## Step 5 — Configurar custom paths
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

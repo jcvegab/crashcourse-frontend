@@ -26,7 +26,17 @@
     ],
     "skipLibCheck": true,
     "incremental": true,
-    "module": "esnext"
+    "module": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/layouts/*": ["components/layouts/*"],
+      "@/ui/*": ["components/UI/*"],
+      "@/pages/*": ["pages/*"],
+      "@/lib/*": ["lib/*"],
+      "@/types/*": ["types/*"],
+      "@/utils/*": ["utils/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
