@@ -33,13 +33,8 @@ export async function gql<TData, TVariables = Record<string, unknown>>(
     body: JSON.stringify({ query, variables }),
   });
 
-  // if (!res.ok) {
-  //   throw new Error(`GQL fetch failed: ${res.status}`);
-  // }
-
   if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`GQL fetch failed: ${res.status} — ${body}`);
+    throw new Error(`GQL fetch failed: ${res.status}`);
   }
 
   const { data, errors } = await res.json();
