@@ -24,10 +24,8 @@
       "@/components/*": ["components/*"],
       "@/layouts/*": ["components/layouts/*"],
       "@/ui/*": ["components/UI/*"],
-      "@/pages/*": ["pages/*"],
       "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"],
-      "@/utils/*": ["utils/*"]
+      "@/types/*": ["types/*"]
     },
     "plugins": [
       {

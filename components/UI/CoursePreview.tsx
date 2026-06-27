@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import Button from '../../components/UI/Button';
-import CourseCost from '../../components/UI/CourseCost';
+import Button from '@/ui/Button';
+import CourseCost from '@/ui/CourseCost';
 
 import type { Course } from '@/types/course.types';
 

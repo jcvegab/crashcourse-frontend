@@ -11,7 +11,7 @@ const StyledLoading = styled.div`
   gap: 45px;
 `;
 
-export default function Loading() {
+export default function LoadingPage() {
   return (
     <StyledLoading>
       <StyledH2>Crashcourse</StyledH2>

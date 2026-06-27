@@ -6,7 +6,7 @@ const SpinnerAnimation = keyframes`
 `;
 
 const StyledSpinner = styled.div`
-  border: 10px solid rgb(0, 0, 0, 0.1);
+  border: 10px solid rgba(0, 0, 0, 0.1);
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -15,5 +15,5 @@ const StyledSpinner = styled.div`
 `;
 
 export default function Spinner() {
-  return <StyledSpinner></StyledSpinner>;
+  return <StyledSpinner role="status" aria-label="Cargando" />;
 }

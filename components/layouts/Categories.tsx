@@ -15,7 +15,7 @@ const CategoriesTemplate = styled.section`
 `;
 
 const CategoriesList = styled.div`
-  display: flexbox;
+  display: flex;
   gap: 24px;
   overflow-x: scroll;
 `;
@@ -24,14 +24,12 @@ export default function Categories({ props, onSelect }: CategoriesProps) {
   return (
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
-      <CategoriesList>
+      <CategoriesList aria-label="Categorias de cursos">
         {props.map((category) => (
           <CategoryCard
             key={category.name}
             category={category.name}
-            onSelect={(category: string) => {
-              onSelect(category);
-            }}
+            onSelect={onSelect}
           />
         ))}
       </CategoriesList>

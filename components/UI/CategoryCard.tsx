@@ -6,7 +6,7 @@ type CategoryCardProps = {
   onSelect: (category: string) => void;
 };
 
-const CategoryCardContainer = styled.div`
+const CategoryCardContainer = styled.button`
   width: 120px;
   height: 112px;
   padding: 10px;
@@ -22,6 +22,7 @@ const CategoryCardContainer = styled.div`
   text-align: center;
   gap: 8px;
   cursor: pointer;
+  border: 0;
 `;
 
 export default function CategoryCard({
@@ -29,8 +30,13 @@ export default function CategoryCard({
   onSelect,
 }: CategoryCardProps) {
   return (
-    <CategoryCardContainer onClick={() => onSelect(category)}>
-      <Image height={40} width={40} src="/icons/category-icon.svg" alt="" />
+    <CategoryCardContainer type="button" onClick={() => onSelect(category)}>
+      <Image
+        height={40}
+        width={40}
+        src="/icons/category-icon.svg"
+        alt={`Categoria ${category}`}
+      />
       <p>{category}</p>
     </CategoryCardContainer>
   );

@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
 import { initializeApollo } from '@/lib/apolloClient';
+import { COURSE_FIELDS_FRAGMENT } from '@/lib/courseQueries';
 
 import HomePage from './HomePage';
 
@@ -13,19 +14,15 @@ type ResumeQueryData = {
 };
 
 const ResumeQuery = gql`
+  ${COURSE_FIELDS_FRAGMENT}
+
   query ResumeQuery {
     categories {
       name
     }
     courses {
       id
-      name
-      tutorUsername
-      level
-      users
-      score
-      price
-      realPrice
+      ...CourseFields
       category {
         name
       }

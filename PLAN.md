@@ -1951,7 +1951,7 @@ git revert <commit_sha>
 
 ## Step 34 — Auditoría de calidad de código
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -1998,7 +1998,7 @@ git revert <commit_sha>
 
 ## Step 35 — Ejecutar optimizaciones priorizadas
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

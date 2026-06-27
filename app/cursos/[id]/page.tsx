@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 import { notFound } from 'next/navigation';
 
 import { initializeApollo } from '@/lib/apolloClient';
+import { COURSE_FIELDS_FRAGMENT } from '@/lib/courseQueries';
 import { buildCourseSeo } from '@/lib/seo';
 
 import CoursePage from './CoursePage';
@@ -14,15 +15,11 @@ type CourseQueryData = {
 };
 
 const CourseQuery = gql`
+  ${COURSE_FIELDS_FRAGMENT}
+
   query CourseQuery($id: ID!) {
     course(id: $id) {
-      name
-      tutorUsername
-      level
-      users
-      score
-      price
-      realPrice
+      ...CourseFields
     }
   }
 `;

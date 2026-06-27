@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const StatsContainer = styled.div`
+  display: flex;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -29,17 +31,17 @@ export default function CourseStats({
   course_score,
 }: CourseStatsProps) {
   return (
-    <StatsContainer className="flex items-center">
+    <StatsContainer>
       <div className="flex items-center">
-        <StatsIcon src="/icons/bar-chart.svg" />
+        <StatsIcon src="/icons/bar-chart.svg" alt="" aria-hidden="true" />
         <StatsText>Nivel {level}</StatsText>
       </div>
       <div className="flex items-center">
-        <StatsIcon src="/icons/people.svg" />
+        <StatsIcon src="/icons/people.svg" alt="" aria-hidden="true" />
         <StatsText>{users} Usuarios</StatsText>
       </div>
       <div className="flex items-center">
-        <StatsIcon src="/icons/star.svg" />
+        <StatsIcon src="/icons/star.svg" alt="" aria-hidden="true" />
         <StatsText>{course_score}</StatsText>
       </div>
     </StatsContainer>
