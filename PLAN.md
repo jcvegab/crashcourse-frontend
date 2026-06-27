@@ -1580,7 +1580,7 @@ git revert <commit_sha>
 
 ## Step 25 — Documentar estrategia de upgrade
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
