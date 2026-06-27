@@ -16,7 +16,7 @@ type CourseQueryData = {
 const COURSE_QUERY = /* GraphQL */ `
   ${COURSE_FIELDS_FRAGMENT}
 
-  query CourseQuery($id: ID!) {
+  query CourseQuery($id: Int!) {
     course(id: $id) {
       ...CourseFields
     }
@@ -30,8 +30,8 @@ type PageProps = {
 async function getCourse(id: string): Promise<Course | null> {
   const data = await gql<CourseQueryData>(
     COURSE_QUERY,
-    { id },
-    { next: { tags: [`course-${id}`] } },
+    { id: parseInt(id, 10) },
+    { next: { revalidate: 300, tags: [`course-${id}`] } },
   );
 
   return data.course;

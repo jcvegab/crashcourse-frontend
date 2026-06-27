@@ -35,7 +35,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const data = await gql<ResumeQueryData>(RESUME_QUERY);
+  const data = await gql<ResumeQueryData>(RESUME_QUERY, undefined, {
+    next: { revalidate: 300 },
+  });
 
   return <HomePage data={data} />;
 }
