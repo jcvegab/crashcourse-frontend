@@ -3,6 +3,7 @@
   "files": {
     "includes": [
       "**/*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc,css}",
+      "!next-env.d.ts",
       "!**/.next",
       "!**/public",
       "!**/node_modules"

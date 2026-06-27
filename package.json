@@ -14,14 +14,12 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "typecheck": "tsc --noEmit",
-    "lint:legacy": "next lint",
     "prepare": "husky"
   },
   "dependencies": {
     "@apollo/client": "^3.14.0",
-    "eslint-config-next": "^15.5.19",
     "graphql": "^15.10.1",
-    "next": "^15.5.19",
+    "next": "^16.2.9",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "styled-components": "^5.3.11"

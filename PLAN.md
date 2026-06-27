@@ -1704,7 +1704,7 @@ git revert <commit_sha>
 
 ## Step 28 — Upgrade a versión objetivo final
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
