@@ -2139,7 +2139,7 @@ git revert <commit_sha>
 
 ## Step 38 — Instalar Vitest y Testing Library
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
