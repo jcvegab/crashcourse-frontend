@@ -27,6 +27,7 @@ export async function gql<TData, TVariables = Record<string, unknown>>(
     headers: {
       ...options?.headers,
       'Content-Type': 'application/json',
+      // biome-ignore lint/style/noNonNullAssertion: Internal token is required for Cloudflare WAF bypass
       'X-Internal-Token': process.env.INTERNAL_TOKEN!,
       ...(token && { Authorization: `Bearer ${token}` }),
     },
