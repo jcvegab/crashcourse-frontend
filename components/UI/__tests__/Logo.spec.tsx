@@ -1,18 +1,19 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
 
 import { render } from '../../../test/test-utils';
 import Logo from '../Logo';
+
+import type React from 'react';
 
 vi.mock('next/link', () => ({
   default: function Link({
     children,
     href,
   }: {
-    children: React.ReactElement;
+    children: React.ReactNode;
     href: string;
   }) {
-    return React.cloneElement(children, { href } as Record<string, unknown>);
+    return <a href={href}>{children}</a>;
   },
 }));
 
