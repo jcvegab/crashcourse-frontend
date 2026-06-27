@@ -2042,7 +2042,7 @@ git revert <commit_sha>
 
 ## Step 36 — Auditar patrón legacy de props
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -2083,7 +2083,7 @@ git revert <commit_sha>
 
 ## Step 37 — Normalizar props en componentes de bajo riesgo
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
