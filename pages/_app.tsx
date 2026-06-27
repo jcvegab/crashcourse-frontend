@@ -1,8 +1,10 @@
 import { ApolloProvider } from '@apollo/client';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { client } from './api/apolloClient';
+
+import type { AppProps } from 'next/app';
 import '../styles/_app.css';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -30,7 +32,7 @@ const AppView = styled.div`
   overflow: hidden;
 `;
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <GlobalStyle />

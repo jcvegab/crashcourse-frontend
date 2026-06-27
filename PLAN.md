@@ -951,7 +951,7 @@ git revert <commit_sha>
 
 ## Step 11 — Migrar archivos core de Next.js a TypeScript
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

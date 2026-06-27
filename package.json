@@ -31,6 +31,7 @@
     "@types/node": "^26.0.1",
     "@types/react": "^17.0.93",
     "@types/react-dom": "^17.0.26",
+    "@types/styled-components": "^5.1.36",
     "babel-plugin-styled-components": "^1.13.3",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
