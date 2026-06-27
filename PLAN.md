@@ -2362,7 +2362,7 @@ git revert <commit_sha>
 
 ## Step 42 — Instalar Playwright
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
