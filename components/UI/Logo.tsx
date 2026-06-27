@@ -13,7 +13,7 @@ const StyledLogo = styled.div`
 
 export default function Logo() {
   return (
-    <Link href="/">
+    <Link href="/" style={{ textDecoration: 'none' }}>
       <StyledLogo>
         <img src="/logo.svg" alt="Crashcourse"></img>
         <StyledH1>Crashcourse</StyledH1>

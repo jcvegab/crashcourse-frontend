@@ -5,19 +5,27 @@ const CategoryCardContainer = styled.button`
   width: 120px;
   height: 112px;
   padding: 10px;
-  color: ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.grayLighter};
-  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  flex: none;
+
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   text-align: center;
-  gap: 8px;
-  cursor: pointer;
+
+  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.grayLighter};
+  
   border: 0;
+  border-radius: 10px;
+
+  cursor: pointer;
 `;
 
 type CategoryCardProps = {
