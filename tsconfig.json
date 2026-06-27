@@ -12,7 +12,6 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./types", "./node_modules/@types"],
     "types": ["vitest/globals"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

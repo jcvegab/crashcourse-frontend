@@ -1,6 +1,17 @@
+import path from 'node:path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@/components': path.resolve(__dirname, './components'),
+      '@/layouts': path.resolve(__dirname, './components/layouts'),
+      '@/ui': path.resolve(__dirname, './components/UI'),
+      '@/lib': path.resolve(__dirname, './lib'),
+      '@/types': path.resolve(__dirname, './types'),
+      '@/utils': path.resolve(__dirname, './utils'),
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',

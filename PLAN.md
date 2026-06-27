@@ -2219,7 +2219,7 @@ git revert <commit_sha>
 
 ## Step 39 — Agregar tests unitarios de componentes
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

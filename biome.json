@@ -6,7 +6,8 @@
       "!next-env.d.ts",
       "!**/.next",
       "!**/public",
-      "!**/node_modules"
+      "!**/node_modules",
+      "!**/coverage"
     ]
   },
   "assist": {
