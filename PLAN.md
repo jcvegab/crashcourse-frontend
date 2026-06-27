@@ -2655,7 +2655,7 @@ git revert <commit_sha>
 
 ## Step 47 — Actualizar AGENTS.md
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -2711,7 +2711,7 @@ git revert <commit_sha>
 
 ## Step 48 — Crear o actualizar CLAUDE.md
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

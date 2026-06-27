@@ -11,10 +11,20 @@ npm run lint:fix    # biome check --write --unsafe
 npm run format      # biome format --write
 npm run format:check# biome format
 npm run typecheck   # tsc --noEmit
-npm run lint:legacy # next lint (deprecated)
+npm run test        # vitest run
+npm run test:watch  # vitest
+npm run coverage    # vitest run --coverage
+npm run e2e         # playwright test
+npm run e2e:ui      # playwright test --ui
 ```
 
-No test runner exists.
+## Testing
+
+- **Vitest** for unit tests, **Playwright** for E2E.
+- Coverage threshold: 90% (statements, branches, functions, lines).
+- Tests live in `__tests__` dir inside each component folder.
+- Spec pattern: `Component.spec.tsx`.
+- Vitest globals enabled — no need to import `describe`, `it`, `expect`.
 
 ## Git hooks
 
@@ -22,18 +32,30 @@ No test runner exists.
 
 ## Environment
 
-`NEXT_PUBLIC_API_URL` must be defined in `.env.local` (read by `pages/api/apolloClient.js`). Without it, every GraphQL query fails and pages render "Error in backend..." fallback.
+`SERVER_API_URL` + `INTERNAL_TOKEN` must be defined in `.env.local`. Without them, every GraphQL query fails.
 
-## Architecture (non-obvious)
+```env
+SERVER_API_URL=
+INTERNAL_TOKEN=
+NEXT_PUBLIC_SITE_URL=
+```
 
-- **Next.js 12 Pages Router** — NOT App Router. React 17.
-- **Apollo GraphQL** — `ApolloClient` at `pages/api/apolloClient.js`, provided via `ApolloProvider` in `_app.js`. Queries are defined inline with `useQuery`/`gql` per page — no separate queries module.
-- **styled-components SSR** — `next.config.js` sets `compiler.styledComponents: true`. `_document.js` wires `ServerStyleSheet` — preserve that setup when editing `_document.js`. Theme is defined inline in `_app.js` (`theme.colors`), consumed via `${({ theme }) => theme.colors.X}`. Global resets in `createGlobalStyle` block in `_app.js`.
-- **Category filtering** is client-side in `Main.js` — `currentCategory` state, `"All"` sentinel means no filter.
+## Architecture
+
+- **Next.js 16 App Router** — NOT Pages Router.
+- **GraphQL** — Custom server-only `gql<TData, TVariables>()` function at `lib/gql.ts`. Uses `fetch` with `SERVER_API_URL` + `INTERNAL_TOKEN` + optional auth cookie. Supports ISR via `next: { revalidate, tags }`. No Apollo Client.
+- **styled-components SSR** — Uses `lib/registry.tsx` (Client Component wrapping `ServerStyleSheet` + `StyleSheetManager`). Theme and global styles in `app/providers.tsx`. Consumed via `${({ theme }) => theme.colors.X}`.
+- **Category filtering** is client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
+- **SEO** — `lib/seo.ts` helpers: `buildSeo`, `buildHomeSeo`, `buildCourseSeo`. JSON-LD structured data for Course schema. App Router `generateMetadata` or `metadata` export.
+- **Course queries** — Fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts` shared across pages.
 
 ## Conventions (easy to get wrong)
 
-- Components receive data through **a single prop named `props`** (e.g. `function Main({ props })`), not standard React destructuring. Follow this pattern when editing existing files.
+- Props are destructured normally (e.g. `function Main({ category, courses })`), NOT as single `props` object.
+- Types live in `Component.types.ts` next to component, or shared types in `types/*.types.ts`.
+- Components follow structure: `Component.tsx`, `Component.types.ts`, `index.ts`, `__tests__/Component.spec.tsx`.
+- GraphQL queries use variables, NOT interpolation into template strings.
+- Use `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` custom path aliases — avoid relative imports.
 - `Button` always wraps Next.js `<Link>` — pass `url`/`path` for routing, `ghost` for outline variant.
-- `pages/cursos/[id].js` builds its GraphQL query by **interpolating the route `id` into the template string** (`gql\`... ${id} ...\``), not GraphQL variables. `getStaticPaths`/`getStaticProps` are stubbed out — page is client-rendered.
 - UI text is Spanish placeholder copy.
+- One commit per step/change — no mixing unrelated refactors.
