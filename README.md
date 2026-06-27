@@ -1,34 +1,119 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Crashcourse Frontend
 
-## Getting Started
+Crashcourse | Next.js + GraphQL Client
 
-First, run the development server:
+## Requirements
+
+- Node.js >= 24
+- npm >= 11
+- A running [crashcourse-backend](https://github.com/jcvegab/crashcourse-backend) instance (GraphQL endpoint + `INTERNAL_TOKEN`)
+
+## Quick Start
 
 ```bash
+# Copy environment file
+cp .env.example .env.local
+
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Environment variables
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Copy `.env.example` to `.env.local` and configure:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+| Variable | Description |
+|---|---|
+| `SERVER_API_URL` | GraphQL endpoint URL of `crashcourse-backend` |
+| `INTERNAL_TOKEN` | Shared secret used as `X-Internal-Token` header on every request (Cloudflare WAF bypass) |
+| `NEXT_PUBLIC_SITE_URL` | Public site URL used for SEO / metadata generation |
 
-## Learn More
+Without `SERVER_API_URL` + `INTERNAL_TOKEN`, every GraphQL query fails.
 
-To learn more about Next.js, take a look at the following resources:
+## Available Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Description |
+|---|---|
+| `npm run dev` | Dev server at `localhost:3000` |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | Biome check |
+| `npm run lint:fix` | Biome check --write --unsafe |
+| `npm run format` | Biome format --write |
+| `npm run format:check` | Biome format |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run test` | Vitest run |
+| `npm run test:watch` | Vitest watch mode |
+| `npm run test:coverage` | Vitest with coverage (90% threshold) |
+| `npm run e2e` | Playwright E2E tests |
+| `npm run e2e:ui` | Playwright UI mode |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+CI order: lint `->` typecheck `->` test `->` e2e.
 
-## Deploy on Vercel
+## Architecture
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework:** Next.js 16 App Router (NOT Pages Router).
+- **UI:** React 19 + TypeScript.
+- **Styling:** styled-components with SSR via `lib/registry.tsx` (`ServerStyleSheet` + `StyleSheetManager`). Theme + globals in `app/providers.tsx`. Consume via `${({ theme }) => theme.colors.X}`.
+- **Data:** Custom server-only `gql<TData, TVariables>()` function at `lib/gql.ts` — `fetch` based, no Apollo Client. Supports ISR via `next: { revalidate, tags }`. Forwards `auth-token` cookie as `Authorization: Bearer` and always sends `X-Internal-Token`.
+- **Course queries:** Shared fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts`.
+- **SEO:** `lib/seo.ts` helpers (`buildSeo`, `buildHomeSeo`, `buildCourseSeo`) + Course JSON-LD via `generateMetadata`.
+- **Category filtering:** client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Routing
+
+```
+app/
+  page.tsx              ->  /            Home (categories + courses grid)
+  cursos/[id]/page.tsx  ->  /cursos/:id  Course detail
+  checkout/page.tsx     ->  /checkout    Checkout flow
+  error.tsx             ->  Global error boundary
+  layout.tsx            ->  Root layout (providers + registry)
+```
+
+## Conventions
+
+- Props are destructured normally (e.g. `function Main({ category, courses })`), NOT as a single `props` object.
+- Component layout: `Component.tsx`, `Component.types.ts`, `index.ts`, `__tests__/Component.spec.tsx`.
+- Types live next to the component in `Component.types.ts`; shared types in `types/*.types.ts`.
+- GraphQL queries use variables, NOT template-string interpolation.
+- Use path aliases: `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` — avoid relative imports.
+- `Button` always wraps Next.js `<Link>` — pass `url`/`path` for routing, `ghost` for outline variant.
+- UI copy is Spanish placeholder text.
+- One commit per step/change — no mixing unrelated refactors.
+
+## Testing
+
+- **Vitest** for unit tests, **Playwright** for E2E.
+- Coverage threshold: 90% (statements, branches, functions, lines).
+- Tests live in `__tests__/` next to each component. Spec pattern: `Component.spec.tsx`.
+- Vitest globals enabled — no need to import `describe`, `it`, `expect`.
+
+## Git hooks
+
+`husky` + `lint-staged` run `biome check --write --unsafe --no-errors-on-unmatched` on staged files before every commit. Commits must pass lint-staged checks.
+
+## Deployment
+
+Target: [Vercel](https://vercel.com).
+
+Configure the env vars in the Vercel project settings, point at the production backend, and deploy.
+
+Production URL: https://crashcourse.jcvegab.dev
+
+## Related
+
+- [crashcourse-backend](https://github.com/jcvegab/crashcourse-backend) — Django + GraphQL API.
+
+## License
+
+MIT
+
+## Author
+
+Joseph Vega — admin@jcvegab.dev
