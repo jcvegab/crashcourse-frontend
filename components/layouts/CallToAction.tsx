@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import Button from '../UI/Button';
-import { StyledH2 } from '../UI/Title';
+import Button from '@/ui/Button';
+import { StyledH2 } from '@/ui/Title';
 
 const SectionTemplate = styled.section`
   margin-bottom: 56px;

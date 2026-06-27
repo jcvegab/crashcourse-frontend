@@ -5,10 +5,10 @@ import CourseCost from './CourseCost';
 import CourseStats from './CourseStats';
 import Tag from './Tag';
 
-import type { Course } from '@/types/course.types';
+import type { CourseSummary } from '@/types/course.types';
 
 type CourseCardProps = {
-  props: Course;
+  props: CourseSummary;
 };
 
 const CourseCardContainer = styled.div`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import Button from '../UI/Button';
-import Logo from '../UI/Logo';
+import Button from '@/ui/Button';
+import Logo from '@/ui/Logo';
 
 const HeaderTemplate = styled.header`
   padding: 16px 0;

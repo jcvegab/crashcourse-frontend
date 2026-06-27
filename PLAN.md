@@ -1029,7 +1029,7 @@ git revert <commit_sha>
 
 ## Step 13 — Migrar layouts y componentes compartidos a TypeScript
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

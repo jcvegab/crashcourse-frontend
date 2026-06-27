@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
-import CategoryCard from '../UI/CategoryCard';
-import { StyledH4 } from '../UI/Title';
+import CategoryCard from '@/ui/CategoryCard';
+import { StyledH4 } from '@/ui/Title';
+
+import type { CourseCategory } from '@/types/course.types';
+
+type CategoriesProps = {
+  props: CourseCategory[];
+  onSelect: (category: string) => void;
+};
 
 const CategoriesTemplate = styled.section`
   margin-bottom: 56px;
@@ -13,7 +20,7 @@ const CategoriesList = styled.div`
   overflow-x: scroll;
 `;
 
-export default function Categories({ props, onSelect }) {
+export default function Categories({ props, onSelect }: CategoriesProps) {
   return (
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
@@ -22,7 +29,7 @@ export default function Categories({ props, onSelect }) {
           <CategoryCard
             key={category.name}
             category={category.name}
-            onSelect={(category) => {
+            onSelect={(category: string) => {
               onSelect(category);
             }}
           />

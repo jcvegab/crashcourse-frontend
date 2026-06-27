@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import Spinner from '../UI/Spinner';
-import { StyledH2, StyledH3 } from '../UI/Title';
+import Spinner from '@/ui/Spinner';
+import { StyledH2, StyledH3 } from '@/ui/Title';
 
 const StyledLoading = styled.div`
   padding: 100px 0;

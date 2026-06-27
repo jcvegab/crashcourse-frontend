@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
-import CourseCard from '../UI/CourseCard';
-import { StyledH4 } from '../UI/Title';
+import CourseCard from '@/ui/CourseCard';
+import { StyledH4 } from '@/ui/Title';
+
+import type { CourseSummary } from '@/types/course.types';
+
+type CoursesListProps = {
+  props: CourseSummary[];
+};
 
 const CoursesListTemplate = styled.div`
   display: grid;
@@ -26,7 +32,7 @@ const CoursesListTemplate = styled.div`
   }
 `;
 
-export default function CoursesList({ props }) {
+export default function CoursesList({ props }: CoursesListProps) {
   return (
     <section>
       <StyledH4 margin="40px">Title H4 - Listado de cursos</StyledH4>

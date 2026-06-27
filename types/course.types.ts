@@ -1,5 +1,8 @@
+export type CourseCategory = {
+  name: string;
+};
+
 export type Course = {
-  id?: string;
   name: string;
   tutorUsername: string;
   level: string;
@@ -7,7 +10,9 @@ export type Course = {
   score: number;
   price: number;
   realPrice: number;
-  category?: {
-    name: string;
-  };
+};
+
+export type CourseSummary = Course & {
+  id: string;
+  category: CourseCategory;
 };

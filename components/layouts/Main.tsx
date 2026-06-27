@@ -1,10 +1,19 @@
 import { useState } from 'react';
 
-import CallToAction from '../layouts/CallToAction';
-import Categories from '../layouts/Categories';
-import CoursesList from '../layouts/CoursesList';
+import CallToAction from '@/layouts/CallToAction';
+import Categories from '@/layouts/Categories';
+import CoursesList from '@/layouts/CoursesList';
 
-export default function Main({ props }) {
+import type { CourseCategory, CourseSummary } from '@/types/course.types';
+
+type MainProps = {
+  props: {
+    categories: CourseCategory[];
+    courses: CourseSummary[];
+  };
+};
+
+export default function Main({ props }: MainProps) {
   const [currentCategory, setCurrentCategory] = useState('All');
 
   const filteredCourses = props.courses.filter((course) =>
@@ -18,7 +27,7 @@ export default function Main({ props }) {
       <CallToAction />
       <Categories
         props={props.categories}
-        onSelect={(category) => {
+        onSelect={(category: string) => {
           category === currentCategory
             ? setCurrentCategory('All')
             : setCurrentCategory(category);
