@@ -1,42 +1,81 @@
-# CLAUDE.md
+# CLAUDE.md — Crashcourse Frontend
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with this repository.
 
 ## Commands
 
 ```bash
-npm run dev      # Start dev server at http://localhost:3000
-npm run build    # Production build
-npm run start    # Serve the production build
+npm run dev         # Dev server at http://localhost:3000
+npm run build       # Production build (must be green before commit)
+npm run start       # Serve the production build
+npm run lint        # Biome check (linter + formatter)
+npm run lint:fix    # Auto-fix lint/format issues
+npm run format      # Format all files with Biome
+npm run typecheck   # TypeScript type checking (tsc --noEmit)
+npm run test        # Run Vitest unit tests
+npm run coverage    # Run unit tests with coverage (threshold: 90%)
+npm run e2e         # Run Playwright E2E tests
 ```
 
-There is no test runner and no `lint` script configured. `eslint-config-next` is installed, so linting can be run ad hoc with `npx next lint`.
+## Workflow rules
+
+- Execute one step at a time; commit after each step.
+- Do not mix unrelated changes in the same commit.
+- Before committing: run `npm run lint`, `npm run typecheck`, `npm run test`, `npm run build`.
+- If the build fails, fix the issue before committing.
 
 ## Environment
 
-The Apollo client reads the GraphQL endpoint from `NEXT_PUBLIC_API_URL` (see `pages/api/apolloClient.js`). Without a `.env.local` defining it, all data queries fail and pages render the "Error in backend..." fallback.
+Required `.env.local` variables:
+
+```env
+SERVER_API_URL=
+INTERNAL_TOKEN=
+NEXT_PUBLIC_SITE_URL=
+```
+
+`SERVER_API_URL` + `INTERNAL_TOKEN` are mandatory — without them every GraphQL query fails. Build step loads them from `.env.local` or GitHub Actions secrets.
 
 ## Architecture
 
-Next.js 12 **Pages Router** app (not the App Router). UI is a course marketplace ("Crashcourse"). React 17.
+- **Next.js 16 App Router** — routes live in `app/`. No Pages Router.
+- **React 19** with TypeScript strict mode.
+- **GraphQL** — Custom `gql<TData, TVariables>()` in `lib/gql.ts`. Server-only `fetch`-based client with ISR support (`next: { revalidate, tags }`). No Apollo Client.
+- **styled-components SSR** — `lib/registry.tsx` wraps children with `ServerStyleSheet` + `StyleSheetManager`. Theme (`theme.colors`) in `app/providers.tsx`.
+- **SEO** — `lib/seo.ts` helpers: `buildSeo`, `buildHomeSeo`, `buildCourseSeo`. JSON-LD structured data for Course schema. Use `generateMetadata` or `metadata` export in App Router pages.
+- **Biome** — Replaces ESLint + Prettier. `biome.json` configures linter, formatter, import organizer.
+- **lint-staged** — Runs Biome on staged files before every commit via husky.
 
-**Data layer — Apollo GraphQL.** A single `ApolloClient` is instantiated in `pages/api/apolloClient.js` and provided app-wide via `ApolloProvider` in `pages/_app.js`. Pages fetch with `useQuery`/`gql` inline — there is no separate queries module. The standard page pattern is: run the query, return an error `<span>` on `error`, return `<Loading />` on `loading`, otherwise render. Note `pages/cursos/[id].js` builds its query by interpolating the route `id` into the gql template string rather than using GraphQL variables.
+## Conventions to follow
 
-**Styling — styled-components with SSR.** Configured via `next.config.js` (`compiler.styledComponents`). `pages/_document.js` wires up `ServerStyleSheet` so styles render server-side — preserve that setup when editing `_document.js`. The theme (color palette under `theme.colors`) is defined inline in `pages/_app.js` and consumed everywhere through `${({ theme }) => theme.colors.X}`. Global resets live in the `createGlobalStyle` block in `_app.js`; additional CSS in `styles/`.
+- **Types**: Props typed explicitly in `*.types.ts` next to the component. Shared domain types in `types/*.types.ts`. Avoid `any`.
+- **Imports**: Use custom aliases (`@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`) — no relative `../` imports.
+- **Components**: Structure is `Component.tsx`, `Component.types.ts`, `__tests__/Component.spec.tsx`.
+- **Props**: Destructure normally (`function Main({ category, courses })`), not as single `props` object.
+- **GraphQL queries**: Always use variables, never interpolate values into template strings.
+- **Tests**: Unit tests in `__tests__` inside the component folder. Coverage threshold is 90%.
+- **SEO**: Update `generateMetadata` or `metadata` when page data changes. Use `lib/seo.ts` helpers.
+- **Styled-components**: Use `${({ theme }) => theme.colors.X}` for theme access. No hardcoded color values.
 
-**Component layering.**
-- `components/UI/` — leaf presentational primitives (`Button`, `Title`, `CourseCard`, `Tag`, etc.). `Title.js` exports `StyledH1`–`StyledH4` sharing a common `css` template; these are the canonical typography elements.
-- `components/layouts/` — page sections composed from UI primitives (`Header`, `Main`, `Categories`, `CoursesList`, `CallToAction`, `LoadingPage`).
-- Composition flows: page → layout → UI.
+## Project structure
 
-**Conventions worth matching.**
-- Components receive data through a single prop literally named `props` (e.g. `function Main({ props })`), distinct from React's conventional usage — follow the existing pattern when editing these files.
-- Category filtering is client-side: `Main.js` holds `currentCategory` state; clicking a `CategoryCard` toggles it, and an `"All"` sentinel means no filter.
-- `Button` always wraps a Next.js `<Link>`; pass `url`/`path` for routing and `ghost` for the outline variant.
-- UI text is largely Spanish placeholder copy ("Title H2 - ...").
-
-## Routes
-
-- `/` (`pages/index.js`) — home; lists categories + courses.
-- `/cursos/[id]` (`pages/cursos/[id].js`) — course detail. `getStaticPaths`/`getStaticProps` are stubbed out in comments; the page is currently client-rendered.
-- `/checkout` (`pages/checkout.js`) — placeholder, renders only a `<Head>`.
+```
+app/
+├── layout.tsx                  # Root layout with providers
+├── providers.tsx               # Theme + GlobalStyle
+├── page.tsx                    # Home route /
+├── checkout/
+│   └── page.tsx                # /checkout route
+└── cursos/[id]/
+    └── page.tsx                # /cursos/[id] route (SSR + generateMetadata)
+lib/
+├── gql.ts                      # GraphQL client
+├── seo.ts / seo.types.ts       # SEO helpers
+└── courseQueries.ts            # Shared GraphQL fragments
+components/
+├── UI/                         # Presentational primitives
+└── layouts/                    # Page sections
+types/
+├── course.types.ts             # Shared course types
+└── styled-components.d.ts      # Theme type augmentation
+```
