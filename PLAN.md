@@ -2561,7 +2561,7 @@ git revert <commit_sha>
 
 ## Step 45 — Agregar Playwright al CI
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
