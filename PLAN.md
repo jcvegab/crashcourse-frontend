@@ -1379,7 +1379,7 @@ git revert <commit_sha>
 
 ## Step 21 — Eliminar interpolación directa en GraphQL
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
