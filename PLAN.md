@@ -2465,7 +2465,7 @@ git revert <commit_sha>
 
 ## Step 44 — Agregar GitHub Actions CI
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
