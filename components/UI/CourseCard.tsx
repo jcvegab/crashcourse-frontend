@@ -8,7 +8,7 @@ import Tag from './Tag';
 import type { CourseSummary } from '@/types/course.types';
 
 type CourseCardProps = {
-  props: CourseSummary;
+  course: CourseSummary;
 };
 
 const CourseCardContainer = styled.div`
@@ -50,7 +50,7 @@ const CourseProfesor = styled.p`
   line-height: 20px;
 `;
 
-export default function CourseCard({ props }: CourseCardProps) {
+export default function CourseCard({ course }: CourseCardProps) {
   return (
     <CourseCardContainer>
       <CourseCardTop>
@@ -58,16 +58,16 @@ export default function CourseCard({ props }: CourseCardProps) {
       </CourseCardTop>
       <CourseCardBottom>
         <CourseInfo>
-          <CourseName>{props.name}</CourseName>
-          <CourseProfesor>{props.tutorUsername}</CourseProfesor>
+          <CourseName>{course.name}</CourseName>
+          <CourseProfesor>{course.tutorUsername}</CourseProfesor>
           <CourseStats
-            level={props.level}
-            users={props.users}
-            course_score={props.score}
+            level={course.level}
+            users={course.users}
+            course_score={course.score}
           />
         </CourseInfo>
-        <CourseCost price={props.price} realPrice={props.realPrice} />
-        <Button url={`cursos/${props.id}`} path="cursos/[id]">
+        <CourseCost price={course.price} realPrice={course.realPrice} />
+        <Button url={`cursos/${course.id}`} path="cursos/[id]">
           Comprar ahora
         </Button>
       </CourseCardBottom>

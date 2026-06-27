@@ -16,7 +16,7 @@ export default function HomePage({ data }: HomePageProps) {
   return (
     <>
       <Header />
-      <Main props={data} />
+      <Main categories={data.categories} courses={data.courses} />
     </>
   );
 }

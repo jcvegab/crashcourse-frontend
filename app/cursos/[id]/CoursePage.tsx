@@ -46,7 +46,7 @@ export default function CoursePage({ course }: CoursePageProps) {
           <div>
             <span>Acción 1</span>
           </div>
-          <CoursePreview props={course} />
+          <CoursePreview price={course.price} realPrice={course.realPrice} />
         </div>
       </main>
     </>

@@ -6,7 +6,7 @@ import { StyledH4 } from '@/ui/Title';
 import type { CourseSummary } from '@/types/course.types';
 
 type CoursesListProps = {
-  props: CourseSummary[];
+  courses: CourseSummary[];
 };
 
 const CoursesListTemplate = styled.div`
@@ -32,13 +32,13 @@ const CoursesListTemplate = styled.div`
   }
 `;
 
-export default function CoursesList({ props }: CoursesListProps) {
+export default function CoursesList({ courses }: CoursesListProps) {
   return (
     <section>
       <StyledH4 margin="40px">Title H4 - Listado de cursos</StyledH4>
       <CoursesListTemplate>
-        {props.map((course) => (
-          <CourseCard key={course.id} props={course} />
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course} />
         ))}
       </CoursesListTemplate>
     </section>
