@@ -1,15 +1,9 @@
+'use client';
+
 import { ApolloProvider } from '@apollo/client';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { initializeApollo } from '@/lib/apolloClient';
-
-import type { NormalizedCacheObject } from '@apollo/client';
-import type { AppProps } from 'next/app';
-import '../styles/_app.css';
-
-type PagePropsWithApollo = {
-  initialApolloState?: NormalizedCacheObject;
-};
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -37,19 +31,15 @@ const AppView = styled.div`
   overflow: hidden;
 `;
 
-function MyApp({ Component, pageProps }: AppProps<PagePropsWithApollo>) {
-  const client = initializeApollo(pageProps.initialApolloState);
+export default function Providers({ children }: { children: React.ReactNode }) {
+  const client = initializeApollo();
 
   return (
     <ApolloProvider client={client}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <AppView>
-          <Component {...pageProps} />
-        </AppView>
+        <AppView>{children}</AppView>
       </ThemeProvider>
     </ApolloProvider>
   );
 }
-
-export default MyApp;

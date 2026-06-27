@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
+import { initializeApollo } from '@/lib/apolloClient';
 import { buildHomeSeo } from '@/lib/seo';
 
 import Header from '../components/layouts/Header';
 import Main from '../components/layouts/Main';
 import SeoHead from '../components/UI/SeoHead';
-import { initializeApollo } from './api/apolloClient';
 
 import type { GetServerSideProps } from 'next';
 import type { SeoTags } from '@/lib/seo.types';

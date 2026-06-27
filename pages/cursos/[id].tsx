@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+import { initializeApollo } from '@/lib/apolloClient';
 import { buildCourseSeo } from '@/lib/seo';
 
 import Header from '../../components/layouts/Header';
@@ -7,7 +8,6 @@ import CoursePreview from '../../components/UI/CoursePreview';
 import CourseStats from '../../components/UI/CourseStats';
 import SeoHead from '../../components/UI/SeoHead';
 import { StyledH2 } from '../../components/UI/Title';
-import { initializeApollo } from '../api/apolloClient';
 
 import type { GetServerSideProps } from 'next';
 import type { SeoTags } from '@/lib/seo.types';
