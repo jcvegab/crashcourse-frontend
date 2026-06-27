@@ -5,10 +5,6 @@ import { StyledH4 } from '@/ui/Title';
 
 import type { CourseSummary } from '@/types/course.types';
 
-type CoursesListProps = {
-  courses: CourseSummary[];
-};
-
 const CoursesListTemplate = styled.div`
   display: grid;
   gap: 40px 24px;
@@ -31,6 +27,10 @@ const CoursesListTemplate = styled.div`
     grid-template-columns: repeat(4, 270px);
   }
 `;
+
+type CoursesListProps = {
+  courses: CourseSummary[];
+};
 
 export default function CoursesList({ courses }: CoursesListProps) {
   return (

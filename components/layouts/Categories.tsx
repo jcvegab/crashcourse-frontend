@@ -5,11 +5,6 @@ import { StyledH4 } from '@/ui/Title';
 
 import type { CourseCategory } from '@/types/course.types';
 
-type CategoriesProps = {
-  categories: CourseCategory[];
-  onSelect: (category: string) => void;
-};
-
 const CategoriesTemplate = styled.section`
   margin-bottom: 56px;
 `;
@@ -19,6 +14,11 @@ const CategoriesList = styled.div`
   gap: 24px;
   overflow-x: scroll;
 `;
+
+type CategoriesProps = {
+  categories: CourseCategory[];
+  onSelect: (category: string) => void;
+};
 
 export default function Categories({ categories, onSelect }: CategoriesProps) {
   return (

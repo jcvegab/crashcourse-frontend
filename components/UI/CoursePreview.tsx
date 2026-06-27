@@ -3,11 +3,6 @@ import styled, { css } from 'styled-components';
 import Button from '@/ui/Button';
 import CourseCost from '@/ui/CourseCost';
 
-type CoursePreviewProps = {
-  price: number;
-  realPrice: number;
-};
-
 const _TextTemplate = css`
   color: ${({ theme }) => theme.colors.baseMain};
 `;
@@ -33,6 +28,11 @@ const ButtonsContainer = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
+
+type CoursePreviewProps = {
+  price: number;
+  realPrice: number;
+};
 
 export default function CoursePreview({
   price,
