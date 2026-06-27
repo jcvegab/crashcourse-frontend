@@ -48,6 +48,20 @@ describe('seo helpers', () => {
 
       vi.unstubAllEnvs();
     });
+
+    it('strips trailing slashes from site url', () => {
+      vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com/');
+
+      const seo = buildSeo({
+        title: 'Test',
+        description: 'Desc',
+        path: '/cursos/123',
+      });
+
+      expect(seo.canonical).toBe('https://example.com/cursos/123');
+
+      vi.unstubAllEnvs();
+    });
   });
 
   describe('buildHomeSeo', () => {

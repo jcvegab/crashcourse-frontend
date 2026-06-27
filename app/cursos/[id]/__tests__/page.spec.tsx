@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import { buildCourseSeo } from '@/lib/seo';
+
 import CursoPage, { generateMetadata } from '../page';
 
 import { render } from '@/test/test-utils';
@@ -111,6 +113,39 @@ describe('generateMetadata', () => {
 
     expect(metadata.title).toBe('Curso React');
     expect(metadata.openGraph?.url).toBe('https://example.com/cursos/123');
+  });
+
+  it('returns metadata without images when image is empty', async () => {
+    vi.mocked(buildCourseSeo).mockReturnValueOnce({
+      title: 'Curso React',
+      description: 'Desc',
+      canonical: 'https://example.com/cursos/123',
+      image: '',
+      ogType: 'product',
+      noindex: false,
+      jsonLd: [],
+    });
+
+    mockQuery.mockResolvedValue({
+      data: {
+        course: {
+          name: 'React',
+          tutorUsername: 'John',
+          level: 'Avanzado',
+          users: 100,
+          score: 4.8,
+          price: 99,
+          realPrice: 199,
+        },
+      },
+    });
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ id: '123' }),
+    });
+
+    expect(metadata.openGraph?.images).toBeUndefined();
+    expect(metadata.twitter?.images).toBeUndefined();
   });
 
   it('returns noindex metadata for missing course', async () => {

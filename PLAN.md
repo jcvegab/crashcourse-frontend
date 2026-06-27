@@ -2318,7 +2318,7 @@ git revert <commit_sha>
 
 ## Step 41 — Alcanzar 90% de cobertura
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
