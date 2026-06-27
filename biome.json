@@ -1,7 +1,12 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["**/*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc,css}", "!**/.next/**", "!**/public/**", "!**/node_modules/**"]
+    "includes": [
+      "**/*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc,css}",
+      "!**/.next",
+      "!**/public",
+      "!**/node_modules"
+    ]
   },
   "assist": {
     "enabled": true,
@@ -13,7 +18,14 @@
             "groups": [
               {
                 "type": false,
-                "source": ["react", "next/**", ":PACKAGE:", ":NODE:", ":BUN:", ":URL:"]
+                "source": [
+                  "react",
+                  "next/**",
+                  ":PACKAGE:",
+                  ":NODE:",
+                  ":BUN:",
+                  ":URL:"
+                ]
               },
               ":BLANK_LINE:",
               {

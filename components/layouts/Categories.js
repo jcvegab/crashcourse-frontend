@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { StyledH4 } from '../UI/Title';
+
 import CategoryCard from '../UI/CategoryCard';
+import { StyledH4 } from '../UI/Title';
 
 const CategoriesTemplate = styled.section`
   margin-bottom: 56px;
@@ -17,9 +18,9 @@ export default function Categories({ props, onSelect }) {
     <CategoriesTemplate>
       <StyledH4 margin="16px">Title H4 - Categorias</StyledH4>
       <CategoriesList>
-        {props.map((category, index) => (
+        {props.map((category) => (
           <CategoryCard
-            key={index}
+            key={category.name}
             category={category.name}
             onSelect={(category) => {
               onSelect(category);

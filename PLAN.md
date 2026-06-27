@@ -907,7 +907,7 @@ git revert <commit_sha>
 
 ## Step 10 — Aplicar formato inicial con Biome
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

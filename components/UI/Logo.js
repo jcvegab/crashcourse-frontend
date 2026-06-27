@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import { StyledH1 } from './Title';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+import { StyledH1 } from './Title';
 
 const StyledLogo = styled.a`
   display: flex;

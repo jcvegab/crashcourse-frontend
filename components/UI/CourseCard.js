@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+
 import Button from './Button';
-import Tag from './Tag';
-import CourseStats from './CourseStats';
 import CourseCost from './CourseCost';
+import CourseStats from './CourseStats';
+import Tag from './Tag';
 
 const CourseCardContainer = styled.div`
   width: 270px;

@@ -1,8 +1,9 @@
+import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
-import { useQuery, gql } from '@apollo/client';
+
 import Header from '../components/layouts/Header';
-import Main from '../components/layouts/Main';
 import Loading from '../components/layouts/LoadingPage';
+import Main from '../components/layouts/Main';
 
 const ResumeQuery = gql`
   query ResumeQuery {

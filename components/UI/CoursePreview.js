@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
+
 import Button from '../../components/UI/Button';
 import CourseCost from '../../components/UI/CourseCost';
 
-const TextTemplate = css`
+const _TextTemplate = css`
   color: ${({ theme }) => theme.colors.baseMain};
 `;
 

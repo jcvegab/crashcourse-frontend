@@ -11,19 +11,10 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "typeRoots": [
-      "./types",
-      "./node_modules/@types"
-    ],
-    "types": [
-      "vitest/globals"
-    ],
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "types": ["vitest/globals"],
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "incremental": true,
     "module": "esnext",
@@ -38,14 +29,6 @@
       "@/utils/*": ["utils/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "exclude": ["node_modules"]
 }

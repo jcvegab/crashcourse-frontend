@@ -1,6 +1,7 @@
-import { StyledH4 } from '../UI/Title';
-import CourseCard from '../UI/CourseCard';
 import styled from 'styled-components';
+
+import CourseCard from '../UI/CourseCard';
+import { StyledH4 } from '../UI/Title';
 
 const CoursesListTemplate = styled.div`
   display: grid;

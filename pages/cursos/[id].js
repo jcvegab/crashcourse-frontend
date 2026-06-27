@@ -1,11 +1,12 @@
+import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
-import { useQuery, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
+
 import Header from '../../components/layouts/Header';
-import { StyledH2 } from '../../components/UI/Title';
-import CourseStats from '../../components/UI/CourseStats';
 import Loading from '../../components/layouts/LoadingPage';
 import CoursePreview from '../../components/UI/CoursePreview';
+import CourseStats from '../../components/UI/CourseStats';
+import { StyledH2 } from '../../components/UI/Title';
 
 const CourseQuery = (id) => gql`
   query ResumeQuery {
