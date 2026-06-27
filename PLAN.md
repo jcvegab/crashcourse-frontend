@@ -1435,7 +1435,7 @@ git revert <commit_sha>
 
 ## Step 22 — Auditar SEO actual
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
