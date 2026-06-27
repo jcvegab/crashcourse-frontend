@@ -507,7 +507,7 @@ git revert <commit_sha>
 
 ## Step 4 — Instalar TypeScript
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
