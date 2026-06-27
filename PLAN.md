@@ -1745,7 +1745,7 @@ git revert <commit_sha>
 
 ## Step 29 — Auditar migración de Pages Router a App Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -1788,7 +1788,7 @@ git revert <commit_sha>
 
 ## Step 30 — Preparar estructura base de App Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -1833,7 +1833,7 @@ git revert <commit_sha>
 
 ## Step 31 — Migrar rutas estáticas de bajo riesgo a App Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -1872,7 +1872,7 @@ git revert <commit_sha>
 
 ## Step 32 — Migrar detalle de curso a App Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -1912,7 +1912,7 @@ git revert <commit_sha>
 
 ## Step 33 — Migrar rutas restantes elegibles a App Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
