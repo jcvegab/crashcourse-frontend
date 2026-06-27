@@ -403,7 +403,7 @@ git revert <commit_sha>
 
 ## Step 2 — Fijar Node.js 24
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
