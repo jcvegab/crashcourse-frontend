@@ -4,22 +4,38 @@ import styled, { css } from 'styled-components';
 import type { ReactNode } from 'react';
 
 type StyledButtonProps = {
+  $height?: string;
+  $width?: string;
+  $fontSize?: string;
+  $lineHeight?: string;
+  $ghost?: boolean;
+};
+
+type ButtonProps = {
   height?: string;
   width?: string;
   fontSize?: string;
   lineHeight?: string;
   ghost?: boolean;
-};
-
-type ButtonProps = StyledButtonProps & {
   url?: string;
   path?: string;
   children: ReactNode;
 };
 
-const StyledButton = styled.a<StyledButtonProps>`
-  height: ${(props) => props.height || '48px'};
-  width: ${(props) => props.width || '100%'};
+type ButtonLinkProps = {
+  href: string;
+  routeAs: string;
+  className?: string;
+  children: ReactNode;
+};
+
+const ButtonLink = ({ routeAs, ...props }: ButtonLinkProps) => {
+  return <Link {...props} as={routeAs} />;
+};
+
+const StyledButton = styled(ButtonLink)<StyledButtonProps>`
+  height: ${(props) => props.$height || '48px'};
+  width: ${(props) => props.$width || '100%'};
   padding: 0;
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.baseMain};
@@ -28,13 +44,13 @@ const StyledButton = styled.a<StyledButtonProps>`
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: ${(props) => props.fontSize || '18px'};
-  line-height: ${(props) => props.lineHeight || '20px'};
+  font-size: ${(props) => props.$fontSize || '18px'};
+  line-height: ${(props) => props.$lineHeight || '20px'};
   cursor: pointer;
   text-decoration: none;
   user-select: none;
   ${(props) =>
-    props.ghost &&
+    props.$ghost &&
     css`
       color: ${({ theme }) => theme.colors.baseMain};
       background-color: ${({ theme }) => theme.colors.transparent};
@@ -53,22 +69,17 @@ const Button = ({
   children,
 }: ButtonProps) => {
   return (
-    <Link
-      legacyBehavior
-      as={url ? `/${url}` : '/'}
+    <StyledButton
+      routeAs={url ? `/${url}` : '/'}
       href={path ? `/${path}` : '/'}
-      passHref
+      $height={height}
+      $width={width}
+      $fontSize={fontSize}
+      $lineHeight={lineHeight}
+      $ghost={ghost}
     >
-      <StyledButton
-        height={height}
-        width={width}
-        fontSize={fontSize}
-        lineHeight={lineHeight}
-        ghost={ghost}
-      >
-        {children}
-      </StyledButton>
-    </Link>
+      {children}
+    </StyledButton>
   );
 };
 export default Button;
