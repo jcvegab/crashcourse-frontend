@@ -1106,7 +1106,7 @@ git revert <commit_sha>
 
 ## Step 15 — Endurecer TypeScript gradualmente
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

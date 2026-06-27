@@ -2,7 +2,8 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "strict": false,
+    "strict": true,
+    "noImplicitAny": true,
     "noEmit": true,
     "jsx": "preserve",
     "moduleResolution": "node",
