@@ -623,7 +623,7 @@ git revert <commit_sha>
 
 ## Step 6 — Documentar convenciones de componentes, tipos y tests
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
