@@ -2611,7 +2611,7 @@ git revert <commit_sha>
 
 ## Step 46 — Agregar Dependabot tomando referencia del portfolio
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
