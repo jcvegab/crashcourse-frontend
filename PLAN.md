@@ -1665,7 +1665,7 @@ git revert <commit_sha>
 
 ## Step 27 — Upgrade Next.js segundo salto
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
