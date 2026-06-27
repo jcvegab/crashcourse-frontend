@@ -2764,7 +2764,7 @@ git revert <commit_sha>
 
 ## Step 49 — Verificación completa del proyecto
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
@@ -2815,35 +2815,35 @@ git revert <commit_sha>
 
 # Checklist final
 
-- [ ] Node.js 24 fijado en `.nvmrc` y `.node-version`.
-- [ ] TypeScript instalado.
-- [ ] `tsconfig.json` contiene `types: ["vitest/globals"]`.
-- [ ] Custom paths configurados.
-- [ ] Biome instalado y configurado.
-- [ ] lint-staged configurado con Biome.
-- [ ] Convenciones de tipos documentadas.
-- [ ] Tests unitarios ubicados en `__tests__`.
-- [ ] Archivos principales migrados a `.ts` / `.tsx`.
-- [ ] `tsconfig.json` endurecido.
-- [ ] CSR relevante migrado a SSR.
-- [ ] GraphQL usa variables, no interpolación directa.
-- [ ] SEO implementado con data existente.
-- [ ] Structured data agregado solo donde aplica.
-- [ ] Next.js actualizado por saltos.
-- [ ] React actualizado si aplica.
-- [ ] App Router introducido gradualmente.
-- [ ] Build funcionando.
-- [ ] Biome funcionando.
-- [ ] Vitest instalado.
+- [x] Node.js 24 fijado en `.nvmrc` y `.node-version`.
+- [x] TypeScript instalado.
+- [x] `tsconfig.json` contiene `types: ["vitest/globals"]`.
+- [x] Custom paths configurados.
+- [x] Biome instalado y configurado.
+- [x] lint-staged configurado con Biome.
+- [x] Convenciones de tipos documentadas.
+- [x] Tests unitarios ubicados en `__tests__`.
+- [x] Archivos principales migrados a `.ts` / `.tsx`.
+- [x] `tsconfig.json` endurecido.
+- [x] CSR relevante migrado a SSR.
+- [x] GraphQL usa variables, no interpolación directa.
+- [x] SEO implementado con data existente.
+- [x] Structured data agregado solo donde aplica.
+- [x] Next.js actualizado por saltos.
+- [x] React actualizado si aplica.
+- [x] App Router introducido gradualmente.
+- [x] Build funcionando.
+- [x] Biome funcionando.
+- [x] Vitest instalado.
 - [ ] Coverage mínimo de 90%.
-- [ ] Playwright instalado.
-- [ ] E2E mínimo funcionando.
-- [ ] GitHub Actions configurado.
-- [ ] Dependabot configurado.
-- [ ] `AGENTS.md` actualizado.
-- [ ] `CLAUDE.md` actualizado.
-- [ ] Cada step tiene su propio commit.
-- [ ] No quedan cambios sin commit.
+- [x] Playwright instalado.
+- [x] E2E mínimo funcionando.
+- [x] GitHub Actions configurado.
+- [x] Dependabot configurado.
+- [x] `AGENTS.md` actualizado.
+- [x] `CLAUDE.md` actualizado.
+- [x] Cada step tiene su propio commit.
+- [x] No quedan cambios sin commit.
 
 ---
 

@@ -2,26 +2,43 @@
 
 ## Estado actual
 
-- **Statements**: 99.33%
-- **Branches**: 95.58%
-- **Functions**: 98.46%
-- **Lines**: 99.33%
+- `npm run coverage` ejecuta 13 archivos de test y 44 tests correctamente.
+- El reporte actual de cobertura muestra `All files | 0`.
+- `coverage/coverage-final.json` queda vacío en la verificación final.
+- El objetivo de 90% no queda verificable hasta corregir instrumentación.
 
 ## Exclusiones justificadas
 
-No se aplicaron exclusiones manuales. Todos los archivos fuente son evaluados por el reporte de cobertura.
+`vitest.config.ts` excluye archivos declarativos, configuración, tests y wrappers de infraestructura que no representan lógica de aplicación:
 
-## Archivos con cobertura menor al 100%
+- `**/__tests__/**`
+- `**/*.spec.{ts,tsx}`
+- `**/*.test.{ts,tsx}`
+- `**/*.d.ts`
+- `app/layout.tsx`
+- `app/providers.tsx`
+- `app/error.tsx`
+- `components/UI/SeoHead.tsx`
+- `lib/registry.tsx`
+- `lib/*.types.ts`
 
-### `components/UI/CoursePreview.tsx` — 88.88% statements
+## Hallazgo de verificación final
 
-- Línea 7: `_TextTemplate` es un template de styled-components que no se evalúa directamente en runtime porque no se aplica a ningún elemento. Es código declarativo de CSS-in-JS.
+Vitest 4 requiere `coverage.include` explícito para incluir archivos no cargados o no reportados por defecto. Se agregó configuración explícita para:
 
-### `lib/seo.ts` — 89.28% branches
+- `app/**/*.ts`
+- `app/**/*.tsx`
+- `components/**/*.ts`
+- `components/**/*.tsx`
+- `lib/**/*.ts`
+- `lib/**/*.tsx`
+- `types/**/*.types.ts`
 
-- Línea 50: `getSiteUrl` con trailing slash. Cubierto en tests unitarios.
-- Línea 102: `buildCourseJsonLd` asignación condicional de `url`. Cubierto indirectamente mediante `buildCourseSeo`.
-- Línea 140: `canonical` en `buildCourseSeo`. Cubierto en tests unitarios.
+La ejecución sigue generando un reporte vacío en este entorno, por lo que la cobertura real queda como deuda pendiente.
+
+## Próximo ajuste requerido
+
+Investigar por qué `@vitest/coverage-v8` no instrumenta archivos fuente aunque los tests importan módulos reales. Mantener el threshold de 90% y fallar CI cuando el reporte incluya archivos reales por debajo del mínimo.
 
 ## Estrategia
 
