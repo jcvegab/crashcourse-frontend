@@ -1202,7 +1202,7 @@ git revert <commit_sha>
 
 ## Step 17 — Separar variables de entorno cliente/servidor
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
