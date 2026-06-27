@@ -1,11 +1,14 @@
 import { gql } from '@apollo/client';
-import Head from 'next/head';
+
+import { buildHomeSeo } from '@/lib/seo';
 
 import Header from '../components/layouts/Header';
 import Main from '../components/layouts/Main';
+import SeoHead from '../components/UI/SeoHead';
 import { initializeApollo } from './api/apolloClient';
 
 import type { GetServerSideProps } from 'next';
+import type { SeoTags } from '@/lib/seo.types';
 import type { CourseCategory, CourseSummary } from '@/types/course.types';
 
 type ResumeQueryData = {
@@ -16,6 +19,7 @@ type ResumeQueryData = {
 type HomeProps = {
   data: ResumeQueryData | null;
   hasError: boolean;
+  seo: SeoTags;
 };
 
 const ResumeQuery = gql`
@@ -39,15 +43,12 @@ const ResumeQuery = gql`
   }
 `;
 
-export default function Home({ data, hasError }: HomeProps) {
+export default function Home({ data, hasError, seo }: HomeProps) {
   if (hasError) return <span>Error in backend...</span>;
 
   return (
     <>
-      <Head>
-        <title>Crashcourse</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SeoHead seo={seo} />
       <Header></Header>
       {data ? <Main props={data}></Main> : null}
     </>
@@ -65,6 +66,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
       props: {
         data,
         hasError: false,
+        seo: buildHomeSeo(),
         initialApolloState: apolloClient.cache.extract(),
       },
     };
@@ -73,6 +75,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
       props: {
         data: null,
         hasError: true,
+        seo: buildHomeSeo(),
       },
     };
   }

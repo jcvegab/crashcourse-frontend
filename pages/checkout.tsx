@@ -1,9 +1,14 @@
-import Head from 'next/head';
+import SeoHead from '@/ui/SeoHead';
+
+import { buildSeo } from '@/lib/seo';
+
+const checkoutSeo = buildSeo({
+  title: 'Checkout',
+  description: 'Finaliza la compra de tu curso en Crashcourse.',
+  path: '/checkout',
+  noindex: true,
+});
 
 export default function Checkout() {
-  return (
-    <Head>
-      <title>Checkout | Crashcourse</title>
-    </Head>
-  );
+  return <SeoHead seo={checkoutSeo} />;
 }

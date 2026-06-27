@@ -1490,7 +1490,7 @@ git revert <commit_sha>
 
 ## Step 23 — Implementar SEO en Pages Router
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

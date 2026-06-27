@@ -1,13 +1,16 @@
 import { gql } from '@apollo/client';
-import Head from 'next/head';
+
+import { buildCourseSeo } from '@/lib/seo';
 
 import Header from '../../components/layouts/Header';
 import CoursePreview from '../../components/UI/CoursePreview';
 import CourseStats from '../../components/UI/CourseStats';
+import SeoHead from '../../components/UI/SeoHead';
 import { StyledH2 } from '../../components/UI/Title';
 import { initializeApollo } from '../api/apolloClient';
 
 import type { GetServerSideProps } from 'next';
+import type { SeoTags } from '@/lib/seo.types';
 import type { Course } from '@/types/course.types';
 
 type CourseQueryData = {
@@ -17,7 +20,7 @@ type CourseQueryData = {
 type CoursePageProps = {
   course: Course | null;
   hasError: boolean;
-  id: string;
+  seo: SeoTags;
 };
 
 const CourseQuery = gql`
@@ -34,15 +37,13 @@ const CourseQuery = gql`
   }
 `;
 
-export default function Curso({ course, hasError, id }: CoursePageProps) {
+export default function Curso({ course, hasError, seo }: CoursePageProps) {
   if (hasError) return <span>Error in backend...</span>;
   if (!course) return null;
 
   return (
     <>
-      <Head>
-        <title>Curso {id} | Crashcourse</title>
-      </Head>
+      <SeoHead seo={seo} />
       <Header />
       <main>
         <div>
@@ -105,7 +106,7 @@ export const getServerSideProps: GetServerSideProps<CoursePageProps> = async ({
       props: {
         course: data.course,
         hasError: false,
-        id,
+        seo: buildCourseSeo({ id, course: data.course }),
         initialApolloState: apolloClient.cache.extract(),
       },
     };
@@ -114,7 +115,7 @@ export const getServerSideProps: GetServerSideProps<CoursePageProps> = async ({
       props: {
         course: null,
         hasError: true,
-        id,
+        seo: buildCourseSeo({ id, course: null }),
       },
     };
   }
