@@ -1,25 +1,46 @@
 {
   "name": "crashcourse",
   "version": "0.1.0",
+  "description": "Crashcourse | Next.js + GraphQL client for a course platform, featuring SSR styled-components, ISR, SEO-optimized course pages and a Spanish UI.",
+  "keywords": [
+    "nextjs",
+    "react",
+    "graphql",
+    "styled-components",
+    "typescript",
+    "frontend",
+    "course-platform",
+    "ssr",
+    "isr",
+    "seo"
+  ],
+  "author": "Joseph Vega <admin@jcvegab.dev>",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcvegab/crashcourse-frontend.git"
+  },
+  "homepage": "https://crashcourse.jcvegab.dev",
   "private": true,
   "engines": {
-    "node": ">=24"
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
   },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write --unsafe .",
-    "format": "biome format --write .",
-    "format:check": "biome format .",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "dev": "next dev",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "prepare": "husky"
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write --unsafe .",
+    "prepare": "husky",
+    "start": "next start",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "^16.2.9",
