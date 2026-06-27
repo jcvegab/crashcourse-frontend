@@ -2421,7 +2421,7 @@ git revert <commit_sha>
 
 ## Step 43 — Agregar E2E de rutas críticas
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

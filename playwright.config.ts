@@ -3,9 +3,11 @@ import { defineConfig, devices } from '@playwright/test';
 const PORT = Number(process.env.PORT ?? 3000);
 const BASE_URL = `http://localhost:${PORT}`;
 
-const SERVER_API_URL = process.env.SERVER_API_URL ?? '';
+const SERVER_API_URL =
+  process.env.SERVER_API_URL ?? 'http://localhost:8000/graphql/';
 const INTERNAL_TOKEN = process.env.INTERNAL_TOKEN ?? '';
-const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+const NEXT_PUBLIC_SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export default defineConfig({
   testDir: './e2e',
