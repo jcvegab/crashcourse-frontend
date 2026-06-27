@@ -1,8 +1,9 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
 
 import { render } from '../../../test/test-utils';
 import Button from '../Button';
+
+import type React from 'react';
 
 vi.mock('next/link', () => ({
   default: function Link({
@@ -10,15 +11,12 @@ vi.mock('next/link', () => ({
     as,
     href,
   }: {
-    children: React.ReactElement;
+    children: React.ReactNode;
     as?: string;
     href: string;
   }) {
     const resolvedHref = as && as !== '/' ? as : href;
-    return React.cloneElement(children, { href: resolvedHref } as Record<
-      string,
-      unknown
-    >);
+    return <a href={resolvedHref}>{children}</a>;
   },
 }));
 
