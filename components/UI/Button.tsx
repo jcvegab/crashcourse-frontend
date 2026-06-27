@@ -53,7 +53,12 @@ const Button = ({
   children,
 }: ButtonProps) => {
   return (
-    <Link as={url ? `/${url}` : '/'} href={path ? `/${path}` : '/'} passHref>
+    <Link
+      legacyBehavior
+      as={url ? `/${url}` : '/'}
+      href={path ? `/${path}` : '/'}
+      passHref
+    >
       <StyledButton
         height={height}
         width={width}
