@@ -5,6 +5,13 @@ import Header from '../components/layouts/Header';
 import Loading from '../components/layouts/LoadingPage';
 import Main from '../components/layouts/Main';
 
+import type { CourseCategory, CourseSummary } from '@/types/course.types';
+
+type ResumeQueryData = {
+  categories: CourseCategory[];
+  courses: CourseSummary[];
+};
+
 const ResumeQuery = gql`
   query ResumeQuery {
     categories {
@@ -27,7 +34,7 @@ const ResumeQuery = gql`
 `;
 
 export default function Home() {
-  const { data, error, loading } = useQuery(ResumeQuery);
+  const { data, error, loading } = useQuery<ResumeQueryData>(ResumeQuery);
 
   if (error) return <span>Error in backend...</span>;
 
@@ -40,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header></Header>
-      <Main props={data}></Main>
+      {data ? <Main props={data}></Main> : null}
     </>
   );
 }

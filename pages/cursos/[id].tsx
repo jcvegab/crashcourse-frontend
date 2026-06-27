@@ -8,7 +8,13 @@ import CoursePreview from '../../components/UI/CoursePreview';
 import CourseStats from '../../components/UI/CourseStats';
 import { StyledH2 } from '../../components/UI/Title';
 
-const CourseQuery = (id) => gql`
+import type { Course } from '@/types/course.types';
+
+type CourseQueryData = {
+  course: Course;
+};
+
+const CourseQuery = (id: string | string[] | undefined) => gql`
   query ResumeQuery {
     course(id: ${id}) {
       name
@@ -26,9 +32,11 @@ export default function Curso() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, error, loading } = useQuery(CourseQuery(id));
+  const { data, error, loading } = useQuery<CourseQueryData>(CourseQuery(id));
   if (error) return <span>Error in backend...</span>;
   if (loading) return <Loading />;
+
+  if (!data) return null;
 
   return (
     <>

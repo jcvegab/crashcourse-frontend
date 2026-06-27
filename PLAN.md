@@ -1067,7 +1067,7 @@ git revert <commit_sha>
 
 ## Step 14 — Migrar páginas a TypeScript
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
