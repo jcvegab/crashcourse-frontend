@@ -17,7 +17,17 @@ const StatsText = styled.span`
   color: ${({ theme }) => theme.colors.grayDark};
 `;
 
-export default function CourseStats({ level, users, course_score }) {
+type CourseStatsProps = {
+  level: string;
+  users: number;
+  course_score: number;
+};
+
+export default function CourseStats({
+  level,
+  users,
+  course_score,
+}: CourseStatsProps) {
   return (
     <StatsContainer className="flex items-center">
       <div className="flex items-center">

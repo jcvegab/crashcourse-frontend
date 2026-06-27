@@ -29,7 +29,12 @@ const RealPrice = styled.span`
   margin-left: 8px;
 `;
 
-export default function CourseCost({ price, realPrice }) {
+type CourseCostProps = {
+  price: number;
+  realPrice: number;
+};
+
+export default function CourseCost({ price, realPrice }: CourseCostProps) {
   return (
     <CostContainer>
       <PriceSimbol>co</PriceSimbol>

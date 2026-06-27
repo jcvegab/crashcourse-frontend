@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components';
 import Button from '../../components/UI/Button';
 import CourseCost from '../../components/UI/CourseCost';
 
+import type { Course } from '@/types/course.types';
+
+type CoursePreviewProps = {
+  props: Course;
+};
+
 const _TextTemplate = css`
   color: ${({ theme }) => theme.colors.baseMain};
 `;
@@ -29,7 +35,7 @@ const ButtonsContainer = styled.div`
   gap: 10px;
 `;
 
-export default function CoursePreview({ props }) {
+export default function CoursePreview({ props }: CoursePreviewProps) {
   return (
     <PreviewCardContainer>
       <TrailerContainer>
@@ -38,7 +44,7 @@ export default function CoursePreview({ props }) {
       <BuyCourseContainer>
         <CourseCost price={props.price} realPrice={props.realPrice} />
         <ButtonsContainer>
-          <Button url={`checkout`} path={`checkout`}>
+          <Button url="checkout" path="checkout">
             Comprar ahora
           </Button>
           <Button ghost>Agregar al carrito</Button>

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+import type { ReactNode } from 'react';
+
+type TagProps = {
+  children: ReactNode;
+};
+
 const StyledTag = styled.div`
   width: fit-content;
   padding: 4px 8px;
@@ -12,6 +18,6 @@ const StyledTag = styled.div`
   text-transform: uppercase;
 `;
 
-export default function Tag({ children }) {
+export default function Tag({ children }: TagProps) {
   return <StyledTag>{children}</StyledTag>;
 }

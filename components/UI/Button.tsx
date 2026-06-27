@@ -1,7 +1,23 @@
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
-const StyledButton = styled.a`
+import type { ReactNode } from 'react';
+
+type StyledButtonProps = {
+  height?: string;
+  width?: string;
+  fontSize?: string;
+  lineHeight?: string;
+  ghost?: boolean;
+};
+
+type ButtonProps = StyledButtonProps & {
+  url?: string;
+  path?: string;
+  children: ReactNode;
+};
+
+const StyledButton = styled.a<StyledButtonProps>`
   height: ${(props) => props.height || '48px'};
   width: ${(props) => props.width || '100%'};
   padding: 0;
@@ -35,7 +51,7 @@ const Button = ({
   url,
   path,
   children,
-}) => {
+}: ButtonProps) => {
   return (
     <Link as={url ? `/${url}` : '/'} href={path ? `/${path}` : '/'} passHref>
       <StyledButton

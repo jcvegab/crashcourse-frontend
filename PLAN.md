@@ -990,7 +990,7 @@ git revert <commit_sha>
 
 ## Step 12 — Migrar componentes UI a TypeScript
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

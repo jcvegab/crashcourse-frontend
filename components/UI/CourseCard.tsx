@@ -5,6 +5,12 @@ import CourseCost from './CourseCost';
 import CourseStats from './CourseStats';
 import Tag from './Tag';
 
+import type { Course } from '@/types/course.types';
+
+type CourseCardProps = {
+  props: Course;
+};
+
 const CourseCardContainer = styled.div`
   width: 270px;
 `;
@@ -44,7 +50,7 @@ const CourseProfesor = styled.p`
   line-height: 20px;
 `;
 
-export default function CourseCard({ props }) {
+export default function CourseCard({ props }: CourseCardProps) {
   return (
     <CourseCardContainer>
       <CourseCardTop>
@@ -61,7 +67,7 @@ export default function CourseCard({ props }) {
           />
         </CourseInfo>
         <CourseCost price={props.price} realPrice={props.realPrice} />
-        <Button url={`cursos/${props.id}`} path={`cursos/[id]`}>
+        <Button url={`cursos/${props.id}`} path="cursos/[id]">
           Comprar ahora
         </Button>
       </CourseCardBottom>

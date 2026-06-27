@@ -1,12 +1,17 @@
 import styled, { css } from 'styled-components';
 
-const TitlesTemplate = css`
+type TitleProps = {
+  margin?: string;
+  movile?: boolean;
+};
+
+const TitlesTemplate = css<TitleProps>`
   margin-bottom: ${(props) => props.margin};
   color: ${({ theme }) => theme.colors.black};
   font-weight: 900;
 `;
 
-const StyledH1 = styled.h1`
+const StyledH1 = styled.h1<TitleProps>`
   ${TitlesTemplate}
   font-size: 20px;
   line-height: 18px;
@@ -17,7 +22,7 @@ const StyledH1 = styled.h1`
     `};
 `;
 
-const StyledH2 = styled.h2`
+const StyledH2 = styled.h2<TitleProps>`
   ${TitlesTemplate}
   font-size: 40px;
   line-height: 44px;
@@ -28,7 +33,7 @@ const StyledH2 = styled.h2`
     `};
 `;
 
-const StyledH3 = styled.h3`
+const StyledH3 = styled.h3<TitleProps>`
   ${TitlesTemplate}
   font-size: 32px;
   line-height: 44px;
@@ -39,7 +44,7 @@ const StyledH3 = styled.h3`
     `};
 `;
 
-const StyledH4 = styled.h4`
+const StyledH4 = styled.h4<TitleProps>`
   ${TitlesTemplate}
   font-size: 24px;
   line-height: 28px;
