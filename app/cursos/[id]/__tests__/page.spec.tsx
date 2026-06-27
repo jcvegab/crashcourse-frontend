@@ -54,8 +54,8 @@ describe('CursoPage', () => {
     expect(container.textContent).toContain('React');
     expect(gql).toHaveBeenCalledWith(
       expect.any(String),
-      { id: '123' },
-      { next: { tags: ['course-123'] } },
+      { id: 123 },
+      { next: { revalidate: 300, tags: ['course-123'] } },
     );
   });
 
