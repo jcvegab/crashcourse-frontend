@@ -1338,7 +1338,7 @@ git revert <commit_sha>
 
 ## Step 20 — Migrar páginas SSR elegibles restantes
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
