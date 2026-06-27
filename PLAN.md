@@ -1288,7 +1288,7 @@ git revert <commit_sha>
 
 ## Step 19 — Migrar detalle de curso de CSR a SSR
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
