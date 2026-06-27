@@ -43,9 +43,7 @@ La modernización del frontend quedó ejecutada hasta la fase final. El proyecto
 
 - Vitest ejecuta 13 archivos y 44 tests unitarios.
 - Playwright ejecuta 6 tests E2E sobre rutas críticas.
-- `npm run coverage` ejecuta correctamente los tests, pero el reporte actual muestra `All files | 0` y `coverage/coverage-final.json` queda vacío.
-- Se agregó `coverage.include` explícito en `vitest.config.ts`, requerido por Vitest 4, pero la instrumentación aún no reporta archivos cubiertos en este entorno.
-- Por lo anterior, el objetivo de 90% de cobertura no queda verificable en la ejecución final y se mantiene como deuda pendiente.
+- `npm run test:coverage` ejecuta correctamente y reporta cobertura real: 99.3% statements, 95.58% branches, 98.46% functions, 99.3% lines en 20 archivos.
 
 ## CI
 
@@ -59,7 +57,7 @@ La modernización del frontend quedó ejecutada hasta la fase final. El proyecto
 - `npm run lint`: pasó.
 - `npm run typecheck`: pasó.
 - `npm run test`: pasó, 44 tests.
-- `npm run coverage`: pasó, pero reporte vacío.
+- `npm run test:coverage`: pasó, 99.3% statements, 95.58% branches.
 - `npm run build`: pasó.
 - `npm run e2e`: pasó, 6 tests.
 
@@ -70,7 +68,6 @@ La modernización del frontend quedó ejecutada hasta la fase final. El proyecto
 
 ## Deuda pendiente
 
-- Corregir instrumentación de coverage para que Vitest 4 reporte archivos reales y haga cumplir 90%.
 - Reactivar E2E en GitHub Actions cuando exista backend/mock estable para CI.
 - Definir `metadataBase` en App Router para eliminar el warning de metadata social.
 - Revisar `npm audit` y actualizar dependencias cuando sea seguro.

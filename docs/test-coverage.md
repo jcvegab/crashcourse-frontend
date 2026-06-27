@@ -2,7 +2,7 @@
 
 ## Estado actual
 
-- `npm run coverage` ejecuta 13 archivos de test y 44 tests correctamente.
+- `npm run test:coverage` ejecuta 13 archivos de test y 44 tests correctamente.
 - El reporte actual de cobertura muestra `All files | 0`.
 - `coverage/coverage-final.json` queda vacío en la verificación final.
 - El objetivo de 90% no queda verificable hasta corregir instrumentación.

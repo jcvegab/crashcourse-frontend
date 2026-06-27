@@ -3,19 +3,19 @@
 ## Commands
 
 ```bash
-npm run dev         # dev server at localhost:3000
-npm run build       # production build
-npm run start       # serve production build
-npm run lint        # biome check
-npm run lint:fix    # biome check --write --unsafe
-npm run format      # biome format --write
-npm run format:check# biome format
-npm run typecheck   # tsc --noEmit
-npm run test        # vitest run
-npm run test:watch  # vitest
-npm run coverage    # vitest run --coverage
-npm run e2e         # playwright test
-npm run e2e:ui      # playwright test --ui
+npm run dev           # dev server at localhost:3000
+npm run build         # production build
+npm run start         # serve production build
+npm run lint          # biome check
+npm run lint:fix      # biome check --write --unsafe
+npm run format        # biome format --write
+npm run format:check  # biome format
+npm run typecheck     # tsc --noEmit
+npm run test          # vitest run
+npm run test:watch    # vitest
+npm run test:coverage # vitest run --coverage
+npm run e2e           # playwright test
+npm run e2e:ui        # playwright test --ui
 ```
 
 ## Testing

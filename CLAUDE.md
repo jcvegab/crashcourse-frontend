@@ -5,16 +5,17 @@ This file provides guidance to Claude Code when working with this repository.
 ## Commands
 
 ```bash
-npm run dev         # Dev server at http://localhost:3000
-npm run build       # Production build (must be green before commit)
-npm run start       # Serve the production build
-npm run lint        # Biome check (linter + formatter)
-npm run lint:fix    # Auto-fix lint/format issues
-npm run format      # Format all files with Biome
-npm run typecheck   # TypeScript type checking (tsc --noEmit)
-npm run test        # Run Vitest unit tests
-npm run coverage    # Run unit tests with coverage (threshold: 90%)
-npm run e2e         # Run Playwright E2E tests
+npm run dev             # Dev server at http://localhost:3000
+npm run build           # Production build (must be green before commit)
+npm run start           # Serve the production build
+npm run lint            # Biome check (linter + formatter)
+npm run lint:fix        # Auto-fix lint/format issues
+npm run format          # Format all files with Biome
+npm run typecheck       # TypeScript type checking (tsc --noEmit)
+npm run test            # Run Vitest unit tests
+npm run test:coverage   # Run unit tests with coverage (threshold: 90%)
+npm run e2e             # Run Playwright E2E tests
+npm run e2e:ui          # Run Playwright E2E tests in UI mode
 ```
 
 ## Workflow rules
