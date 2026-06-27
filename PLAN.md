@@ -1539,7 +1539,7 @@ git revert <commit_sha>
 
 ## Step 24 — Agregar structured data cuando aplique
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

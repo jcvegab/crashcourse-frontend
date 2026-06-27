@@ -1,5 +1,7 @@
 export type SeoOgType = 'website' | 'product' | 'article';
 
+export type JsonLd = Record<string, unknown>;
+
 export type SeoTags = {
   title: string;
   description: string;
@@ -7,6 +9,7 @@ export type SeoTags = {
   image: string;
   ogType: SeoOgType;
   noindex: boolean;
+  jsonLd: JsonLd[];
 };
 
 export type BuildSeoInput = {
@@ -16,4 +19,5 @@ export type BuildSeoInput = {
   image?: string;
   ogType?: SeoOgType;
   noindex?: boolean;
+  jsonLd?: JsonLd[];
 };

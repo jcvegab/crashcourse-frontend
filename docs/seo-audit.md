@@ -157,15 +157,68 @@ than inventing one.
 
 | Route | Schema | Fields available |
 | --- | --- | --- |
-| `/cursos/[id]` | `Product` | `name`, `tutorUsername` (mapped to `brand`), `price` (mapped to `offers.price`), `realPrice` (discounted) |
+| `/cursos/[id]` | `Course` | `name`, `tutorUsername` (mapped to `provider.name`), `level` (used in description), `price` (mapped to `offers.price`) |
 | `/` | none | Listing without primary entity |
 | `/checkout` | none | Transactional, not indexed |
 
-`Product` was chosen over `Course` because the data shape
-(`price`, `realPrice`, `users`, `score`) maps more naturally to
-`Product.offers` + `Product.aggregateRating`-like fields. We will
-not emit `aggregateRating` because `score` is not an explicit
-review-derived rating and inventing a `reviewCount` would be unsafe.
+`Course` (schema.org) was chosen over `Product` because the data is
+naturally a course. Mapping:
+
+- `name` -> `Course.name`
+- `tutorUsername` -> `Course.provider` (`@type: Person`)
+- `level` -> embedded into the `Course.description` string
+- `price` -> `Course.offers.price`
+- `priceCurrency` -> constant `PEN` (Peruvian Sol, ISO 4217) tied
+  to the Spanish locale assumed for the site
+- `inLanguage` -> constant `es`
+- `url` -> set only when `NEXT_PUBLIC_SITE_URL` is defined
+
+Fields intentionally omitted (no safe source of truth in data):
+
+- `image` — no course image field in the GraphQL response.
+- `aggregateRating` / `reviewCount` — `score` and `users` do not map
+  safely to a structured review rating. Inventing them could mislead
+  crawlers and consumers.
+- `availability` — there is no stock/availability signal in the
+  GraphQL response. Omitted to avoid implying inventory state that
+  the backend does not provide.
+- `priceValidUntil` — would require a real sale window. Omitted.
+- `realPrice` discount metadata — the GraphQL response does not
+  expose an explicit discount date or label, so the original price
+  is not emitted as a separate `priceSpecification`.
+
+## JSON-LD Sanitization (Step 24)
+
+JSON-LD is rendered via `dangerouslySetInnerHTML` inside
+`<script type="application/ld+json">`. To prevent an injected
+`</script>` from breaking out of the script tag, the serializer
+in `lib/seo.ts` (`serializeJsonLd`) escapes `<` to its unicode
+escape `\u003c` after `JSON.stringify`. All JSON-LD objects are
+constructed from typed `Course` data, not from arbitrary user
+input, so this is a defense-in-depth measure rather than a primary
+input filter.
+
+## Implementation Surface (Step 24)
+
+- `lib/seo.ts`
+  - `buildSeo(input)` — low-level builder, accepts `jsonLd[]`.
+  - `buildHomeSeo()` — home page SEO tags, no JSON-LD.
+  - `buildCourseSeo({ id, course })` — course SEO tags, includes
+    a single `Course` JSON-LD object when the course is present.
+    When the course is missing (`hasError` path), no JSON-LD is
+    emitted and the page is `noindex`.
+  - `serializeJsonLd(data)` — stringifies and escapes `<` for
+    safe injection into `<script>`.
+- `components/UI/SeoHead.tsx`
+  - Renders `<title>`, meta description, robots, canonical, OG,
+    Twitter Card, and JSON-LD `<script>` tags from a `SeoTags`
+    object.
+- `pages/cursos/[id].tsx`
+  - Uses `buildCourseSeo` in both success and error paths.
+- `pages/index.tsx`
+  - Uses `buildHomeSeo`; no JSON-LD.
+- `pages/checkout.tsx`
+  - Uses `buildSeo` with `noindex: true`; no JSON-LD.
 
 ## Noindex Pages
 
