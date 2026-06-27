@@ -1155,7 +1155,7 @@ git revert <commit_sha>
 
 ## Step 16 — Auditar páginas CSR actuales
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
