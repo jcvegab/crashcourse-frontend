@@ -8,9 +8,18 @@
 # testing
 /coverage
 
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # next.js
 /.next/
 /out/
+
+# typescript
+tsconfig.tsbuildinfo
 
 # production
 /build
@@ -32,3 +41,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# AI
+.claude
+.serena
+
+# Environment variables
+.env

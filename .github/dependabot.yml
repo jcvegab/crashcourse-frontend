@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://json.schemastore.org/dependabot-2.0.json
+
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    open-pull-requests-limit: 5
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '08:00'
+      timezone: 'America/Lima'
+    reviewers:
+      - 'jcvegab'
+
+  - package-ecosystem: 'npm'
+    directory: '/'
+    versioning-strategy: 'increase'
+    open-pull-requests-limit: 5
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '08:00'
+      timezone: 'America/Lima'
+    reviewers:
+      - 'jcvegab'
+    groups:
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+      development-minor-patch:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+      production-minor-patch:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+    cooldown:
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
