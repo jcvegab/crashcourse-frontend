@@ -46,5 +46,5 @@ Investigar por qué `@vitest/coverage-v8` no instrumenta archivos fuente aunque 
 - Tests para layouts en `components/layouts/__tests__`.
 - Tests para data fetching SSR en `app/__tests__` y `app/cursos/[id]/__tests__`.
 - Tests para helpers en `lib/__tests__`.
-- Mock de Apollo Client en tests de páginas.
+- Mock del helper `gql()` en tests de páginas.
 - Mock de `next/link` y `next/navigation` en tests de componentes.

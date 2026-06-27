@@ -1,124 +1,177 @@
 # GraphQL Conventions
 
+## Runtime
+
+Este proyecto no usa Apollo Client.
+
+GraphQL se ejecuta con el helper server-side `gql<TData, TVariables>()` en `lib/gql.ts`, basado en `fetch`.
+
+```ts
+const data = await gql<QueryData, QueryVariables>(QUERY, variables, {
+  next: { revalidate: 300, tags: ['course-1'] },
+});
+```
+
+## Environment
+
+`lib/gql.ts` requiere:
+
+- `SERVER_API_URL`: endpoint GraphQL server-side.
+- `INTERNAL_TOKEN`: token interno enviado como `X-Internal-Token`.
+
+El helper también lee la cookie `auth-token` desde `next/headers` y, si existe, la envía como `Authorization: Bearer <token>`.
+
 ## Security Rules
 
 ### No Direct Interpolation
 
-Never interpolate variables directly into GraphQL template strings.
+Nunca interpolar valores dinámicos dentro del string GraphQL.
 
-**Incorrect:**
+Incorrecto:
 
 ```ts
-gql`query { course(id: ${id}) { name } }`
+const query = /* GraphQL */ `
+  query {
+    course(id: ${id}) {
+      name
+    }
+  }
+`;
 ```
 
-**Correct:**
+Correcto:
 
 ```ts
-gql`
-  query CourseQuery($id: ID!) {
+const COURSE_QUERY = /* GraphQL */ `
+  query CourseQuery($id: Int!) {
     course(id: $id) {
       name
     }
   }
 `;
+
+const data = await gql<CourseQueryData, CourseQueryVariables>(COURSE_QUERY, {
+  id,
+});
 ```
 
 ### Use GraphQL Variables
 
-All dynamic values must use GraphQL variables with proper type declarations:
+Todo valor dinámico debe entrar por `variables`:
 
-- `$id: ID!` for required IDs
-- `$name: String!` for required strings
-- `$limit: Int` for optional integers
+- `$id: Int!` para IDs numéricos usados por la API actual.
+- `$name: String!` para strings requeridos.
+- `$limit: Int` para enteros opcionales.
 
-### Variable Naming
-
-- Use camelCase for variable names: `$courseId`, not `$course_id`
-- Match variable names to field names when possible: `course(id: $id)`
+Usar `camelCase` para variables: `$courseId`, no `$course_id`.
 
 ## Query Organization
 
-### One Query Per File (when complex)
+### Shared Fragments
 
-For reusable or complex queries, consider extracting to a dedicated file:
+Los fragments compartidos viven en `lib/courseQueries.ts`.
 
+```ts
+export const COURSE_FIELDS_FRAGMENT = /* GraphQL */ `
+  fragment CourseFields on CourseType {
+    name
+    tutorUsername
+    level
+    users
+    score
+    price
+    realPrice
+  }
+`;
 ```
-lib/queries/
-  courseQuery.ts
-  resumeQuery.ts
-```
 
-### Inline Queries (when simple)
+### Page Queries
 
-Simple page-specific queries can stay inline in the page file:
+Las queries usadas por una sola ruta pueden vivir junto a la página App Router.
 
 ```tsx
-// pages/cursos/[id].tsx
-const CourseQuery = gql`
-  query CourseQuery($id: ID!) {
+const COURSE_QUERY = /* GraphQL */ `
+  ${COURSE_FIELDS_FRAGMENT}
+
+  query CourseQuery($id: Int!) {
     course(id: $id) {
-      name
-      level
+      ...CourseFields
     }
   }
 `;
 ```
 
+Extraer a `lib/*Queries.ts` cuando una query o fragment sea compartido por más de una ruta.
+
 ## Type Safety
 
-### Type Query Data
+Tipar siempre la respuesta esperada.
 
-Always type the expected response shape:
-
-```tsx
+```ts
 type CourseQueryData = {
   course: Course | null;
 };
-
-const { data } = await apolloClient.query<CourseQueryData>({
-  query: CourseQuery,
-  variables: { id },
-});
 ```
 
-### Type Variables (optional but recommended)
+Tipar variables cuando existan.
 
-```tsx
+```ts
 type CourseQueryVariables = {
-  id: string;
+  id: number;
 };
 
-const { data } = await apolloClient.query<CourseQueryData, CourseQueryVariables>({
-  query: CourseQuery,
-  variables: { id },
+const data = await gql<CourseQueryData, CourseQueryVariables>(COURSE_QUERY, {
+  id: parseInt(id, 10),
 });
 ```
 
-## SSR Considerations
+Si la query no usa variables, pasar `undefined`.
 
-- Use `initializeApollo()` for server-side queries
-- Never share cache between SSR requests
-- Use `SERVER_API_URL` when available for server-side requests
-- Return `notFound: true` for missing resources
+```ts
+const data = await gql<ResumeQueryData>(RESUME_QUERY, undefined, {
+  next: { revalidate: 300 },
+});
+```
+
+## App Router Data Fetching
+
+Las queries públicas se ejecutan en Server Components o funciones server-side de App Router.
+
+```tsx
+export default async function Home() {
+  const data = await gql<ResumeQueryData>(RESUME_QUERY, undefined, {
+    next: { revalidate: 300 },
+  });
+
+  return <HomePage data={data} />;
+}
+```
+
+Usar opciones `next` de `fetch` para caching e ISR:
+
+- `next: { revalidate: 300 }` para contenido refrescable.
+- `next: { tags: ['course-1'] }` cuando una ruta pueda invalidarse por tag.
+
+## Missing Resources
+
+Para recursos inexistentes en App Router, retornar `notFound()` desde `next/navigation`.
+
+```tsx
+const course = await getCourse(id);
+
+if (!course) {
+  notFound();
+}
+```
 
 ## Error Handling
 
-Always wrap Apollo queries in try/catch for SSR:
+`gql()` lanza error cuando:
 
-```tsx
-try {
-  const { data } = await apolloClient.query({
-    query: MyQuery,
-    variables: { id },
-  });
+- `SERVER_API_URL` no está definido.
+- `fetch` responde con status no exitoso.
+- GraphQL responde con `errors`.
 
-  if (!data.resource) {
-    return { notFound: true };
-  }
+Dejar que errores inesperados lleguen al boundary de App Router (`app/error.tsx`) salvo que la ruta necesite un fallback específico.
 
-  return { props: { data: data.resource } };
-} catch {
-  return { props: { hasError: true } };
-}
-```
+No crear cache GraphQL global ni cliente compartido por request. El cache válido es el de `fetch`/Next mediante `next.revalidate` y `next.tags`.
