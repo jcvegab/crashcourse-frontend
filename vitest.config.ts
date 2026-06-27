@@ -9,7 +9,7 @@ export default defineConfig({
       '@/ui': path.resolve(__dirname, './components/UI'),
       '@/lib': path.resolve(__dirname, './lib'),
       '@/types': path.resolve(__dirname, './types'),
-      '@/utils': path.resolve(__dirname, './utils'),
+      '@/test': path.resolve(__dirname, './test'),
     },
   },
   test: {

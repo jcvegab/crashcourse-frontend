@@ -2272,7 +2272,7 @@ git revert <commit_sha>
 
 ## Step 40 — Agregar tests para SSR, SEO y GraphQL
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

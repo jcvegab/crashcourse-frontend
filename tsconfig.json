@@ -24,7 +24,8 @@
       "@/layouts/*": ["components/layouts/*"],
       "@/ui/*": ["components/UI/*"],
       "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/test/*": ["test/*"]
     },
     "plugins": [
       {
