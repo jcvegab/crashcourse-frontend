@@ -1,6 +1,4 @@
-import { gql } from '@apollo/client';
-
-export const COURSE_FIELDS_FRAGMENT = gql`
+export const COURSE_FIELDS_FRAGMENT = /* GraphQL */ `
   fragment CourseFields on Course {
     name
     tutorUsername

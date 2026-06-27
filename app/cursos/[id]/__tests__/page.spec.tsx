@@ -10,8 +10,8 @@ vi.mock('next/navigation', () => ({
   notFound: vi.fn(),
 }));
 
-vi.mock('@/lib/apolloClient', () => ({
-  initializeApollo: vi.fn(),
+vi.mock('@/lib/gql', () => ({
+  gql: vi.fn(),
 }));
 
 vi.mock('@/lib/seo', () => ({
@@ -26,31 +26,23 @@ vi.mock('@/lib/seo', () => ({
   })),
 }));
 
-const mockQuery = vi.fn();
-const mockApolloClient = {
-  query: mockQuery,
-};
-
-import { initializeApollo } from '@/lib/apolloClient';
+import { gql } from '@/lib/gql';
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.mocked(initializeApollo).mockReturnValue(mockApolloClient as never);
 });
 
 describe('CursoPage', () => {
   it('renders course page when course is found', async () => {
-    mockQuery.mockResolvedValue({
-      data: {
-        course: {
-          name: 'React',
-          tutorUsername: 'John',
-          level: 'Avanzado',
-          users: 100,
-          score: 4.8,
-          price: 99,
-          realPrice: 199,
-        },
+    vi.mocked(gql).mockResolvedValue({
+      course: {
+        name: 'React',
+        tutorUsername: 'John',
+        level: 'Avanzado',
+        users: 100,
+        score: 4.8,
+        price: 99,
+        realPrice: 199,
       },
     });
 
@@ -60,17 +52,15 @@ describe('CursoPage', () => {
     const { container } = render(Component);
 
     expect(container.textContent).toContain('React');
-    expect(mockQuery).toHaveBeenCalledWith(
-      expect.objectContaining({
-        variables: { id: '123' },
-      }),
+    expect(gql).toHaveBeenCalledWith(
+      expect.any(String),
+      { id: '123' },
+      { next: { tags: ['course-123'] } },
     );
   });
 
   it('calls notFound when course is null', async () => {
-    mockQuery.mockResolvedValue({
-      data: { course: null },
-    });
+    vi.mocked(gql).mockResolvedValue({ course: null });
 
     await CursoPage({
       params: Promise.resolve({ id: '123' }),
@@ -79,31 +69,28 @@ describe('CursoPage', () => {
     expect(notFound).toHaveBeenCalled();
   });
 
-  it('renders error fallback on backend error', async () => {
-    mockQuery.mockRejectedValue(new Error('Network error'));
+  it('throws backend errors for the route error boundary', async () => {
+    vi.mocked(gql).mockRejectedValue(new Error('Network error'));
 
-    const Component = await CursoPage({
-      params: Promise.resolve({ id: '123' }),
-    });
-    const { container } = render(Component);
-
-    expect(container.textContent).toContain('Error in backend');
+    await expect(
+      CursoPage({
+        params: Promise.resolve({ id: '123' }),
+      }),
+    ).rejects.toThrow('Network error');
   });
 });
 
 describe('generateMetadata', () => {
   it('returns metadata for existing course', async () => {
-    mockQuery.mockResolvedValue({
-      data: {
-        course: {
-          name: 'React',
-          tutorUsername: 'John',
-          level: 'Avanzado',
-          users: 100,
-          score: 4.8,
-          price: 99,
-          realPrice: 199,
-        },
+    vi.mocked(gql).mockResolvedValue({
+      course: {
+        name: 'React',
+        tutorUsername: 'John',
+        level: 'Avanzado',
+        users: 100,
+        score: 4.8,
+        price: 99,
+        realPrice: 199,
       },
     });
 
@@ -126,17 +113,15 @@ describe('generateMetadata', () => {
       jsonLd: [],
     });
 
-    mockQuery.mockResolvedValue({
-      data: {
-        course: {
-          name: 'React',
-          tutorUsername: 'John',
-          level: 'Avanzado',
-          users: 100,
-          score: 4.8,
-          price: 99,
-          realPrice: 199,
-        },
+    vi.mocked(gql).mockResolvedValue({
+      course: {
+        name: 'React',
+        tutorUsername: 'John',
+        level: 'Avanzado',
+        users: 100,
+        score: 4.8,
+        price: 99,
+        realPrice: 199,
       },
     });
 
@@ -149,9 +134,7 @@ describe('generateMetadata', () => {
   });
 
   it('returns noindex metadata for missing course', async () => {
-    mockQuery.mockResolvedValue({
-      data: { course: null },
-    });
+    vi.mocked(gql).mockResolvedValue({ course: null });
 
     const metadata = await generateMetadata({
       params: Promise.resolve({ id: '123' }),

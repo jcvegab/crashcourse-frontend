@@ -1,7 +1,5 @@
-import { gql } from '@apollo/client';
-
-import { initializeApollo } from '@/lib/apolloClient';
 import { COURSE_FIELDS_FRAGMENT } from '@/lib/courseQueries';
+import { gql } from '@/lib/gql';
 
 import HomePage from './HomePage';
 
@@ -13,7 +11,7 @@ type ResumeQueryData = {
   courses: CourseSummary[];
 };
 
-const ResumeQuery = gql`
+const RESUME_QUERY = /* GraphQL */ `
   ${COURSE_FIELDS_FRAGMENT}
 
   query ResumeQuery {
@@ -37,14 +35,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  try {
-    const apolloClient = initializeApollo();
-    const { data } = await apolloClient.query<ResumeQueryData>({
-      query: ResumeQuery,
-    });
+  const data = await gql<ResumeQueryData>(RESUME_QUERY);
 
-    return <HomePage data={data} />;
-  } catch {
-    return <span>Error in backend...</span>;
-  }
+  return <HomePage data={data} />;
 }

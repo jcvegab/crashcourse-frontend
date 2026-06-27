@@ -1,8 +1,7 @@
-import { gql } from '@apollo/client';
 import { notFound } from 'next/navigation';
 
-import { initializeApollo } from '@/lib/apolloClient';
 import { COURSE_FIELDS_FRAGMENT } from '@/lib/courseQueries';
+import { gql } from '@/lib/gql';
 import { buildCourseSeo } from '@/lib/seo';
 
 import CoursePage from './CoursePage';
@@ -14,7 +13,7 @@ type CourseQueryData = {
   course: Course | null;
 };
 
-const CourseQuery = gql`
+const COURSE_QUERY = /* GraphQL */ `
   ${COURSE_FIELDS_FRAGMENT}
 
   query CourseQuery($id: ID!) {
@@ -28,17 +27,23 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
+async function getCourse(id: string): Promise<Course | null> {
+  const data = await gql<CourseQueryData>(
+    COURSE_QUERY,
+    { id },
+    { next: { tags: [`course-${id}`] } },
+  );
+
+  return data.course;
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const apolloClient = initializeApollo();
-  const { data } = await apolloClient.query<CourseQueryData>({
-    query: CourseQuery,
-    variables: { id },
-  });
+  const course = await getCourse(id);
 
-  const seo = buildCourseSeo({ id, course: data.course });
+  const seo = buildCourseSeo({ id, course });
 
   return {
     title: seo.title,
@@ -65,35 +70,26 @@ export async function generateMetadata({
 
 export default async function CursoPage({ params }: PageProps) {
   const { id } = await params;
+  const course = await getCourse(id);
 
-  try {
-    const apolloClient = initializeApollo();
-    const { data } = await apolloClient.query<CourseQueryData>({
-      query: CourseQuery,
-      variables: { id },
-    });
-
-    if (!data.course) {
-      notFound();
-    }
-
-    const seo = buildCourseSeo({ id, course: data.course });
-
-    return (
-      <>
-        {seo.jsonLd.length > 0 && (
-          <script
-            type="application/ld+json"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires raw script content
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(seo.jsonLd[0]).replace(/</g, '\\u003c'),
-            }}
-          />
-        )}
-        <CoursePage course={data.course} />
-      </>
-    );
-  } catch {
-    return <span>Error in backend...</span>;
+  if (!course) {
+    notFound();
   }
+
+  const seo = buildCourseSeo({ id, course });
+
+  return (
+    <>
+      {seo.jsonLd.length > 0 && (
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires raw script content
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(seo.jsonLd[0]).replace(/</g, '\\u003c'),
+          }}
+        />
+      )}
+      <CoursePage course={course} />
+    </>
+  );
 }

@@ -1,9 +1,6 @@
 'use client';
 
-import { ApolloProvider } from '@apollo/client';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-
-import { initializeApollo } from '@/lib/apolloClient';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -32,14 +29,12 @@ const AppView = styled.div`
 `;
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const client = initializeApollo();
-
   return (
-    <ApolloProvider client={client}>
+    <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <AppView>{children}</AppView>
       </ThemeProvider>
-    </ApolloProvider>
+    </>
   );
 }
