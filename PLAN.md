@@ -668,7 +668,7 @@ git revert <commit_sha>
 
 ## Step 7 — Instalar y configurar Biome
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
