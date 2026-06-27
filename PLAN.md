@@ -346,7 +346,7 @@ Si se requiere compatibilidad temporal con `next lint`, dejarla documentada como
 
 ---
 
-# Phase 1 — Baseline y preparación
+# Phase 1 — Baseline y preparación ✅
 
 ## Step 1 — Crear baseline del proyecto
 
@@ -458,7 +458,7 @@ git revert <commit_sha>
 
 ## Step 3 — Normalizar scripts base temporalmente
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
