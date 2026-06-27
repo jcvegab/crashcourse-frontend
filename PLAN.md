@@ -1247,7 +1247,7 @@ git revert <commit_sha>
 
 ## Step 18 — Crear Apollo Client compatible con SSR
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

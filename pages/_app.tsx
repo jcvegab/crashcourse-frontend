@@ -1,10 +1,15 @@
 import { ApolloProvider } from '@apollo/client';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { client } from './api/apolloClient';
+import { initializeApollo } from './api/apolloClient';
 
+import type { NormalizedCacheObject } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import '../styles/_app.css';
+
+type PagePropsWithApollo = {
+  initialApolloState?: NormalizedCacheObject;
+};
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -32,7 +37,9 @@ const AppView = styled.div`
   overflow: hidden;
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<PagePropsWithApollo>) {
+  const client = initializeApollo(pageProps.initialApolloState);
+
   return (
     <ApolloProvider client={client}>
       <GlobalStyle />
