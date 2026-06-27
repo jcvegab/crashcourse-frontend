@@ -805,7 +805,7 @@ git revert <commit_sha>
 
 ## Step 8 — Actualizar scripts para Biome
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 
