@@ -3,13 +3,22 @@
 ## Commands
 
 ```bash
-npm run dev       # dev server at localhost:3000
-npm run build     # production build
-npm run start     # serve production build
-npx next lint     # ad-hoc lint (no `lint` script in package.json)
+npm run dev         # dev server at localhost:3000
+npm run build       # production build
+npm run start       # serve production build
+npm run lint        # biome check
+npm run lint:fix    # biome check --write --unsafe
+npm run format      # biome format --write
+npm run format:check# biome format
+npm run typecheck   # tsc --noEmit
+npm run lint:legacy # next lint (deprecated)
 ```
 
 No test runner exists.
+
+## Git hooks
+
+`husky` + `lint-staged` run `biome check --write --unsafe --no-errors-on-unmatched` on staged files before every commit. Commits must pass lint-staged checks.
 
 ## Environment
 

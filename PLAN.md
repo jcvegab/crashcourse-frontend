@@ -855,7 +855,7 @@ git revert <commit_sha>
 
 ## Step 9 — Configurar lint-staged con Biome
 
-Status: [ ]
+Status: [x]
 
 ### Objetivo
 

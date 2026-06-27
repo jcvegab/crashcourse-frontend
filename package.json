@@ -14,7 +14,8 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "typecheck": "tsc --noEmit",
-    "lint:legacy": "next lint"
+    "lint:legacy": "next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@apollo/client": "^3.14.0",
@@ -31,6 +32,8 @@
     "@types/react": "^17.0.93",
     "@types/react-dom": "^17.0.26",
     "babel-plugin-styled-components": "^1.13.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
     "typescript": "^6.0.3"
   }
 }
