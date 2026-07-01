@@ -9,10 +9,9 @@ Available aliases:
 - `@/components/*` maps to `components/*`.
 - `@/layouts/*` maps to `components/layouts/*`.
 - `@/ui/*` maps to `components/UI/*`.
-- `@/pages/*` maps to `pages/*`.
 - `@/lib/*` maps to `lib/*`.
 - `@/types/*` maps to `types/*`.
-- `@/utils/*` maps to `utils/*`.
+- `@/test/*` maps to `test/*`.
 
 Do not convert every import at once. Prefer aliases when editing a file for a focused migration or refactor.
 
@@ -60,7 +59,7 @@ export type CourseCardProps = {
 
 Avoid large inline prop types inside JSX files. Avoid `React.FC` unless there is an explicit reason.
 
-During the initial migration, keep the existing legacy single `props` prop pattern when editing components that already use it. Normalize props in focused follow-up refactors only.
+Props are destructured in the function signature. Avoid the legacy single `props` object pattern in new or touched components.
 
 ## Tests
 

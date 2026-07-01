@@ -3,42 +3,31 @@
 ## Estado actual
 
 - `npm run test:coverage` ejecuta 13 archivos de test y 44 tests correctamente.
-- El reporte actual de cobertura muestra `All files | 0`.
-- `coverage/coverage-final.json` queda vacío en la verificación final.
-- El objetivo de 90% no queda verificable hasta corregir instrumentación.
+- La verificación final reportada en `docs/final-modernization-report.md` alcanzó 99.3% statements, 95.58% branches, 98.46% functions y 99.3% lines.
+- El threshold activo es 90% para statements, branches, functions y lines.
+- CI ejecuta `npm run test:coverage` antes de `npm run build`.
 
 ## Exclusiones justificadas
 
-`vitest.config.ts` excluye archivos declarativos, configuración, tests y wrappers de infraestructura que no representan lógica de aplicación:
+`vitest.config.ts` excluye tests, archivos declarativos y artefactos que no representan lógica de aplicación:
 
 - `**/__tests__/**`
-- `**/*.spec.{ts,tsx}`
-- `**/*.test.{ts,tsx}`
 - `**/*.d.ts`
-- `app/layout.tsx`
-- `app/providers.tsx`
-- `app/error.tsx`
-- `components/UI/SeoHead.tsx`
-- `lib/registry.tsx`
-- `lib/*.types.ts`
+- `**/node_modules/**`
+- `**/.next/**`
+- `**/e2e/**`
+- `test/**`
 
-## Hallazgo de verificación final
+## Configuración actual
 
-Vitest 4 requiere `coverage.include` explícito para incluir archivos no cargados o no reportados por defecto. Se agregó configuración explícita para:
+Vitest usa `@vitest/coverage-v8` con reporters `text`, `json` y `html`.
 
-- `app/**/*.ts`
-- `app/**/*.tsx`
-- `components/**/*.ts`
-- `components/**/*.tsx`
-- `lib/**/*.ts`
-- `lib/**/*.tsx`
-- `types/**/*.types.ts`
+Exclusiones principales:
 
-La ejecución sigue generando un reporte vacío en este entorno, por lo que la cobertura real queda como deuda pendiente.
+- Tests y archivos declarativos.
+- `node_modules`, `.next`, `e2e` y utilidades de test.
 
-## Próximo ajuste requerido
-
-Investigar por qué `@vitest/coverage-v8` no instrumenta archivos fuente aunque los tests importan módulos reales. Mantener el threshold de 90% y fallar CI cuando el reporte incluya archivos reales por debajo del mínimo.
+Mantener el threshold de 90% y fallar CI si la cobertura real cae por debajo del mínimo.
 
 ## Estrategia
 

@@ -1,6 +1,14 @@
 # Crashcourse Frontend
 
-Crashcourse | Next.js + GraphQL Client
+Frontend de Crashcourse: plataforma de cursos construida con Next.js 16 App Router, React 19, TypeScript, GraphQL server-side, styled-components SSR, ISR y SEO para una UI en español.
+
+## Project Scope
+
+- Home con categorías y grilla de cursos.
+- Detalle de curso en `/cursos/[id]` con metadata dinámica y JSON-LD Course.
+- Checkout estático en `/checkout`.
+- Integración server-side con `crashcourse-backend` vía GraphQL.
+- Testing unitario con Vitest y E2E con Playwright.
 
 ## Requirements
 
@@ -64,6 +72,7 @@ CI order: lint `->` typecheck `->` test `->` e2e.
 - **Course queries:** Shared fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts`.
 - **SEO:** `lib/seo.ts` helpers (`buildSeo`, `buildHomeSeo`, `buildCourseSeo`) + Course JSON-LD via `generateMetadata`.
 - **Category filtering:** client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
+- **Codebase memory:** indexed as `home-jcvegab-jcvegab-projects-crashcourse-frontend` for graph-based code discovery.
 
 ### Routing
 
@@ -94,6 +103,14 @@ app/
 - Tests live in `__tests__/` next to each component. Spec pattern: `Component.spec.tsx`.
 - Vitest globals enabled — no need to import `describe`, `it`, `expect`.
 
+## Documentation
+
+- `docs/documentation-update-plan.md` — plan applied for README, package metadata, docs and GitHub topics.
+- `docs/code-conventions.md` — aliases, component layout and refactor boundaries.
+- `docs/graphql-conventions.md` — server-side GraphQL usage, variables, caching and error handling.
+- `docs/test-coverage.md` — current coverage state, thresholds and test strategy.
+- `docs/final-modernization-report.md` — modernization summary and final verification notes.
+
 ## Git hooks
 
 `husky` + `lint-staged` run `biome check --write --unsafe --no-errors-on-unmatched` on staged files before every commit. Commits must pass lint-staged checks.
@@ -112,7 +129,7 @@ Production URL: https://crashcourse.jcvegab.dev
 
 ## License
 
-MIT
+UNLICENSED. Private repository/package.
 
 ## Author
 
