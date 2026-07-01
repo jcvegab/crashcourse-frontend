@@ -72,7 +72,7 @@ CI order: lint `->` typecheck `->` test `->` e2e.
 - **Course queries:** Shared fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts`.
 - **SEO:** `lib/seo.ts` helpers (`buildSeo`, `buildHomeSeo`, `buildCourseSeo`) + Course JSON-LD via `generateMetadata`.
 - **Category filtering:** client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
-- **Codebase memory:** indexed as `home-jcvegab-jcvegab-projects-crashcourse-frontend` for graph-based code discovery.
+- **Local code analysis:** this repo uses a local code analysis tool for structural discovery. Do not document index names, local paths or machine-specific details.
 
 ### Routing
 
@@ -105,11 +105,10 @@ app/
 
 ## Documentation
 
-- `docs/documentation-update-plan.md` — plan applied for README, package metadata, docs and GitHub topics.
 - `docs/code-conventions.md` — aliases, component layout and refactor boundaries.
 - `docs/graphql-conventions.md` — server-side GraphQL usage, variables, caching and error handling.
 - `docs/test-coverage.md` — current coverage state, thresholds and test strategy.
-- `docs/final-modernization-report.md` — modernization summary and final verification notes.
+- `docs/technical-debt.md` — TODOs, follow-ups and technical debt.
 
 ## Git hooks
 

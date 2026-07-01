@@ -3,7 +3,7 @@
 ## Estado actual
 
 - `npm run test:coverage` ejecuta 13 archivos de test y 44 tests correctamente.
-- La verificación final reportada en `docs/final-modernization-report.md` alcanzó 99.3% statements, 95.58% branches, 98.46% functions y 99.3% lines.
+- La verificacion final de modernizacion alcanzo 99.3% statements, 95.58% branches, 98.46% functions y 99.3% lines.
 - El threshold activo es 90% para statements, branches, functions y lines.
 - CI ejecuta `npm run test:coverage` antes de `npm run build`.
 
