@@ -58,7 +58,7 @@
     "styled-components": "^6.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.4",
+    "@biomejs/biome": "^2.5.5",
     "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -70,7 +70,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "lint-staged": "^17.0.8",
+    "lint-staged": "^17.1.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   },
