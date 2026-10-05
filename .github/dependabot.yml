@@ -31,6 +31,19 @@ updates:
           - 'react-dom'
           - '@types/react'
           - '@types/react-dom'
+      vitest:
+        patterns:
+          - 'vitest'
+          - '@vitest/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      testing-library:
+        patterns:
+          - '@testing-library/*'
+        update-types:
+          - 'minor'
+          - 'patch'
       development-minor-patch:
         dependency-type: 'development'
         update-types:
