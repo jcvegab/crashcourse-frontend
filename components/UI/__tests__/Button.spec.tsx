@@ -34,7 +34,7 @@ describe('Button', () => {
   });
 
   it('links to provided path', () => {
-    const { container } = render(<Button path="checkout">Checkout</Button>);
+    const { container } = render(<Button url="checkout">Checkout</Button>);
 
     expect(container.querySelector('a')).toHaveAttribute('href', '/checkout');
   });

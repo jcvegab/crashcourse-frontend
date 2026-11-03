@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
 import { COURSE_FIELDS_FRAGMENT } from '@/lib/courseQueries';
 import { gql } from '@/lib/gql';
@@ -27,7 +28,7 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
-async function getCourse(id: string): Promise<Course | null> {
+const getCourse = cache(async (id: string): Promise<Course | null> => {
   const data = await gql<CourseQueryData>(
     COURSE_QUERY,
     { id: parseInt(id, 10) },
@@ -35,7 +36,7 @@ async function getCourse(id: string): Promise<Course | null> {
   );
 
   return data.course;
-}
+});
 
 export async function generateMetadata({
   params,

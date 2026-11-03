@@ -18,22 +18,10 @@ type ButtonProps = {
   lineHeight?: string;
   ghost?: boolean;
   url?: string;
-  path?: string;
   children: ReactNode;
 };
 
-type ButtonLinkProps = {
-  href: string;
-  routeAs: string;
-  className?: string;
-  children: ReactNode;
-};
-
-const ButtonLink = ({ routeAs, ...props }: ButtonLinkProps) => {
-  return <Link {...props} as={routeAs} />;
-};
-
-const StyledButton = styled(ButtonLink)<StyledButtonProps>`
+const StyledButton = styled(Link)<StyledButtonProps>`
   height: ${(props) => props.$height || '48px'};
   width: ${(props) => props.$width || '100%'};
   padding: 0;
@@ -65,13 +53,11 @@ const Button = ({
   lineHeight,
   ghost,
   url,
-  path,
   children,
 }: ButtonProps) => {
   return (
     <StyledButton
-      routeAs={url ? `/${url}` : '/'}
-      href={path ? `/${path}` : '/'}
+      href={url ? `/${url}` : '/'}
       $height={height}
       $width={width}
       $fontSize={fontSize}
