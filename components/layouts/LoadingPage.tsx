@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 
 import Spinner from '@/ui/Spinner';
@@ -13,10 +15,10 @@ const StyledLoading = styled.div`
 
 export default function LoadingPage() {
   return (
-    <StyledLoading>
+    <StyledLoading aria-live="polite">
       <StyledH2>Crashcourse</StyledH2>
       <Spinner />
-      <StyledH3>Loading...</StyledH3>
+      <StyledH3>Cargando...</StyledH3>
     </StyledLoading>
   );
 }

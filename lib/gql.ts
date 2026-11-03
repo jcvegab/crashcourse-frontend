@@ -21,7 +21,7 @@ export async function gql<TData, TVariables = Record<string, unknown>>(
   const cookieStore = await cookies();
   const token = cookieStore.get('auth-token')?.value;
 
-  const res = await fetch(apiUrl, {
+  const requestOptions: RequestInit & { next?: GqlFetchOptions['next'] } = {
     ...options,
     method: 'POST',
     headers: {
@@ -32,10 +32,33 @@ export async function gql<TData, TVariables = Record<string, unknown>>(
       ...(token && { Authorization: `Bearer ${token}` }),
     },
     body: JSON.stringify({ query, variables }),
-  });
+  };
 
-  if (!res.ok) {
-    throw new Error(`GQL fetch failed: ${res.status}`);
+  const startedAt = Date.now();
+  let res: Response | undefined;
+
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      res = await fetch(apiUrl, requestOptions);
+      if (![502, 503, 504].includes(res.status) || attempt === 1) break;
+    } catch {
+      if (attempt === 1) {
+        console.error('GraphQL request failed after retry', {
+          durationMs: Date.now() - startedAt,
+        });
+        throw new Error('The courses service is temporarily unavailable.');
+      }
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 300));
+  }
+
+  if (!res?.ok) {
+    console.error('GraphQL request returned an unsuccessful response', {
+      status: res?.status,
+      durationMs: Date.now() - startedAt,
+    });
+    throw new Error('The courses service is temporarily unavailable.');
   }
 
   const { data, errors } = await res.json();
