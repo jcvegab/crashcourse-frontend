@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import type { CourseCostProps } from './CourseCost.types';
+
 const TextTemplate = css`
   color: ${({ theme }) => theme.colors.baseMain};
   font-weight: 800;
@@ -28,11 +30,6 @@ const RealPrice = styled.span`
   text-decoration-line: line-through;
   margin-left: 8px;
 `;
-
-type CourseCostProps = {
-  price: number;
-  realPrice: number;
-};
 
 export default function CourseCost({ price, realPrice }: CourseCostProps) {
   return (

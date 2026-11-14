@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import Button from '@/ui/Button';
+import CourseCost from '@/ui/CourseCost';
 
-import CourseCost from './CourseCost';
 import CourseStats from './CourseStats';
 import Tag from './Tag';
 

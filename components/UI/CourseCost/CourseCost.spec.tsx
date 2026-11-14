@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-import CourseCost from '../CourseCost';
+import { render } from '@/test/test-utils';
+import CourseCost from '.';
 
 describe('CourseCost', () => {
   it('renders price and real price', () => {
@@ -15,5 +15,12 @@ describe('CourseCost', () => {
     render(<CourseCost price={50} realPrice={100} />);
 
     expect(screen.getByText('co')).toBeInTheDocument();
+  });
+
+  it('renders zero values', () => {
+    render(<CourseCost price={0} realPrice={0} />);
+
+    expect(screen.getByText('$0')).toBeInTheDocument();
+    expect(screen.getByText('CO$0')).toBeInTheDocument();
   });
 });
