@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/react';
+
 import HomePage from './page';
 
 import { render } from '@/test/test-utils';
@@ -24,8 +26,8 @@ describe('HomePage', () => {
           level: 'Avanzado',
           users: 100,
           score: 4.8,
-          price: 99,
-          realPrice: 199,
+          price: '99.00',
+          realPrice: '199.00',
           category: { name: 'Programación' },
         },
       ],
@@ -35,6 +37,11 @@ describe('HomePage', () => {
     const { container } = render(Component);
 
     expect(container.textContent).toContain('React');
+    expect(
+      screen.getByRole('group', {
+        name: /Precio actual: COP\s+99, antes COP\s+199/,
+      }),
+    ).toBeInTheDocument();
   });
 
   it('throws backend errors for the route error boundary', async () => {

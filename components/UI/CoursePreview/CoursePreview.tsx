@@ -1,13 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Button from '@/ui/Button';
-import CourseCost from '@/ui/CourseCost';
+import Price from '@/ui/Price';
 
 import type { CoursePreviewProps } from './CoursePreview.types';
-
-const _TextTemplate = css`
-  color: ${({ theme }) => theme.colors.baseMain};
-`;
 
 const PreviewCardContainer = styled.div`
   width: 465px;
@@ -41,7 +37,7 @@ export default function CoursePreview({
         <span>Ver trailer del curso</span>
       </TrailerContainer>
       <BuyCourseContainer>
-        <CourseCost price={price} realPrice={realPrice} />
+        <Price amount={price} compareAtAmount={realPrice} />
         <ButtonsContainer>
           <Button href="/checkout" fullWidth>
             Comprar ahora

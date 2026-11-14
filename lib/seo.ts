@@ -1,3 +1,5 @@
+import { COURSE_PRICING, formatCurrency, parsePrice } from './pricing';
+
 import type { Course } from '@/types/course.types';
 import type { BuildSeoInput, JsonLd, SeoOgType, SeoTags } from './seo.types';
 
@@ -5,7 +7,6 @@ const SITE_NAME = 'Crashcourse';
 const DEFAULT_IMAGE = '/logo.svg';
 const DEFAULT_OG_TYPE: SeoOgType = 'website';
 const DESCRIPTION_MAX_LENGTH = 155;
-const PRICE_CURRENCY = 'PEN';
 
 function getSiteUrl() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -23,14 +24,6 @@ function truncate(text: string, maxLength: number) {
   }
 
   return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
-}
-
-function formatPrice(price: number) {
-  if (!Number.isFinite(price)) {
-    return '';
-  }
-
-  return `S/ ${price.toFixed(2)}`;
 }
 
 function buildSeo(input: BuildSeoInput): SeoTags {
@@ -78,12 +71,17 @@ function buildCourseJsonLd({
       name: course.tutorUsername,
     },
     inLanguage: 'es',
-    offers: {
-      '@type': 'Offer',
-      price: course.price,
-      priceCurrency: PRICE_CURRENCY,
-    },
   };
+
+  const price = parsePrice(course.price);
+
+  if (price !== null) {
+    data.offers = {
+      '@type': 'Offer',
+      price,
+      priceCurrency: COURSE_PRICING.currency,
+    };
+  }
 
   if (url) {
     data.url = url;
@@ -112,14 +110,24 @@ export function buildCourseSeo({ id, course }: CourseSeoOptions): SeoTags {
     });
   }
 
-  const discountPrice = formatPrice(course.price);
-  const realPrice = formatPrice(course.realPrice);
+  const normalizedPrice = parsePrice(course.price);
+  const normalizedRealPrice = parsePrice(course.realPrice);
+  const discountPrice =
+    normalizedPrice === null ? null : formatCurrency(normalizedPrice);
+  const hasDiscount =
+    normalizedPrice !== null &&
+    normalizedRealPrice !== null &&
+    normalizedRealPrice > normalizedPrice;
+  const realPrice =
+    hasDiscount && normalizedRealPrice !== null
+      ? formatCurrency(normalizedRealPrice)
+      : null;
 
   const description = [
     `Curso de ${course.name} con ${course.tutorUsername}.`,
     `Nivel ${course.level}.`,
     `Puntuacion ${course.score}.`,
-    `Desde ${discountPrice}${realPrice && realPrice !== discountPrice ? ` (antes ${realPrice})` : ''}.`,
+    `Desde ${discountPrice ?? 'Precio no disponible'}${realPrice ? ` (antes ${realPrice})` : ''}.`,
   ].join(' ');
 
   const siteUrl = getSiteUrl();

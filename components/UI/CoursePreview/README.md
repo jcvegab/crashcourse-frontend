@@ -14,8 +14,8 @@ import type { CoursePreviewProps } from '@/ui/CoursePreview';
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `price` | `number` | Yes | - | Current price passed to `CourseCost`. |
-| `realPrice` | `number` | Yes | - | Original price passed to `CourseCost`. |
+| `price` | `number \| string` | Yes | - | Current amount passed to `Price`; the backend may return a decimal string. |
+| `realPrice` | `number \| string` | Yes | - | Comparison amount passed to `Price`; displayed only when greater than `price`. |
 
 ## Usage
 
@@ -31,11 +31,13 @@ export function CoursePurchasePanel() {
 
 - Shows the text `Ver trailer del curso` in a black trailer placeholder; no
   video player is currently wired up.
-- Displays current and original prices through `CourseCost`.
+- Displays prices through the reusable `Price` component, using the shared
+  `COP` / `es-CO` defaults and showing the previous amount only for a real
+  discount.
 - `Comprar ahora` is a full-width primary link to `/checkout`.
 - `Agregar al carrito` is a full-width secondary native button without a
   handler; cart behavior is not yet implemented.
-- Uses `CourseCost` and `Button`, including their styled-components theme
+- Uses `Price` and `Button`, including their styled-components theme
   requirements. The panel has no internal state or client directive.
 
 ## Accessibility

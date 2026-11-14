@@ -107,6 +107,11 @@ Extraer a `lib/*Queries.ts` cuando una query o fragment sea compartido por más 
 
 Tipar siempre la respuesta esperada.
 
+El backend puede serializar `price` y `realPrice` como strings decimales,
+por ejemplo `"14.99"`. Los tipos del curso permiten `number | string` y
+`lib/pricing.ts` valida y normaliza esos valores antes de formatearlos,
+compararlos o incluirlos en SEO. No convertir divisas en esta capa.
+
 ```ts
 type CourseQueryData = {
   course: Course | null;

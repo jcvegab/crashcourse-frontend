@@ -52,8 +52,8 @@ export type CourseCardProps = {
   level: string;
   users: number;
   score: number;
-  price: number;
-  realPrice: number;
+  price: number | string;
+  realPrice: number | string;
 };
 ```
 

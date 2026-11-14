@@ -1,7 +1,7 @@
 # CourseCard
 
 Summary card for one course in the course listing. It combines the course
-title and tutor, level and popularity statistics, current and original price,
+title and tutor, level and popularity statistics, current and comparison price,
 a promotional tag, and a link to the course detail page.
 
 ## Public API
@@ -51,7 +51,9 @@ export function CourseGridItem() {
 - Renders the course title as an `h5` and shows its tutor, stats, prices, and
   the literal tag `Tag venta`.
 - The purchase link uses `href="/cursos/{id}"` through the shared `Button`.
-- Uses `CourseStats`, `CourseCost`, `Tag`, and `Button` from their UI modules.
+- Uses `CourseStats`, `Price`, `Tag`, and `Button` from their UI modules.
+- Shows the comparison price only when `realPrice` is greater than `price`;
+  currency formatting uses the shared `COP` / `es-CO` defaults.
 - Requires the app's styled-components `ThemeProvider` through its child UI
   modules. It has no own state, handlers, or client directive.
 - The category is accepted as part of `CourseSummary` but is not currently

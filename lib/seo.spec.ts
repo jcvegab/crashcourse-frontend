@@ -12,8 +12,8 @@ describe('seo helpers', () => {
           tutorUsername: 'John',
           level: 'Avanzado',
           score: 4.8,
-          price: 99,
-          realPrice: 199,
+          price: '99.00',
+          realPrice: '199.00',
         },
       });
 
@@ -22,7 +22,10 @@ describe('seo helpers', () => {
       expect(seo.canonical).toBe('https://example.com/cursos/123');
       expect(seo.description).toContain('React');
       expect(seo.description).toContain('John');
-      expect(seo.description).toContain('antes S/ 199.00');
+      expect(seo.description).toContain('antes COP 199');
+      expect(seo.jsonLd[0]).toMatchObject({
+        offers: { price: 99, priceCurrency: 'COP' },
+      });
 
       vi.unstubAllEnvs();
     });
@@ -73,12 +76,13 @@ describe('seo helpers', () => {
           tutorUsername: 'John',
           level: 'Avanzado',
           score: 4.8,
-          price: Number.NaN,
-          realPrice: Number.NaN,
+          price: 'not-a-price',
+          realPrice: 'not-a-price',
         },
       });
 
-      expect(seo.description).toContain('React');
+      expect(seo.description).toContain('Desde Precio no disponible.');
+      expect(seo.jsonLd[0]).not.toHaveProperty('offers');
 
       vi.unstubAllEnvs();
     });

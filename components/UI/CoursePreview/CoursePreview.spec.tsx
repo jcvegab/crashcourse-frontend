@@ -26,8 +26,9 @@ describe('CoursePreview', () => {
     render(<CoursePreview price={99} realPrice={199} />);
 
     expect(screen.getByText('Ver trailer del curso')).toBeInTheDocument();
-    expect(screen.getByText('$99')).toBeInTheDocument();
-    expect(screen.getByText('CO$199')).toBeInTheDocument();
+    expect(
+      screen.getByRole('group', { name: /Precio actual: COP\s+99/ }),
+    ).toHaveAccessibleName(/antes COP\s+199/);
     expect(screen.getByText('Comprar ahora')).toBeInTheDocument();
     expect(screen.getByText('Agregar al carrito')).toBeInTheDocument();
 

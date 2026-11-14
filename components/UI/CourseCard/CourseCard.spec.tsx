@@ -44,8 +44,9 @@ describe('CourseCard', () => {
     expect(screen.getByText('Nivel Avanzado')).toBeInTheDocument();
     expect(screen.getByText('120 Usuarios')).toBeInTheDocument();
     expect(screen.getByText('4.8')).toBeInTheDocument();
-    expect(screen.getByText('$99')).toBeInTheDocument();
-    expect(screen.getByText('CO$199')).toBeInTheDocument();
+    expect(
+      screen.getByRole('group', { name: /Precio actual: COP\s+99/ }),
+    ).toHaveAccessibleName(/antes COP\s+199/);
     expect(screen.getByText('Tag venta')).toBeInTheDocument();
   });
 

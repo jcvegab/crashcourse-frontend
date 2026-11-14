@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import Button from '@/ui/Button';
-import CourseCost from '@/ui/CourseCost';
 import CourseStats from '@/ui/CourseStats';
+import Price from '@/ui/Price';
 import Tag from '@/ui/Tag';
 
 import type { CourseCardProps } from './CourseCard.types';
@@ -62,7 +62,7 @@ export default function CourseCard({ course }: CourseCardProps) {
             course_score={course.score}
           />
         </CourseInfo>
-        <CourseCost price={course.price} realPrice={course.realPrice} />
+        <Price amount={course.price} compareAtAmount={course.realPrice} />
         <Button href={`/cursos/${course.id}`} fullWidth>
           Comprar ahora
         </Button>

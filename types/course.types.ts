@@ -1,3 +1,5 @@
+import type { MoneyAmount } from './money.types';
+
 export type CourseCategory = {
   name: string;
 };
@@ -8,8 +10,8 @@ export type Course = {
   level: string;
   users: number;
   score: number;
-  price: number;
-  realPrice: number;
+  price: MoneyAmount;
+  realPrice: MoneyAmount;
 };
 
 export type CourseSummary = Course & {

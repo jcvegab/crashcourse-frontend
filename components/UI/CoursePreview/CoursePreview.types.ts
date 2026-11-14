@@ -1,4 +1,6 @@
+import type { MoneyAmount } from '@/types/money.types';
+
 export type CoursePreviewProps = {
-  price: number;
-  realPrice: number;
+  price: MoneyAmount;
+  realPrice: MoneyAmount;
 };
