@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button from '@/ui/Button';
+
 import CourseCost from './CourseCost';
 import CourseStats from './CourseStats';
 import Tag from './Tag';
@@ -67,7 +68,9 @@ export default function CourseCard({ course }: CourseCardProps) {
           />
         </CourseInfo>
         <CourseCost price={course.price} realPrice={course.realPrice} />
-        <Button url={`cursos/${course.id}`}>Comprar ahora</Button>
+        <Button url={`cursos/${course.id}`} fullWidth>
+          Comprar ahora
+        </Button>
       </CourseCardBottom>
     </CourseCardContainer>
   );

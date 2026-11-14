@@ -16,13 +16,7 @@ export default function Header() {
   return (
     <HeaderTemplate>
       <Logo />
-      <Button
-        width="187px"
-        height="40px"
-        fontSize="16px"
-        lineHeight="16px"
-        ghost
-      >
+      <Button variant="secondary" size="sm">
         Regístrate gratis
       </Button>
     </HeaderTemplate>

@@ -25,7 +25,9 @@ export default function CallToAction() {
     <SectionTemplate>
       <StyledH2 margin="24px">{`Title H2 - 
       banner cursos nuevos`}</StyledH2>
-      <Button width="218px">Comprar ahora</Button>
+      <Button variant="primary" size="md">
+        Comprar ahora
+      </Button>
     </SectionTemplate>
   );
 }

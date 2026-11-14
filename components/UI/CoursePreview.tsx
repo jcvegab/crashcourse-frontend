@@ -46,8 +46,12 @@ export default function CoursePreview({
       <BuyCourseContainer>
         <CourseCost price={price} realPrice={realPrice} />
         <ButtonsContainer>
-          <Button url="checkout">Comprar ahora</Button>
-          <Button ghost>Agregar al carrito</Button>
+          <Button url="checkout" fullWidth>
+            Comprar ahora
+          </Button>
+          <Button variant="secondary" fullWidth>
+            Agregar al carrito
+          </Button>
         </ButtonsContainer>
       </BuyCourseContainer>
     </PreviewCardContainer>
