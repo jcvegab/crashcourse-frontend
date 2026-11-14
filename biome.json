@@ -35,11 +35,6 @@
               ":BLANK_LINE:",
               {
                 "type": false,
-                "source": ["@/components", "@/components/**"]
-              },
-              ":BLANK_LINE:",
-              {
-                "type": false,
                 "source": ["@/layouts", "@/layouts/**"]
               },
               ":BLANK_LINE:",

@@ -18,7 +18,6 @@ export default defineConfig({
         '**/*.spec.tsx',
         '**/*.test.ts',
         '**/*.test.tsx',
-        '**/__tests__/**',
         '**/*.d.ts',
         '**/node_modules/**',
         '**/.next/**',

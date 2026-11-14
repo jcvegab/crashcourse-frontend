@@ -56,7 +56,7 @@ NEXT_PUBLIC_SITE_URL=
 - Types live in `Component.types.ts` next to component, or shared types in `types/*.types.ts`.
 - Components follow structure: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - GraphQL queries use variables, NOT interpolation into template strings.
-- Use `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
+- Use `@/lib/*`, `@/types/*`, `@/ui/*`, and `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
 - `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
 - UI text is Spanish placeholder copy.
 - One commit per step/change — no mixing unrelated refactors.

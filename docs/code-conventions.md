@@ -6,14 +6,13 @@ TypeScript path aliases are configured in `tsconfig.json` to reduce long relativ
 
 Available aliases:
 
-- `@/components/*` maps to `components/*`.
 - `@/layouts/*` maps to `components/layouts/*`.
 - `@/ui/*` maps to `components/UI/*`.
 - `@/lib/*` maps to `lib/*`.
 - `@/types/*` maps to `types/*`.
 - `@/test/*` maps to `test/*`.
 
-Do not convert every import at once. Prefer aliases when editing a file for a focused migration or refactor. Relative imports are allowed within a component module. The generic `@/components/*` alias is transitional and will be removed after its consumers migrate to specific aliases.
+Use the specific `@/ui/*` and `@/layouts/*` aliases for components. Relative imports are allowed within a component module.
 
 ## Component Organization
 

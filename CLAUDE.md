@@ -50,7 +50,7 @@ NEXT_PUBLIC_SITE_URL=
 ## Conventions to follow
 
 - **Types**: Props typed explicitly in `*.types.ts` next to the component. Shared domain types in `types/*.types.ts`. Avoid `any`.
-- **Imports**: Use custom aliases between modules (`@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`). Relative imports are allowed within a component module.
+- **Imports**: Use custom aliases between modules (`@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`). Relative imports are allowed within a component module.
 - **Components**: Structure is `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - **Props**: Destructure normally (`function Main({ category, courses })`), not as single `props` object.
 - **GraphQL queries**: Always use variables, never interpolate values into template strings.

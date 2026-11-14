@@ -20,7 +20,6 @@
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
       "@/layouts/*": ["components/layouts/*"],
       "@/ui/*": ["components/UI/*"],
       "@/lib/*": ["lib/*"],

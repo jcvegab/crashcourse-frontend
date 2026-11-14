@@ -9,8 +9,8 @@
 
 ## Estado actual
 
-- `npm run test:coverage` ejecuta 13 archivos de test y 46 tests correctamente.
-- La verificacion final de modernizacion alcanzo 99.3% statements, 95.58% branches, 98.46% functions y 99.3% lines.
+- `npm run test:coverage` ejecuta 20 archivos de test y 71 tests correctamente.
+- La verificación final alcanzó 99.31% statements, 95% branches, 98.43% functions y 99.31% lines.
 - El threshold activo es 90% para statements, branches, functions y lines.
 - CI ejecuta `npm run test:coverage` antes de `npm run build`.
 
@@ -19,7 +19,6 @@
 `vitest.config.mts` excludes test files, declarations, and generated or non-application files:
 
 - `**/*.spec.ts`, `**/*.spec.tsx`, `**/*.test.ts`, `**/*.test.tsx`
-- `**/__tests__/**`
 - `**/*.d.ts`
 - `**/node_modules/**`
 - `**/.next/**`
@@ -32,7 +31,7 @@ Vitest usa `@vitest/coverage-v8` con reporters `text`, `json` y `html`.
 
 Exclusiones principales:
 
-- Tests y archivos declarativos.
+- Tests colocados junto al código y archivos declarativos.
 - `node_modules`, `.next`, `e2e` y utilidades de test.
 
 Mantener el threshold de 90% y fallar CI si la cobertura real cae por debajo del mínimo.

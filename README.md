@@ -91,7 +91,7 @@ app/
 - Component layout: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - Types live next to the component in `Component.types.ts`; shared types in `types/*.types.ts`.
 - GraphQL queries use variables, NOT template-string interpolation.
-- Use path aliases between modules: `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`. Relative imports are allowed within a component module.
+- Use path aliases between modules: `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`. Relative imports are allowed within a component module.
 - `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
 - UI copy is Spanish placeholder text.
 - One commit per step/change — no mixing unrelated refactors.
