@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { render } from '../../../test/test-utils';
-import CategoryCard from '../CategoryCard';
+import { render } from '@/test/test-utils';
+import CategoryCard from '.';
 
 describe('CategoryCard', () => {
   it('renders category name', () => {
@@ -16,6 +16,17 @@ describe('CategoryCard', () => {
     render(<CategoryCard category="Diseño" onSelect={onSelect} />);
 
     await userEvent.click(screen.getByRole('button'));
+
+    expect(onSelect).toHaveBeenCalledWith('Diseño');
+  });
+
+  it('activates with the keyboard', async () => {
+    const onSelect = vi.fn();
+    render(<CategoryCard category="Diseño" onSelect={onSelect} />);
+
+    const button = screen.getByRole('button');
+    button.focus();
+    await userEvent.keyboard('{Enter}');
 
     expect(onSelect).toHaveBeenCalledWith('Diseño');
   });

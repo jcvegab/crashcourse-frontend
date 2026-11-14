@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 
+import type { CategoryCardProps } from './CategoryCard.types';
+
 const CategoryCardContainer = styled.button`
   width: 120px;
   height: 112px;
@@ -27,11 +29,6 @@ const CategoryCardContainer = styled.button`
 
   cursor: pointer;
 `;
-
-type CategoryCardProps = {
-  category: string;
-  onSelect: (category: string) => void;
-};
 
 export default function CategoryCard({
   category,
