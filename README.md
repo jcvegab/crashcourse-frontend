@@ -93,7 +93,7 @@ app/
 - The automatic `react-jsx` runtime needs no React import for JSX. Use `React.ReactNode` and `React.ReactElement` for React types without importing them as standalone aliases.
 - GraphQL queries use variables, NOT template-string interpolation.
 - Use path aliases between modules: `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`. Relative imports are allowed within a component module.
-- `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
+- `Button` renders a native button by default (`type="button"`); pass `href` for navigation through Next.js `Link`. Use native button props for actions, `variant="secondary"` for the outline style, and `size` or `fullWidth` for sizing.
 - UI copy is Spanish placeholder text.
 - One commit per step/change — no mixing unrelated refactors.
 

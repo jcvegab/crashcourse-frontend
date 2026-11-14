@@ -1,7 +1,7 @@
 # CoursePreview
 
 Purchase panel used on the course detail page. It presents a trailer prompt,
-course prices, and two full-width navigation links.
+course prices, and a full-width checkout link and a cart button.
 
 ## Public API
 
@@ -33,21 +33,22 @@ export function CoursePurchasePanel() {
   video player is currently wired up.
 - Displays current and original prices through `CourseCost`.
 - `Comprar ahora` is a full-width primary link to `/checkout`.
-- `Agregar al carrito` is a full-width secondary link. With no `url` supplied,
-  the shared `Button` currently sends it to `/`; it does not mutate a cart.
+- `Agregar al carrito` is a full-width secondary native button without a
+  handler; cart behavior is not yet implemented.
 - Uses `CourseCost` and `Button`, including their styled-components theme
   requirements. The panel has no internal state or client directive.
 
 ## Accessibility
 
-Both actions are native links with visible accessible names. The trailer
+The checkout link and cart button expose their native semantics and visible
+accessible names. The trailer
 placeholder is plain text and does not expose video controls or media
 semantics.
 
 ## Verification and maintenance
 
 `CoursePreview.spec.tsx` verifies the trailer text, prices, action labels, and
-both current destinations. Run it with:
+the checkout destination and native cart button. Run it with:
 
 ```bash
 npx vitest run components/UI/CoursePreview/CoursePreview.spec.tsx

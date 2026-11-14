@@ -34,12 +34,11 @@ describe('CallToAction', () => {
     expect(container.querySelector('section')).toBeInTheDocument();
   });
 
-  it('links the purchase action to the current default destination', () => {
+  it('renders a purchase button without implicit navigation', () => {
     render(<CallToAction />);
 
-    expect(screen.getByRole('link', { name: 'Comprar ahora' })).toHaveAttribute(
-      'href',
-      '/',
-    );
+    expect(
+      screen.getByRole('button', { name: 'Comprar ahora' }),
+    ).not.toHaveAttribute('href');
   });
 });

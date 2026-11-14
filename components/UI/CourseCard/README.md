@@ -50,8 +50,7 @@ export function CourseGridItem() {
 
 - Renders the course title as an `h5` and shows its tutor, stats, prices, and
   the literal tag `Tag venta`.
-- The purchase link uses `url="cursos/{id}"`, which the shared `Button`
-  resolves to `/cursos/{id}`.
+- The purchase link uses `href="/cursos/{id}"` through the shared `Button`.
 - Uses `CourseStats`, `CourseCost`, `Tag`, and `Button` from their UI modules.
 - Requires the app's styled-components `ThemeProvider` through its child UI
   modules. It has no own state, handlers, or client directive.

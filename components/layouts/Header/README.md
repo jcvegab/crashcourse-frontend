@@ -32,7 +32,7 @@ export function PageShell() {
 
 - Renders the `Logo` module, which links to `/`.
 - Renders `Regístrate gratis` as a small secondary `Button`.
-- The button currently has no `url`, so the shared `Button` links it to `/`.
+- The registration action is a native button without a handler.
   The header does not implement a registration flow.
 - Uses styled-components for spacing and layout. Its child Button requires
   the app's styled-components theme provider.
@@ -41,14 +41,13 @@ export function PageShell() {
 ## Accessibility
 
 The component uses a semantic `header`. The brand link includes the logo's
-image alternative and `h1`; the registration action is a native link with a
-visible accessible name. The current registration destination is the home
-page.
+image alternative and `h1`; the registration action is a native button with a
+visible accessible name.
 
 ## Verification and maintenance
 
 `Header.spec.tsx` checks brand content, the home destination, and the
-registration link destination. Run it with:
+native registration button. Run it with:
 
 ```bash
 npx vitest run components/layouts/Header/Header.spec.tsx

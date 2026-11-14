@@ -43,7 +43,7 @@ export default function CoursePreview({
       <BuyCourseContainer>
         <CourseCost price={price} realPrice={realPrice} />
         <ButtonsContainer>
-          <Button url="checkout" fullWidth>
+          <Button href="/checkout" fullWidth>
             Comprar ahora
           </Button>
           <Button variant="secondary" fullWidth>

@@ -35,12 +35,12 @@ describe('Header', () => {
     );
   });
 
-  it('renders the small secondary registration link at its current destination', () => {
+  it('renders registration as a button without an implicit home link', () => {
     render(<Header />);
 
     expect(
-      screen.getByRole('link', { name: 'Regístrate gratis' }),
-    ).toHaveAttribute('href', '/');
-    expect(screen.getAllByRole('link')).toHaveLength(2);
+      screen.getByRole('button', { name: 'Regístrate gratis' }),
+    ).not.toHaveAttribute('href');
+    expect(screen.getAllByRole('link')).toHaveLength(1);
   });
 });

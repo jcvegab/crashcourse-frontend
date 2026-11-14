@@ -1,71 +1,80 @@
 # Button
 
-Reusable navigation link styled as a primary or secondary button. Use it for
-actions that navigate to a page. The component renders Next.js `Link`, so it is
-not a form submit button and does not perform mutations by itself.
+Componente visual para acciones y navegación. Sin `href` renderiza un
+`<button type="button">`; con `href` renderiza un enlace de Next.js. Ambos
+usan los mismos estilos del [componente Figma](https://www.figma.com/design/riBMruuvEiyrtuhg6kTr7i/Reto-Codeable---Catalog?node-id=1-826).
 
-## Public API
-
-Import the component and its public types from `@/ui/Button`:
+## API pública
 
 ```tsx
 import Button from '@/ui/Button';
 import type { ButtonProps, ButtonSize, ButtonVariant } from '@/ui/Button';
 ```
 
-| Prop | Type | Required | Default | Description |
-| --- | --- | --- | --- | --- |
-| `children` | `React.ReactNode` | Yes | - | Visible link content. |
-| `url` | `string` | No | `undefined` | Appended to `/` to form the destination. Without a value, links to `/`. |
-| `variant` | `'primary' \| 'secondary'` | No | `'primary'` | Primary uses the dark theme color and white text. Secondary uses the light gray theme color, dark text, and a dark outline. |
-| `size` | `'sm' \| 'md'` | No | `'md'` | Small is 40px high; medium is 48px high. |
-| `fullWidth` | `boolean` | No | `false` | Uses `100%` width when true; otherwise width is automatic. |
+| Propiedad | Tipo | Valor predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `children` | `React.ReactNode` | Requerido | Contenido y nombre accesible. |
+| `variant` | `'primary' \| 'secondary'` | `'primary'` | Relleno oscuro o contorno con fondo transparente. |
+| `size` | `'sm' \| 'md'` | `'md'` | Altura de 40 o 48 px; padding horizontal de 24 o 40 px. |
+| `fullWidth` | `boolean` | `false` | Ancho completo del contenedor. |
+| `href` | `string` | Sin destino | Activa el modo enlace; se utiliza tal cual, sin prefijos. |
 
-The component prefixes `url` with `/`; pass `checkout` to navigate to `/checkout`.
-It does not accept an arbitrary external `href` or forward other anchor props.
+Sin `href`, acepta atributos nativos de botón: `onClick`, `disabled`, `type`,
+`name`, `value`, `form` y atributos ARIA. Con `href`, acepta
+atributos de enlace como `target`, `rel` y `onClick`. Los tipos impiden usar
+`disabled` en enlaces. La antigua propiedad `url` se sustituyó por `href`.
 
-## Usage
+## Uso
+
+Los manejadores de eventos deben declararse dentro de una frontera cliente:
 
 ```tsx
+'use client';
+
 import Button from '@/ui/Button';
 
-export function BuyAction() {
+export function PurchaseActions({ onAdd }: { onAdd: () => void }) {
   return (
-    <Button url="checkout" size="md" fullWidth>
-      Comprar ahora
-    </Button>
+    <>
+      <Button onClick={onAdd}>Agregar al carrito</Button>
+      <Button href="/checkout" variant="secondary">Comprar ahora</Button>
+      <Button type="submit" form="purchase-form">Confirmar</Button>
+    </>
   );
 }
 ```
 
-For a secondary action, pass `variant="secondary"`. For navigation to the home
-page, omit `url`.
+## Estilos y dependencias
 
-## Behavior and dependencies
+- Usa styled-components y los colores `white`, `baseMain` y `transparent` del
+  `ThemeProvider`. La fuente Inter se hereda del layout de la aplicación.
+- Peso 800, espaciado entre letras de 0.4 px y radio de 10 px.
+- S: tamaño/interlineado de 16/16 px; M: 18/20 px.
+- El contorno secundario de 3 px se dibuja hacia dentro mediante `box-shadow`
+  para conservar el tamaño y el padding de Figma sin sumar ancho al botón.
+- Los estilos se comparten entre un botón nativo y un enlace, sin anidarlos.
+- El componente delega la lógica de negocio en el consumidor.
 
-- Wraps Next.js `Link` and emits an anchor with the computed destination.
-- Requires the app's styled-components `ThemeProvider` and theme colors
-  `white`, `baseMain`, and `grayLight`.
-- Requires a Next.js App Router client environment wherever it is rendered.
-- Does not implement click handlers, form submission, disabled state, or cart
-  behavior. The visible content and destination belong to the caller.
+La revisión en Chromium confirmó los valores CSS indicados. Con la versión
+actual de Inter, los textos de ejemplo producen anchos automáticos de
+175–224 px frente a los 172–219 px registrados en Figma. Las métricas de texto
+requieren una revisión adicional para una coincidencia visual exacta; no se
+fijan anchos dependientes del texto de ejemplo.
 
-## Accessibility
+## Accesibilidad
 
-Next.js `Link` renders a native anchor, which is keyboard-focusable and exposes
-link semantics. Provide descriptive `children` so the link has an accessible
-name. This component has no disabled state or extra ARIA attributes.
+El botón conserva la activación nativa con Enter y Espacio, soporte de
+formularios y bloqueo mediante `disabled`. El enlace conserva la semántica de
+navegación. Ambos admiten atributos ARIA y el foco nativo del navegador.
+Proporciona contenido descriptivo o `aria-label` si solo se muestra un icono.
 
-## Verification and maintenance
+## Verificación y mantenimiento
 
-The colocated `Button.spec.tsx` verifies child rendering, default primary/md
-styling and automatic width, the secondary and small variants, full width,
-provided paths, and the home-page fallback. Run it with:
+`Button.spec.tsx` comprueba las cuatro variantes de Figma, navegación explícita,
+activación con teclado, estado deshabilitado y envío de formularios.
 
 ```bash
 npx vitest run components/UI/Button/Button.spec.tsx
 ```
 
-Keep this README synchronized with `Button.tsx`, `Button.types.ts`, and
-`index.ts` when the visual styles, route behavior, props, or public exports
-change.
+Mantén este documento, la implementación, los tipos y el barrel sincronizados.

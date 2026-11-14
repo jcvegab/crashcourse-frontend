@@ -7,7 +7,7 @@ test.describe('Home', () => {
     await page.goto('/');
 
     await expect(
-      page.getByRole('link', { name: /Regístrate gratis/ }),
+      page.getByRole('button', { name: /Regístrate gratis/ }),
     ).toBeVisible();
 
     await expect(

@@ -1,7 +1,7 @@
 # CallToAction
 
 Promotional banner rendered near the top of the home page. It contains a
-placeholder course heading and a purchase link.
+placeholder course heading and a purchase button.
 
 ## Public API
 
@@ -27,7 +27,7 @@ export function HomeContent() {
 
 - Renders a semantic section with the placeholder heading `Title H2 - banner
   cursos nuevos` and the button text `Comprar ahora`.
-- The primary medium Button has no `url`, so its current destination is `/`.
+- The primary medium Button is a native button without a handler.
   No checkout or campaign behavior is implemented by this banner.
 - Uses `StyledH2` from `@/ui/Title` and `Button` from `@/ui/Button`.
 - Uses the styled-components theme color `grayLighter` and requires the
@@ -36,13 +36,13 @@ export function HomeContent() {
 
 ## Accessibility
 
-The banner uses a section and an `h2`, followed by a native link with the
+The banner uses a section and an `h2`, followed by a native button with the
 accessible name `Comprar ahora`. The section has no explicit accessible name.
 
 ## Verification and maintenance
 
-`CallToAction.spec.tsx` verifies the banner heading, section, purchase link,
-and its current `/` destination. Run it with:
+`CallToAction.spec.tsx` verifies the banner heading, section, and native purchase
+button without an implicit navigation destination. Run it with:
 
 ```bash
 npx vitest run components/layouts/CallToAction/CallToAction.spec.tsx

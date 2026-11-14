@@ -36,7 +36,7 @@ describe('CoursePreview', () => {
       '/checkout',
     );
     expect(
-      screen.getByRole('link', { name: 'Agregar al carrito' }),
-    ).toHaveAttribute('href', '/');
+      screen.getByRole('button', { name: 'Agregar al carrito' }),
+    ).not.toHaveAttribute('href');
   });
 });

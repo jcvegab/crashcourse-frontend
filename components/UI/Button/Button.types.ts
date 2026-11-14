@@ -2,10 +2,20 @@ export type ButtonVariant = 'primary' | 'secondary';
 
 export type ButtonSize = 'sm' | 'md';
 
-export type ButtonProps = {
+type VisualProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
-  url?: string;
   children: React.ReactNode;
 };
+
+type ActionProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: never;
+};
+
+type NavigationProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  disabled?: never;
+};
+
+export type ButtonProps = VisualProps & (ActionProps | NavigationProps);

@@ -88,6 +88,6 @@ types/
 - Components follow structure: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - GraphQL queries use variables, NOT interpolation into template strings.
 - Use `@/lib/*`, `@/types/*`, `@/ui/*`, and `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
-- `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
+- `Button` renders a native button by default (`type="button"`); pass `href` for navigation through Next.js `Link`. Use native button props for actions, `variant="secondary"` for the outline style, and `size` or `fullWidth` for sizing.
 - UI text is Spanish placeholder copy.
 - One commit per step/change — no mixing unrelated refactors.
