@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { StyledH1 } from './Title';
+import { StyledH1 } from '@/ui/Title';
 
 const StyledLogo = styled.div`
   display: flex;

@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 
-type TitleProps = {
-  margin?: string;
-  movile?: boolean;
-};
+import type { TitleProps } from './Title.types';
 
 const TitlesTemplate = css<TitleProps>`
   margin-bottom: ${(props) => props.margin};

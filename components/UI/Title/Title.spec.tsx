@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-import { StyledH1, StyledH2, StyledH3, StyledH4 } from '../Title';
+import { render } from '@/test/test-utils';
+import { StyledH1, StyledH2, StyledH3, StyledH4 } from '.';
 
 describe('Title components', () => {
   it('StyledH1 renders children', () => {
