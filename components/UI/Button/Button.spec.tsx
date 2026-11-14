@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-
+import { render } from '@/test/test-utils';
 import Button from '.';
 
 vi.mock('next/link', () => ({
@@ -26,6 +25,19 @@ vi.mock('next/link', () => ({
 }));
 
 describe('Button', () => {
+  it('uses primary medium styling and automatic width by default', () => {
+    render(<Button>Default</Button>);
+
+    expect(screen.getByRole('link', { name: 'Default' })).toHaveStyle({
+      height: '48px',
+      width: 'auto',
+      color: 'rgb(255, 255, 255)',
+      backgroundColor: 'rgb(24, 27, 50)',
+      fontSize: '18px',
+      lineHeight: '20px',
+    });
+  });
+
   it('renders children', () => {
     render(<Button>Click me</Button>);
 
@@ -63,5 +75,14 @@ describe('Button', () => {
     const { container } = render(<Button url="checkout">Checkout</Button>);
 
     expect(container.querySelector('a')).toHaveAttribute('href', '/checkout');
+  });
+
+  it('links to the home page when no path is provided', () => {
+    render(<Button>Home</Button>);
+
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute(
+      'href',
+      '/',
+    );
   });
 });
