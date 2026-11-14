@@ -57,7 +57,7 @@ NEXT_PUBLIC_SITE_URL=
 - **GraphQL** — Custom server-only `gql<TData, TVariables>()` function at `lib/gql.ts`. Uses `fetch` with `SERVER_API_URL` + `INTERNAL_TOKEN` + optional auth cookie. Supports ISR via `next: { revalidate, tags }`. No Apollo Client.
 - **styled-components SSR** — Uses `lib/registry.tsx` (Client Component wrapping `ServerStyleSheet` + `StyleSheetManager`). Theme and global styles in `app/providers.tsx`. Consumed via `${({ theme }) => theme.colors.X}`.
 - **Category filtering** is client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
-- **SEO** — `lib/seo.ts` helpers: `buildSeo`, `buildHomeSeo`, `buildCourseSeo`. JSON-LD structured data for Course schema. App Router `generateMetadata` or `metadata` export.
+- **SEO** — `buildCourseSeo` in `lib/seo.ts` supplies course metadata and Course JSON-LD to the route's App Router `generateMetadata`; site metadata is declared in `app/layout.tsx`.
 - **Course queries** — Fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts` shared across pages.
 
 ## Project structure

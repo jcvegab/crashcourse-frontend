@@ -1,76 +1,9 @@
-import { buildCourseSeo, buildHomeSeo, buildSeo, serializeJsonLd } from './seo';
+import { buildCourseSeo } from './seo';
 
 describe('seo helpers', () => {
-  describe('buildSeo', () => {
-    it('includes site name in title', () => {
-      const seo = buildSeo({
-        title: 'Test',
-        description: 'Description',
-      });
-
-      expect(seo.title).toBe('Test | Crashcourse');
-    });
-
-    it('does not duplicate site name if already present', () => {
-      const seo = buildSeo({
-        title: 'Test | Crashcourse',
-        description: 'Description',
-      });
-
-      expect(seo.title).toBe('Test | Crashcourse');
-    });
-
-    it('truncates long descriptions', () => {
-      const longDesc = 'a'.repeat(200);
-      const seo = buildSeo({
-        title: 'Test',
-        description: longDesc,
-      });
-
-      expect(seo.description.length).toBeLessThanOrEqual(155);
-    });
-
-    it('builds canonical from site url and path', () => {
-      vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com');
-
-      const seo = buildSeo({
-        title: 'Test',
-        description: 'Desc',
-        path: '/cursos/123',
-      });
-
-      expect(seo.canonical).toBe('https://example.com/cursos/123');
-
-      vi.unstubAllEnvs();
-    });
-
-    it('strips trailing slashes from site url', () => {
-      vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com/');
-
-      const seo = buildSeo({
-        title: 'Test',
-        description: 'Desc',
-        path: '/cursos/123',
-      });
-
-      expect(seo.canonical).toBe('https://example.com/cursos/123');
-
-      vi.unstubAllEnvs();
-    });
-  });
-
-  describe('buildHomeSeo', () => {
-    it('returns home seo tags', () => {
-      const seo = buildHomeSeo();
-
-      expect(seo.title).toBe('Crashcourse');
-      expect(seo.ogType).toBe('website');
-    });
-  });
-
   describe('buildCourseSeo', () => {
     it('returns course seo with data', () => {
-      vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com');
+      vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com/');
 
       const seo = buildCourseSeo({
         id: '123',
@@ -114,6 +47,22 @@ describe('seo helpers', () => {
       vi.unstubAllEnvs();
     });
 
+    it('truncates long course descriptions to the metadata limit', () => {
+      const seo = buildCourseSeo({
+        id: '123',
+        course: {
+          name: 'React '.repeat(40),
+          tutorUsername: 'John',
+          level: 'Avanzado',
+          score: 4.8,
+          price: 99,
+          realPrice: 199,
+        },
+      });
+
+      expect(seo.description.length).toBeLessThanOrEqual(155);
+    });
+
     it('handles non-finite price', () => {
       vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.com');
 
@@ -139,16 +88,6 @@ describe('seo helpers', () => {
 
       expect(seo.title).toBe('Curso 123 | Crashcourse');
       expect(seo.noindex).toBe(true);
-    });
-  });
-
-  describe('serializeJsonLd', () => {
-    it('escapes angle brackets', () => {
-      const data = { '@type': 'Course', name: '<script>' };
-      const serialized = serializeJsonLd(data);
-
-      expect(serialized).not.toContain('<');
-      expect(serialized).toContain('\\u003c');
     });
   });
 });

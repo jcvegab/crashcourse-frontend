@@ -70,7 +70,7 @@ CI order: lint `->` typecheck `->` test `->` e2e.
 - **Styling:** styled-components with SSR via `lib/registry.tsx` (`ServerStyleSheet` + `StyleSheetManager`). Theme + globals in `app/providers.tsx`. Consume via `${({ theme }) => theme.colors.X}`.
 - **Data:** Custom server-only `gql<TData, TVariables>()` function at `lib/gql.ts` — `fetch` based, no Apollo Client. Supports ISR via `next: { revalidate, tags }`. Forwards `auth-token` cookie as `Authorization: Bearer` and always sends `X-Internal-Token`.
 - **Course queries:** Shared fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts`.
-- **SEO:** `lib/seo.ts` helpers (`buildSeo`, `buildHomeSeo`, `buildCourseSeo`) + Course JSON-LD via `generateMetadata`.
+- **SEO:** Course metadata and Course JSON-LD use `buildCourseSeo` with App Router `generateMetadata`; default site metadata is declared in `app/layout.tsx`.
 - **Category filtering:** client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
 - **Local code analysis:** this repo uses a local code analysis tool for structural discovery. Do not document index names, local paths or machine-specific details.
 

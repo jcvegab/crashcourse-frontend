@@ -17,7 +17,7 @@ function getSiteUrl() {
   return siteUrl.replace(/\/+$/, '');
 }
 
-export function truncate(text: string, maxLength: number) {
+function truncate(text: string, maxLength: number) {
   if (text.length <= maxLength) {
     return text;
   }
@@ -33,7 +33,7 @@ function formatPrice(price: number) {
   return `S/ ${price.toFixed(2)}`;
 }
 
-export function buildSeo(input: BuildSeoInput): SeoTags {
+function buildSeo(input: BuildSeoInput): SeoTags {
   const {
     title,
     description,
@@ -59,20 +59,6 @@ export function buildSeo(input: BuildSeoInput): SeoTags {
     noindex,
     jsonLd,
   };
-}
-
-export function serializeJsonLd(data: JsonLd): string {
-  return JSON.stringify(data).replace(/</g, '\\u003c');
-}
-
-export function buildHomeSeo(): SeoTags {
-  return buildSeo({
-    title: 'Crashcourse',
-    description:
-      'Aprende con cursos online en Crashcourse. Encuentra categorias, tutores y precios para cada nivel.',
-    path: '/',
-    ogType: 'website',
-  });
 }
 
 function buildCourseJsonLd({

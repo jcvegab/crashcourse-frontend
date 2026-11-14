@@ -13,6 +13,11 @@ const StatsIcon = styled.img`
   height: 16px;
 `;
 
+const StatsItem = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const StatsText = styled.span`
   margin-left: 4px;
   font-weight: bold;
@@ -28,18 +33,18 @@ export default function CourseStats({
 }: CourseStatsProps) {
   return (
     <StatsContainer>
-      <div className="flex items-center">
+      <StatsItem>
         <StatsIcon src="/icons/bar-chart.svg" alt="" aria-hidden="true" />
         <StatsText>Nivel {level}</StatsText>
-      </div>
-      <div className="flex items-center">
+      </StatsItem>
+      <StatsItem>
         <StatsIcon src="/icons/people.svg" alt="" aria-hidden="true" />
         <StatsText>{users} Usuarios</StatsText>
-      </div>
-      <div className="flex items-center">
+      </StatsItem>
+      <StatsItem>
         <StatsIcon src="/icons/star.svg" alt="" aria-hidden="true" />
         <StatsText>{course_score}</StatsText>
-      </div>
+      </StatsItem>
     </StatsContainer>
   );
 }

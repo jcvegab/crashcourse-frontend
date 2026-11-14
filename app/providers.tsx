@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inter';
+    font-family: var(--font-inter), sans-serif;
   }
 `;
 

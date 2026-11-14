@@ -1,9 +1,17 @@
-import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-import '../styles/_app.css';
 import StyledComponentsRegistry from '@/lib/registry';
 
 import Providers from './providers';
+
+import type { Metadata } from 'next';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Crashcourse',
@@ -16,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className={inter.variable}>
       <body>
         <StyledComponentsRegistry>
           <Providers>{children}</Providers>
