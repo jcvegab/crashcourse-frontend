@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { buildCourseSeo } from '@/lib/seo';
 
-import CursoPage, { generateMetadata } from '../page';
+import CursoPage, { generateMetadata } from './page';
 
 import { render } from '@/test/test-utils';
 
