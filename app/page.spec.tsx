@@ -1,4 +1,4 @@
-import HomePage from '../page';
+import HomePage from './page';
 
 import { render } from '@/test/test-utils';
 
