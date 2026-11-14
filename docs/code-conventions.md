@@ -59,6 +59,11 @@ export type CourseCardProps = {
 
 Avoid large inline prop types inside JSX files. Avoid `React.FC` unless there is an explicit reason.
 
+The TypeScript configuration uses the automatic `react-jsx` runtime, so JSX
+does not need a React import. For React types, use the project-wide namespace
+(`React.ReactNode`, `React.ReactElement`) without importing the default `React`
+or standalone aliases such as `ReactNode`.
+
 Props are destructured in the function signature. Avoid the legacy single `props` object pattern in new or touched components.
 
 ## Tests

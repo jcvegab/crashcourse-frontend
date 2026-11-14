@@ -1,7 +1,5 @@
 import { screen } from '@testing-library/react';
 
-import type React from 'react';
-
 import { render } from '@/test/test-utils';
 import CallToAction from '.';
 

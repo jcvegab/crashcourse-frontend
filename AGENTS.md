@@ -84,6 +84,7 @@ types/
 
 - Props are destructured normally (e.g. `function Main({ category, courses })`), NOT as single `props` object.
 - Types live in `Component.types.ts` next to component, or shared types in `types/*.types.ts`.
+- TypeScript uses the automatic `react-jsx` runtime; JSX needs no React import. Use the project-wide `React` namespace for types (`React.ReactNode`, `React.ReactElement`) without importing React or standalone aliases such as `ReactNode`.
 - Components follow structure: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - GraphQL queries use variables, NOT interpolation into template strings.
 - Use `@/lib/*`, `@/types/*`, `@/ui/*`, and `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
