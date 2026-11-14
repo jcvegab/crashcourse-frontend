@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-import Spinner from '../Spinner';
+import { render } from '@/test/test-utils';
+import Spinner from '.';
 
 describe('Spinner', () => {
   it('renders with status role', () => {
