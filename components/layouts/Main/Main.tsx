@@ -4,12 +4,7 @@ import CallToAction from '@/layouts/CallToAction';
 import Categories from '@/layouts/Categories';
 import CoursesList from '@/layouts/CoursesList';
 
-import type { CourseCategory, CourseSummary } from '@/types/course.types';
-
-type MainProps = {
-  categories: CourseCategory[];
-  courses: CourseSummary[];
-};
+import type { MainProps } from './Main.types';
 
 export default function Main({ categories, courses }: MainProps) {
   const [currentCategory, setCurrentCategory] = useState('All');

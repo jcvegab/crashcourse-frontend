@@ -1,10 +1,14 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { render } from '../../../test/test-utils';
-import Main from '../Main';
+import { render } from '@/test/test-utils';
+import Main from '.';
 
-const mockCategories = [{ name: 'Programación' }, { name: 'Diseño' }];
+const mockCategories = [
+  { name: 'Programación' },
+  { name: 'Diseño' },
+  { name: 'Ciencia' },
+];
 
 const mockCourses = [
   {
@@ -56,5 +60,26 @@ describe('Main', () => {
 
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('Figma')).toBeInTheDocument();
+  });
+
+  it('switches from one selected category to another', async () => {
+    render(<Main categories={mockCategories} courses={mockCourses} />);
+
+    await userEvent.click(screen.getByText('Programación'));
+    await userEvent.click(screen.getByText('Diseño'));
+
+    expect(screen.queryByText('React')).not.toBeInTheDocument();
+    expect(screen.getByText('Figma')).toBeInTheDocument();
+  });
+
+  it('renders no course cards for a category with no matching courses', async () => {
+    render(<Main categories={mockCategories} courses={mockCourses} />);
+
+    await userEvent.click(screen.getByText('Ciencia'));
+
+    expect(screen.queryByRole('heading', { level: 5 })).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Title H4 - Listado de cursos'),
+    ).toBeInTheDocument();
   });
 });
