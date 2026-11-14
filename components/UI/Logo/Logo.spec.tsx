@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-import Logo from '../Logo';
-
 import type React from 'react';
+
+import { render } from '@/test/test-utils';
+import Logo from '.';
 
 vi.mock('next/link', () => ({
   default: function Link({
