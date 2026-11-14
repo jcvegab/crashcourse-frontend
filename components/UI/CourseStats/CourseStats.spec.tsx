@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '../../../test/test-utils';
-import CourseStats from '../CourseStats';
+import { render } from '@/test/test-utils';
+import CourseStats from '.';
 
 describe('CourseStats', () => {
   it('renders level, users and score', () => {
@@ -19,5 +19,17 @@ describe('CourseStats', () => {
 
     const images = container.querySelectorAll('img');
     expect(images).toHaveLength(3);
+    images.forEach((image) => {
+      expect(image).toHaveAttribute('alt', '');
+      expect(image).toHaveAttribute('aria-hidden', 'true');
+    });
+  });
+
+  it('renders zero users and score', () => {
+    render(<CourseStats level="Inicial" users={0} course_score={0} />);
+
+    expect(screen.getByText('Nivel Inicial')).toBeInTheDocument();
+    expect(screen.getByText('0 Usuarios')).toBeInTheDocument();
+    expect(screen.getByText('0', { exact: true })).toBeInTheDocument();
   });
 });

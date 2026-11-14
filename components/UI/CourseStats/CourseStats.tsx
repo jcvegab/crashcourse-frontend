@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import type { CourseStatsProps } from './CourseStats.types';
+
 const StatsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -18,12 +20,6 @@ const StatsText = styled.span`
   line-height: 16px;
   color: ${({ theme }) => theme.colors.grayDark};
 `;
-
-type CourseStatsProps = {
-  level: string;
-  users: number;
-  course_score: number;
-};
 
 export default function CourseStats({
   level,

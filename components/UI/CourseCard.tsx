@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import Button from '@/ui/Button';
 import CourseCost from '@/ui/CourseCost';
+import CourseStats from '@/ui/CourseStats';
 
-import CourseStats from './CourseStats';
 import Tag from './Tag';
 
 import type { CourseSummary } from '@/types/course.types';
