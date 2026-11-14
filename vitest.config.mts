@@ -14,6 +14,10 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: [
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/*.test.ts',
+        '**/*.test.tsx',
         '**/__tests__/**',
         '**/*.d.ts',
         '**/node_modules/**',

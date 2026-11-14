@@ -88,11 +88,11 @@ app/
 ## Conventions
 
 - Props are destructured normally (e.g. `function Main({ category, courses })`), NOT as a single `props` object.
-- Component layout: `Component.tsx`, `Component.types.ts`, `index.ts`, `__tests__/Component.spec.tsx`.
+- Component layout: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - Types live next to the component in `Component.types.ts`; shared types in `types/*.types.ts`.
 - GraphQL queries use variables, NOT template-string interpolation.
-- Use path aliases: `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` — avoid relative imports.
-- `Button` always wraps Next.js `<Link>` — pass `url`/`path` for routing, `ghost` for outline variant.
+- Use path aliases between modules: `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`. Relative imports are allowed within a component module.
+- `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
 - UI copy is Spanish placeholder text.
 - One commit per step/change — no mixing unrelated refactors.
 
@@ -100,7 +100,9 @@ app/
 
 - **Vitest** for unit tests, **Playwright** for E2E.
 - Coverage threshold: 90% (statements, branches, functions, lines).
-- Tests live in `__tests__/` next to each component. Spec pattern: `Component.spec.tsx`.
+- Component tests live beside each component. Route and helper tests live beside the file they cover. Spec patterns: `Component.spec.tsx`, `*.spec.ts`, or `*.test.ts(x)`.
+- During component migration, old and colocated test layouts may temporarily coexist.
+- Each component README documents its purpose, public API, usage, behavior, dependencies, accessibility, and verification.
 - Vitest globals enabled — no need to import `describe`, `it`, `expect`.
 
 ## Documentation

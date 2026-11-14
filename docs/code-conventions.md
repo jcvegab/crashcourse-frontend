@@ -13,7 +13,7 @@ Available aliases:
 - `@/types/*` maps to `types/*`.
 - `@/test/*` maps to `test/*`.
 
-Do not convert every import at once. Prefer aliases when editing a file for a focused migration or refactor.
+Do not convert every import at once. Prefer aliases when editing a file for a focused migration or refactor. Relative imports are allowed within a component module. The generic `@/components/*` alias is transitional and will be removed after its consumers migrate to specific aliases.
 
 ## Component Organization
 
@@ -22,17 +22,18 @@ Components should keep files close to the component they describe. Use this stru
 ```txt
 components/ExampleComponent/
   ExampleComponent.tsx
-  ExampleComponent.types.ts
+  ExampleComponent.types.ts   # when component-specific types exist
+  ExampleComponent.spec.tsx
   index.ts
-  __tests__/
-    ExampleComponent.spec.tsx
+  README.md
 ```
 
 Expected names:
 
 - Component implementation: `<Component>.tsx`.
 - Component-only types: `<Component>.types.ts`.
-- Component tests: `__tests__/<Component>.spec.tsx`.
+- Component tests: `<Component>.spec.tsx` beside the implementation.
+- Component documentation: `README.md` beside the implementation and barrel.
 
 ## Props And Types
 
@@ -63,7 +64,7 @@ Props are destructured in the function signature. Avoid the legacy single `props
 
 ## Tests
 
-Unit tests should live in a `__tests__` folder inside the same module or component folder.
+Unit tests should live beside the file they cover. Component tests use `<Component>.spec.tsx`; route and helper specs use `*.spec.ts` or `*.spec.tsx`.
 
 Correct:
 
@@ -71,11 +72,14 @@ Correct:
 components/UI/Button/
   Button.tsx
   Button.types.ts
-  __tests__/
-    Button.spec.tsx
+  Button.spec.tsx
+  index.ts
+  README.md
 ```
 
-Avoid top-level test folders for component unit tests.
+Each component README must document its purpose, exports and props, realistic usage, behavior, dependencies, accessibility, and verification. Document current behavior and limitations without implying unimplemented features.
+
+During a structural migration, old and colocated test layouts may coexist temporarily. Remove old layouts when their final suite has moved.
 
 ## Refactor Scope
 

@@ -50,11 +50,11 @@ NEXT_PUBLIC_SITE_URL=
 ## Conventions to follow
 
 - **Types**: Props typed explicitly in `*.types.ts` next to the component. Shared domain types in `types/*.types.ts`. Avoid `any`.
-- **Imports**: Use custom aliases (`@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`) — no relative `../` imports.
-- **Components**: Structure is `Component.tsx`, `Component.types.ts`, `__tests__/Component.spec.tsx`.
+- **Imports**: Use custom aliases between modules (`@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*`). Relative imports are allowed within a component module.
+- **Components**: Structure is `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - **Props**: Destructure normally (`function Main({ category, courses })`), not as single `props` object.
 - **GraphQL queries**: Always use variables, never interpolate values into template strings.
-- **Tests**: Unit tests in `__tests__` inside the component folder. Coverage threshold is 90%.
+- **Tests**: Component specs are colocated with the component; route and helper specs are colocated with the file they cover. Coverage threshold is 90%.
 - **SEO**: Update `generateMetadata` or `metadata` when page data changes. Use `lib/seo.ts` helpers.
 - **Styled-components**: Use `${({ theme }) => theme.colors.X}` for theme access. No hardcoded color values.
 

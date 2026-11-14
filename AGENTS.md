@@ -22,7 +22,8 @@ npm run e2e:ui        # playwright test --ui
 
 - **Vitest** for unit tests, **Playwright** for E2E.
 - Coverage threshold: 90% (statements, branches, functions, lines).
-- Tests live in `__tests__` dir inside each component folder.
+- Component tests live beside their component as `Component.spec.tsx`.
+- Route and helper tests live beside the file they cover as `*.spec.ts` or `*.spec.tsx`.
 - Spec pattern: `Component.spec.tsx`.
 - Vitest globals enabled — no need to import `describe`, `it`, `expect`.
 
@@ -53,9 +54,9 @@ NEXT_PUBLIC_SITE_URL=
 
 - Props are destructured normally (e.g. `function Main({ category, courses })`), NOT as single `props` object.
 - Types live in `Component.types.ts` next to component, or shared types in `types/*.types.ts`.
-- Components follow structure: `Component.tsx`, `Component.types.ts`, `index.ts`, `__tests__/Component.spec.tsx`.
+- Components follow structure: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
 - GraphQL queries use variables, NOT interpolation into template strings.
-- Use `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` custom path aliases — avoid relative imports.
-- `Button` always wraps Next.js `<Link>` — pass `url`/`path` for routing, `ghost` for outline variant.
+- Use `@/components/*`, `@/lib/*`, `@/types/*`, `@/ui/*`, `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
+- `Button` wraps Next.js `<Link>` — pass `url` for routing, `variant="secondary"` for the outline variant, and `size` or `fullWidth` for sizing.
 - UI text is Spanish placeholder copy.
 - One commit per step/change — no mixing unrelated refactors.
