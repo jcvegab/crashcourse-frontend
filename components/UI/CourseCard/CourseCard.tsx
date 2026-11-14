@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Button from '@/ui/Button';
 import CourseCost from '@/ui/CourseCost';
 import CourseStats from '@/ui/CourseStats';
+import Tag from '@/ui/Tag';
 
-import Tag from './Tag';
-
-import type { CourseSummary } from '@/types/course.types';
+import type { CourseCardProps } from './CourseCard.types';
 
 const CourseCardContainer = styled.div`
   width: 270px;
@@ -46,10 +45,6 @@ const CourseProfesor = styled.p`
   font-size: 14px;
   line-height: 20px;
 `;
-
-type CourseCardProps = {
-  course: CourseSummary;
-};
 
 export default function CourseCard({ course }: CourseCardProps) {
   return (
