@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-import type { ReactNode } from 'react';
-
-type TagProps = {
-  children: ReactNode;
-};
+import type { TagProps } from './Tag.types';
 
 const StyledTag = styled.div`
   width: fit-content;
