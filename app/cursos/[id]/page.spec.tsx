@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react';
 import { notFound } from 'next/navigation';
 
 import { buildCourseSeo } from '@/lib/seo';
@@ -8,6 +9,24 @@ import { render } from '@/test/test-utils';
 
 vi.mock('next/navigation', () => ({
   notFound: vi.fn(),
+}));
+
+vi.mock('next/link', () => ({
+  default: function Link({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode;
+    href: string;
+    className?: string;
+  }) {
+    return (
+      <a className={className} href={href}>
+        {children}
+      </a>
+    );
+  },
 }));
 
 vi.mock('@/lib/gql', () => ({
@@ -41,8 +60,8 @@ describe('CursoPage', () => {
         level: 'Avanzado',
         users: 100,
         score: 4.8,
-        price: 99,
-        realPrice: 199,
+        price: '99.00',
+        realPrice: '199.00',
       },
     });
 
@@ -52,6 +71,20 @@ describe('CursoPage', () => {
     const { container } = render(Component);
 
     expect(container.textContent).toContain('React');
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'React' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Ver Trailer del curso')).toBeInTheDocument();
+    expect(
+      screen.getByRole('group', { name: /Precio actual: COP\s+99/ }),
+    ).toHaveAccessibleName(/antes COP\s+199/);
+    expect(screen.getByRole('link', { name: 'Comprar ahora' })).toHaveAttribute(
+      'href',
+      '/checkout',
+    );
+    expect(
+      screen.getByRole('button', { name: 'Agregar a carrito' }),
+    ).toBeDisabled();
     expect(gql).toHaveBeenCalledWith(
       expect.any(String),
       { id: 123 },

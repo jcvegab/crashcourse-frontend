@@ -9,9 +9,9 @@ import {
 import type { CurrencyFormatOptions } from '@/lib/pricing';
 import type { PriceProps } from './Price.types';
 
-const PriceGroup = styled.div<{ $size: NonNullable<PriceProps['size']> }>`
+const PriceGroup = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   white-space: nowrap;
 `;
 
@@ -35,7 +35,7 @@ const PreviousPrice = styled.del<{ $size: NonNullable<PriceProps['size']> }>`
   font-size: ${({ $size }) => ($size === 'large' ? '24px' : '12px')};
   font-weight: 400;
   line-height: 16px;
-  letter-spacing: ${({ $size }) => ($size === 'large' ? '0' : '0.1px')};
+  letter-spacing: 0.1px;
 `;
 
 function renderCurrencyParts(amount: number, options: CurrencyFormatOptions) {
@@ -87,7 +87,7 @@ export default function Price({
     : `Precio: ${currentFormatted}`;
 
   return (
-    <PriceGroup $size={size} role="group" aria-label={accessibleLabel}>
+    <PriceGroup role="group" aria-label={accessibleLabel}>
       <CurrentPrice $size={size} aria-hidden="true">
         {renderCurrencyParts(amount, options)}
       </CurrentPrice>

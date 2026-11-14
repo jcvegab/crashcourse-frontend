@@ -1,3 +1,3 @@
 export { default } from './CourseCard';
 
-export type { CourseCardProps } from './CourseCard.types';
+export type { CourseCardRootProps } from './CourseCard.types';

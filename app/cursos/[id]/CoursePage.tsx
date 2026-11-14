@@ -2,9 +2,11 @@
 
 import Header from '@/layouts/Header';
 
-import CoursePreview from '@/ui/CoursePreview';
+import Button from '@/ui/Button';
+import CourseDetail from '@/ui/CourseDetail';
 import CourseStats from '@/ui/CourseStats';
-import { StyledH2 } from '@/ui/Title';
+import CourseTrailer from '@/ui/CourseTrailer';
+import Price from '@/ui/Price';
 
 import type { Course } from '@/types/course.types';
 
@@ -17,25 +19,63 @@ export default function CoursePage({ course }: CoursePageProps) {
     <>
       <Header />
       <main>
-        <div>
-          <StyledH2>{course.name}</StyledH2>
-          <p>
-            Body 3- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id
-            mi, mauris aliquam phasellus quis semper diam fringilla. Nunc nullam
-            est in non. Enim sapien amet ut pharetra. Purus sagittis est felis
-            sapien in. Auctor tellus, in mauris mi, facilisi arcu sedut.
-          </p>
-          <CourseStats
-            level={course.level}
-            users={course.users}
-            course_score={course.score}
-          />
-        </div>
-        <div>
-          <div>Img</div>
-          <p>Subtitle 3 - Nombre profesor</p>
-          <p>Body 3 - Cargo profesor</p>
-        </div>
+        <CourseDetail.Root>
+          <CourseDetail.Media>
+            <CourseTrailer />
+          </CourseDetail.Media>
+          <CourseDetail.Overview>
+            <CourseDetail.Heading>{course.name}</CourseDetail.Heading>
+            <CourseDetail.MobilePrice>
+              <Price
+                amount={course.price}
+                compareAtAmount={course.realPrice}
+                size="compact"
+              />
+            </CourseDetail.MobilePrice>
+            <CourseDetail.Summary>
+              Body 3- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Id mi, mauris aliquam phasellus quis semper diam fringilla. Nunc
+              nullam est in non. Enim sapien amet ut pharetra. Purus sagittis
+              est felis sapien in. Auctor tellus, in mauris mi, facilisi arcu
+              sedut.
+            </CourseDetail.Summary>
+            <CourseDetail.Stats>
+              <CourseStats
+                level={course.level}
+                users={course.users}
+                course_score={course.score}
+              />
+            </CourseDetail.Stats>
+            <CourseDetail.Instructor>
+              <CourseDetail.InstructorAvatar aria-hidden="true" />
+              <CourseDetail.InstructorInfo>
+                <CourseDetail.InstructorName>
+                  Subtitle 3 - Nombre profesor
+                </CourseDetail.InstructorName>
+                <CourseDetail.InstructorRole>
+                  Body 3 - Cargo profesor
+                </CourseDetail.InstructorRole>
+              </CourseDetail.InstructorInfo>
+            </CourseDetail.Instructor>
+          </CourseDetail.Overview>
+          <CourseDetail.Purchase>
+            <CourseDetail.Price>
+              <Price
+                amount={course.price}
+                compareAtAmount={course.realPrice}
+                size="large"
+              />
+            </CourseDetail.Price>
+            <CourseDetail.Actions>
+              <Button href="/checkout" fullWidth>
+                Comprar ahora
+              </Button>
+              <Button variant="secondary" fullWidth disabled>
+                Agregar a carrito
+              </Button>
+            </CourseDetail.Actions>
+          </CourseDetail.Purchase>
+        </CourseDetail.Root>
         <div>
           <div>
             <span>Acción 1</span>
@@ -46,7 +86,6 @@ export default function CoursePage({ course }: CoursePageProps) {
           <div>
             <span>Acción 1</span>
           </div>
-          <CoursePreview price={course.price} realPrice={course.realPrice} />
         </div>
       </main>
     </>

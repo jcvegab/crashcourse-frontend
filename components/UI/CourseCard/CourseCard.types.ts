@@ -1,5 +1,6 @@
-import type { CourseSummary } from '@/types/course.types';
-
-export type CourseCardProps = {
-  course: CourseSummary;
+export type CourseCardRootProps = Omit<
+  React.ComponentPropsWithoutRef<'article'>,
+  'children'
+> & {
+  children: React.ReactNode;
 };

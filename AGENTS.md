@@ -59,6 +59,7 @@ NEXT_PUBLIC_SITE_URL=
 - **Category filtering** is client-side in `Main.tsx` — `currentCategory` state, `"All"` sentinel means no filter.
 - **SEO** — `buildCourseSeo` in `lib/seo.ts` supplies course metadata and Course JSON-LD to the route's App Router `generateMetadata`; site metadata is declared in `app/layout.tsx`.
 - **Course queries** — Fragment `COURSE_FIELDS_FRAGMENT` in `lib/courseQueries.ts` shared across pages.
+- **Course prices** — The API may serialize `price` and `realPrice` as decimal strings; `MoneyAmount` and `lib/pricing.ts` validate and normalize them before display, comparison, or SEO. Do not perform currency conversion in the UI.
 
 ## Project structure
 
@@ -86,6 +87,7 @@ types/
 - Types live in `Component.types.ts` next to component, or shared types in `types/*.types.ts`.
 - TypeScript uses the automatic `react-jsx` runtime; JSX needs no React import. Use the project-wide `React` namespace for types (`React.ReactNode`, `React.ReactElement`) without importing React or standalone aliases such as `ReactNode`.
 - Components follow structure: `Component/Component.tsx`, optional `Component/Component.types.ts`, `Component/index.ts`, `Component/Component.spec.tsx`, and `Component/README.md`.
+- Reusable components with independently replaceable visual slots use a compound API (`Component.Root`, `Component.Media`, etc.) and explicit children. Keep API data mapping in the page or layout that owns the record; do not inspect or clone children or add context when slots do not share state.
 - GraphQL queries use variables, NOT interpolation into template strings.
 - Use `@/lib/*`, `@/types/*`, `@/ui/*`, and `@/layouts/*` custom path aliases between modules. Relative imports are allowed within a component module.
 - `Button` renders a native button by default (`type="button"`); pass `href` for navigation through Next.js `Link`. Use native button props for actions, `variant="secondary"` for the outline style, and `size` or `fullWidth` for sizing.

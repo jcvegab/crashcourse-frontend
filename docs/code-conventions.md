@@ -45,8 +45,8 @@ Prefer explicit prop type names using `<ComponentName>Props`.
 Example:
 
 ```tsx
-// CourseCard.types.ts
-export type CourseCardProps = {
+// course.types.ts
+export type Course = {
   name: string;
   tutorUsername: string;
   level: string;
@@ -56,6 +56,12 @@ export type CourseCardProps = {
   realPrice: number | string;
 };
 ```
+
+`CourseCard` and `CourseDetail` expose compound APIs such as
+`<CourseCard.Root>`, `<CourseCard.Media>`, and `<CourseDetail.Actions>`. Their
+callers assemble data into explicit children; keep data mapping in the page or
+list that owns the course record. Do not inspect or clone child trees, or add
+context when slots do not share state.
 
 Avoid large inline prop types inside JSX files. Avoid `React.FC` unless there is an explicit reason.
 
