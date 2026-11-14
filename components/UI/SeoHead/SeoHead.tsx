@@ -2,12 +2,7 @@ import Head from 'next/head';
 
 import { serializeJsonLd } from '@/lib/seo';
 
-import type { SeoTags } from '@/lib/seo.types';
-
-type SeoHeadProps = {
-  seo: SeoTags;
-  faviconHref?: string;
-};
+import type { SeoHeadProps } from './SeoHead.types';
 
 export function SeoHead({ seo, faviconHref = '/favicon.ico' }: SeoHeadProps) {
   return (
