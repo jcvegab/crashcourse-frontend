@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CourseCard from '@/ui/CourseCard';
 import { StyledH4 } from '@/ui/Title';
 
-import type { CourseSummary } from '@/types/course.types';
+import type { CoursesListProps } from './CoursesList.types';
 
 const CoursesListTemplate = styled.div`
   display: grid;
@@ -27,10 +27,6 @@ const CoursesListTemplate = styled.div`
     grid-template-columns: repeat(4, 270px);
   }
 `;
-
-type CoursesListProps = {
-  courses: CourseSummary[];
-};
 
 export default function CoursesList({ courses }: CoursesListProps) {
   return (
