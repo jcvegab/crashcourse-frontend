@@ -1,9 +1,4 @@
-import {
-  buildCourseSeo,
-  buildHomeSeo,
-  buildSeo,
-  serializeJsonLd,
-} from '../seo';
+import { buildCourseSeo, buildHomeSeo, buildSeo, serializeJsonLd } from './seo';
 
 describe('seo helpers', () => {
   describe('buildSeo', () => {
